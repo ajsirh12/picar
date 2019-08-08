@@ -21,13 +21,13 @@ CREATE TABLE car (
     carname varchar2(20) not null,
     fueltype varchar2(20) not null,
     colortype varchar2(20) not null,
-    cost number not null,
     people number not null,
     carimage varchar2(1000)
 );
 CREATE TABLE carlist (
     carnum varchar2(20) primary key,
     cartype number REFERENCES car(cartype) not null,
+    cost number not null,
     carloc varchar2(100) not null,
     validrent varchar2(4) CHECK (validrent in ('n', 'y', 'N', 'Y')),
     driverange number not null,
