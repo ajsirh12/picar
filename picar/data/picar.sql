@@ -1,3 +1,10 @@
+CREATE TABLE membergrade (
+    gradeno number primary key,
+    membergrade varchar2(20) unique
+);
+INSERT INTO membergrade values(10, 'client');
+INSERT INTO membergrade values(20, 'manager');
+INSERT INTO membergrade values(30, 'master');
 CREATE TABLE picarmember (
     membernum number primary key,
     id varchar2(20) unique,
@@ -6,17 +13,22 @@ CREATE TABLE picarmember (
     phone varchar2(20) unique,
     license number unique,
     validdate date not null,
-    grade varchar2(20) CHECK (grade in ('client', 'manager'))
+    gradeno number default 10 REFERENCES membergrade(gradeno) not null
+);
+INSERT INTO picarmember values(1, 'admin', 'admin', 'master', '00000000000', '000000000', '11111111', 30);
+CREATE TABLE car (
+    cartype number primary key,
+    carname varchar2(20) not null,
+    fueltype varchar2(20) not null,
+    colortype varchar2(20) not null,
+    cost number not null,
+    people number not null,
+    carimage varchar2(1000)
 );
 CREATE TABLE carlist (
     carnum varchar2(20) primary key,
-    cartype varchar2(20) not null,
-    carcolor varchar2(20) not null,
-    usefuel varchar2(20) CHECK (usefuel in ('diesel', 'gasoline', 'gas', 'electric')),
-    cost number not null,
-    location varchar2(100) not null,
-    carimage varchar2(1000) not null,
-    people number not null,
+    cartype number REFERENCES car(cartype) not null,
+    carloc varchar2(100) not null,
     validrent varchar2(4) CHECK (validrent in ('n', 'y', 'N', 'Y')),
     driverange number not null,
     usedtime number not null
@@ -45,7 +57,6 @@ CREATE TABLE commlist (
     membernum REFERENCES picarmember(membernum) not null,
     questnum REFERENCES question(questnum) not null
 );
-
 CREATE SEQUENCE SEQ_MEMBERNUM;
 CREATE SEQUENCE SEQ_RENTNUM;
 CREATE SEQUENCE SEQ_QUESTNUM;
