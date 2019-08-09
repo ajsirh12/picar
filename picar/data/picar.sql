@@ -60,7 +60,7 @@ CREATE TABLE commlist (
     commdate date not null,
     membernum REFERENCES picarmember(membernum) not null,
     questnum REFERENCES question(questnum) not null
-);
+); 
 CREATE SEQUENCE SEQ_MEMBERNUM;
 CREATE SEQUENCE SEQ_RENTNUM;
 CREATE SEQUENCE SEQ_QUESTNUM;
