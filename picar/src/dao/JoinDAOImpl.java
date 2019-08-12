@@ -12,10 +12,10 @@ import model.JoinRent;
 public class JoinDAOImpl extends BaseDAO implements JoinDAO {
 
 	private static final String JOIN_SELECT_RENT_SQL = "SELECT carlist.carnum as carnum, car.carname as carname, rentinfo.totalcost as totalcost,"
-			+ " car.people as people, picarmember.name as name"
-			+ " FROM car, rentinfo, picarmember, carlist"
-			+ " WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum"
-			+ " and carlist.cartype = car.cartype and carlist.validrent in ('n', 'N');";
+			+ " car.people as people, picarmember.name as name, carlist.validrent as validrent"
+			+ " FROM car, rentinfo, picarmember, carlist "
+			+ "WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum"
+			+ " and carlist.cartype = car.cartype and carlist.validrent in ('n', 'N')";
 	@Override
 	public List<JoinRent> selectJoin() {
 		List<JoinRent> joinRentList = new ArrayList<JoinRent>();
