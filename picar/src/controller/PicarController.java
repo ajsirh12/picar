@@ -40,14 +40,18 @@ public class PicarController extends HttpServlet {
 		
 		if(action.equals("rentedList")) {
 			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
-			System.out.println(Integer.parseInt(req.getParameter("reqPage")));
+			
 			PageManager manager = new PageManager(requestPage);
 
 			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT));
 			
+			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
+			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
+			System.out.println(rowStartNumber+" "+rowEndNumber);
 			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 			JoinDAO joinDAO = new JoinDAOImpl();
-			joinRentList = joinDAO.selectJoinPage(manager.getPageRowResult().getRowStartNumber(), manager.getPageRowResult().getRowEndNumber());
+			//joinRentList = joinDAO.selectJoin();
+			joinRentList = joinDAO.selectJoin(rowStartNumber, rowEndNumber);
 
 			for(JoinRent j:joinRentList) {
 				System.out.println(j);
@@ -59,10 +63,20 @@ public class PicarController extends HttpServlet {
 		}
 		else if(action.equals("rentedSearch")) {
 			String carNum = req.getParameter("carNum");
-			System.out.println(carNum);
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			
+			PageManager manager = new PageManager(requestPage);
+			
+			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
+			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
+			
+			System.out.println(rowStartNumber+" "+rowEndNumber+" "+carNum);
+			
+			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT));
 			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 			JoinDAO joinDAO = new JoinDAOImpl();
-			joinRentList = joinDAO.selectJoinBycarNum(carNum);
+			//joinRentList = joinDAO.selectJoinBycarNum(carNum);
+			joinRentList = joinDAO.selectJoinBycarNum(rowStartNumber, rowEndNumber, carNum);
 			for(JoinRent j:joinRentList) {
 				System.out.println(j);
 			}

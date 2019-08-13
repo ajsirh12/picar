@@ -10,7 +10,7 @@
 <h2>차량 렌트목록</h2>
 <table border="1">
 	<tr>
-		<form action="rentedSearch" method="post">
+		<form action="rentedSearch?reqPage=1" method="post">
 		<td colspan="7"><input type="text" name="carNum" /> <input type="submit" /></td>
 		</form>
 	</tr>
