@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.JoinDAO;
 import dao.JoinDAOImpl;
 import model.JoinRent;
+import page.PageManager;
+import page.PageSQL;
 
 @WebServlet(name = "PicarController", urlPatterns = {"/rentedList", "/rentedSearch"})
 public class PicarController extends HttpServlet {
@@ -37,11 +39,16 @@ public class PicarController extends HttpServlet {
 		String action = uri.substring(lastIndex+1);
 		
 		if(action.equals("rentedList")) {
-			//String carNum = req.getParameter("carNum");
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			System.out.println(Integer.parseInt(req.getParameter("reqPage")));
+			PageManager manager = new PageManager(requestPage);
+
+			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT));
+			
 			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 			JoinDAO joinDAO = new JoinDAOImpl();
-			joinRentList = joinDAO.selectJoin();
-			//joinRentList = joinDAO.selectJoinBycarNum("7");
+			joinRentList = joinDAO.selectJoinPage(manager.getPageRowResult().getRowStartNumber(), manager.getPageRowResult().getRowEndNumber());
+
 			for(JoinRent j:joinRentList) {
 				System.out.println(j);
 			}
@@ -50,8 +57,18 @@ public class PicarController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlist.jsp");
 			rd.forward(req, resp);
 		}
-		if(action.equals("rentedSearch")) {
-			
+		else if(action.equals("rentedSearch")) {
+			String carNum = req.getParameter("carNum");
+			System.out.println(carNum);
+			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
+			JoinDAO joinDAO = new JoinDAOImpl();
+			joinRentList = joinDAO.selectJoinBycarNum(carNum);
+			for(JoinRent j:joinRentList) {
+				System.out.println(j);
+			}
+			req.setAttribute("rentedList", joinRentList);
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlist.jsp");
+			rd.forward(req, resp);
 		}
 	}
 	

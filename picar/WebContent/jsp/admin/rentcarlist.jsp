@@ -11,7 +11,7 @@
 <table border="1">
 	<tr>
 		<form action="rentedSearch" method="post">
-		<td colspan="7"><input type="text" id=carNum /> <input type="submit" /></td>
+		<td colspan="7"><input type="text" name="carNum" /> <input type="submit" /></td>
 		</form>
 	</tr>
 	<tr>
@@ -37,6 +37,31 @@
 		<td><a href="#"><button>반납</button></a></td>
 	</tr>
 	</c:forEach>
+	<tr>
+		<td colspan="7" align="center">
+			<c:if test="${pageGroupResult.beforPage}">
+				<a href="rentedList?reqPage=${pageGroupResult.groupStartNumber - 1}">&lt;</a>
+			</c:if>
+			<c:if test="${!pageGroupResult.beforPage}">
+				&lt;
+			</c:if>&nbsp&nbsp&nbsp
+			<c:forEach var="index" begin="${pageGroupResult.groupStartNumber }" end="${pageGroupResult.groupEndNumber }">
+				<c:if test="${index == pageGroupResult.selectPageNumber }">
+					<span id="select"><a href="rentedList?reqPage=${index }">${index }</a></span>
+				</c:if>
+				<c:if test="${index != pageGroupResult.selectPageNumber }">
+					<a href="rentedList?reqPage=${index }">${index }</a>
+				</c:if>
+			</c:forEach>&nbsp&nbsp&nbsp
+			<c:if test="${pageGroupResult.afterPage}">
+				<a href="rentedList?reqPage=${pageGroupResult.groupEndNumber + 1}">&gt;</a>
+			</c:if>
+			<c:if test="${!pageGroupResult.afterPage}">
+				&gt;
+			</c:if>
+		</td>
+	</tr>
+	
 </table>
 </body>
 </html>
