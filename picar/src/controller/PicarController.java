@@ -15,7 +15,7 @@ import dao.JoinDAO;
 import dao.JoinDAOImpl;
 import model.JoinRent;
 
-@WebServlet(name = "PicarController", urlPatterns = {"/RentedList"})
+@WebServlet(name = "PicarController", urlPatterns = {"/rentedList", "/rentedSearch"})
 public class PicarController extends HttpServlet {
 
 	@Override
@@ -36,19 +36,21 @@ public class PicarController extends HttpServlet {
 		int lastIndex = uri.lastIndexOf("/");
 		String action = uri.substring(lastIndex+1);
 		
-		if(action.equals("RentedList")) {
+		if(action.equals("rentedList")) {
+			//String carNum = req.getParameter("carNum");
 			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 			JoinDAO joinDAO = new JoinDAOImpl();
 			joinRentList = joinDAO.selectJoin();
+			//joinRentList = joinDAO.selectJoinBycarNum("7");
 			for(JoinRent j:joinRentList) {
 				System.out.println(j);
 			}
-			System.out.println("qwe");
 			req.setAttribute("rentedList", joinRentList);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlist.jsp");
 			rd.forward(req, resp);
-			
+		}
+		if(action.equals("rentedSearch")) {
 			
 		}
 	}

@@ -8,25 +8,35 @@
 </head>
 <body>
 <h2>차량 렌트목록</h2>
-<table>
+<table border="1">
 	<tr>
-		<th>차량번호</th>
-		<th>차종</th>
-		<th>대여비용</th>
-		<th>승차인원수</th>
-		<th>대여회원</th>
+		<form action="rentedSearch" method="post">
+		<td colspan="7"><input type="text" id=carNum /> <input type="submit" /></td>
+		</form>
+	</tr>
+	<tr>
+		<th>carNum</th>
+		<th>name</th>
+		<th>phone</th>
+		<th>rentStart</th>
+		<th>rentEnd</th>
+		<th>late</th>
 		<th>반납</th>
 	</tr>
-	<%-- <c:forEach var="rent" items="${rentList }"> --%>
+	<c:forEach var="rented" items="${rentedList }">
 	<tr>
-		<td>12오3434</td>
-		<td>마티즈</a></td>
-		<td>123</td>
-		<td>234</td>
-		<td>345</td>
+		<td>${rented.carNum }</td>
+		<td>${rented.name }</td>
+		<td>${rented.phone }</td>
+		<td>${rented.rentStart }</td>
+		<td>${rented.rentEnd}</td>
+		<td>
+			<c:if test="${rented.late > 0}">${rented.late * rented.cost * 2}</c:if>
+			<c:if test="${rented.late <= 0}">0</c:if>
+		</td>
 		<td><a href="#"><button>반납</button></a></td>
 	</tr>
-	<%-- </c:forEach> --%>
+	</c:forEach>
 </table>
 </body>
 </html>

@@ -7,6 +7,43 @@ public class JoinRent {
 	private int people;
 	private String name;
 	private String validRent;
+	private String rentStart;
+	private String rentEnd;
+	private int late;
+	private int cost;
+	private String phone;
+	
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getRentStart() {
+		return rentStart;
+	}
+	public void setRentStart(String rentStart) {
+		this.rentStart = rentStart;
+	}
+	public String getRentEnd() {
+		return rentEnd;
+	}
+	public void setRentEnd(String rentEnd) {
+		this.rentEnd = rentEnd;
+	}
+	public int getLate() {
+		return late;
+	}
+	public void setLate(int late) {
+		this.late = late;
+	}
+	public int getCost() {
+		return cost;
+	}
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
 	public String getCarNum() {
 		return carNum;
 	}
@@ -45,8 +82,8 @@ public class JoinRent {
 	}
 	@Override
 	public String toString() {
-		return "JoinRent [carNum=" + carNum + ", carName=" + carName + ", totalCost=" + totalCost + ", people=" + people
-				+ ", name=" + name + ", validRent=" + validRent + "]";
+		return "JoinRent [carNum=" + carNum + ", carName=" + carName + ", name=" + name + ", validRent=" + validRent
+				+ ", rentStart=" + rentStart + ", rentEnd=" + rentEnd + ", late=" + late + ", cost=" + cost + "]";
 	}
 	
 	

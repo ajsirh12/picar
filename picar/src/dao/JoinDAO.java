@@ -6,4 +6,5 @@ import model.JoinRent;
 
 public interface JoinDAO {
 	List<JoinRent> selectJoin();
+	List<JoinRent> selectJoinBycarNum(String carNum);
 }
