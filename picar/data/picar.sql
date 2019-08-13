@@ -15,6 +15,7 @@ CREATE TABLE picarmember (
     validdate date not null,
     gradeno number default 10 REFERENCES membergrade(gradeno) not null
 );
+ALTER TABLE picarmember modify license varchar2(20);
 INSERT INTO picarmember values(1, 'admin', 'admin', 'master', '00000000000', '000000000', '11111111', 30);
 CREATE TABLE car (
     cartype number primary key,
@@ -60,7 +61,7 @@ CREATE TABLE commlist (
     commdate date not null,
     membernum REFERENCES picarmember(membernum) not null,
     questnum REFERENCES question(questnum) not null
-); 
+);
 CREATE SEQUENCE SEQ_MEMBERNUM;
 CREATE SEQUENCE SEQ_RENTNUM;
 CREATE SEQUENCE SEQ_QUESTNUM;
