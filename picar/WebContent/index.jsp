@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -9,6 +8,8 @@
 <title>picar index</title>
 </head>
 <body>
+	
+	
 
 	<ul>
 		<li><a href="login_input">로그인</a></li> 		
@@ -21,6 +22,9 @@
 		<input type = "button" value="회원 정보 수정" />			
 		</form>
 	</c:if>	
+	
+	
+	
 </body>
 </html>
 
