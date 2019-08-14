@@ -81,7 +81,7 @@ public class PicarController extends HttpServlet {
 				System.out.println(j);
 			}
 			req.setAttribute("rentedList", joinRentList);
-			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlist.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlistsearch.jsp");
 			rd.forward(req, resp);
 		}
 	}
