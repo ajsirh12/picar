@@ -9,6 +9,7 @@ public class PicarMember {
 	private int license;
 	private String validate;
 	private int gradeNo;
+	
 	public int getMemberNum() {
 		return memberNum;
 	}
