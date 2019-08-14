@@ -11,11 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CarDAO;
+import dao.CarDAOImpl;
 import dao.JoinDAO;
 import dao.JoinDAOImpl;
+import model.Car;
 import model.JoinRent;
 
-@WebServlet(name = "PicarController", urlPatterns = {"/rentedList", "/rentedSearch"})
+@WebServlet(name = "PicarController", urlPatterns = {"/rentedList", "/rentedSearch","/insertcar"})
 public class PicarController extends HttpServlet {
 
 	@Override
@@ -50,7 +53,30 @@ public class PicarController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlist.jsp");
 			rd.forward(req, resp);
 		}
-		if(action.equals("rentedSearch")) {
+		else if(action.equals("rentedSearch")) {
+			
+		}
+		else if(action.equals("insertcar")){
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/insertcar.jsp");
+			rd.forward(req,resp);
+		}
+		else if(action.equals("registercar")) {
+			req.setCharacterEncoding("utf-8");
+			
+			CarDAO dao = new CarDAOImpl();
+			Car car = new Car();
+			
+			car.setCarType(Integer.parseInt(req.getParameter("cartype")));
+			car.setCarName(req.getParameter("carname"));
+			car.setFuelType(req.getParameter("fueltype"));
+			car.setColorType(req.getParameter("colortype"));
+			car.setPeople(Integer.parseInt(req.getParameter("people")));
+			car.setCarImage(req.getParameter("carimage"));
+			
+			boolean result = dao.insert(car);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/insertcar.jsp");
+			rd.forward(req, resp);	
 			
 		}
 	}

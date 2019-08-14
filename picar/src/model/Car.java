@@ -7,6 +7,7 @@ public class Car {
 	private String colorType;
 	private int people;
 	private String carImage;
+	
 	public int getCarType() {
 		return carType;
 	}
