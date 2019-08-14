@@ -17,6 +17,8 @@ import dao.JoinDAO;
 import dao.JoinDAOImpl;
 import model.Car;
 import model.JoinRent;
+import page.PageManager;
+import page.PageSQL;
 
 @WebServlet(name = "PicarController", urlPatterns = {"/rentedList", "/rentedSearch","/insertcar"})
 public class PicarController extends HttpServlet {
@@ -40,11 +42,20 @@ public class PicarController extends HttpServlet {
 		String action = uri.substring(lastIndex+1);
 		
 		if(action.equals("rentedList")) {
-			//String carNum = req.getParameter("carNum");
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			
+			PageManager manager = new PageManager(requestPage);
+
+			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT));
+			
+			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
+			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
+			System.out.println(rowStartNumber+" "+rowEndNumber);
 			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 			JoinDAO joinDAO = new JoinDAOImpl();
-			joinRentList = joinDAO.selectJoin();
-			//joinRentList = joinDAO.selectJoinBycarNum("7");
+			//joinRentList = joinDAO.selectJoin();
+			joinRentList = joinDAO.selectJoin(rowStartNumber, rowEndNumber);
+
 			for(JoinRent j:joinRentList) {
 				System.out.println(j);
 			}
@@ -54,7 +65,27 @@ public class PicarController extends HttpServlet {
 			rd.forward(req, resp);
 		}
 		else if(action.equals("rentedSearch")) {
+			String carNum = req.getParameter("carNum");
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
 			
+			PageManager manager = new PageManager(requestPage);
+			
+			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
+			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
+			
+			System.out.println(rowStartNumber+" "+rowEndNumber+" "+carNum);
+			
+			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT));
+			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
+			JoinDAO joinDAO = new JoinDAOImpl();
+			//joinRentList = joinDAO.selectJoinBycarNum(carNum);
+			joinRentList = joinDAO.selectJoinBycarNum(rowStartNumber, rowEndNumber, carNum);
+			for(JoinRent j:joinRentList) {
+				System.out.println(j);
+			}
+			req.setAttribute("rentedList", joinRentList);
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlistsearch.jsp");
+			rd.forward(req, resp);
 		}
 		else if(action.equals("insertcar")){
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/insertcar.jsp");

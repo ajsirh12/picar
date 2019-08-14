@@ -29,10 +29,11 @@ public class PageManager {
 		int count = pageDAO.getCount(sql);
 		int totalPageNumber = (int)Math.ceil((double)count/PageInfo.ROW_COUNT_PRE_PAGE);
 		
-		//System.out.println(totalPageNumber);
+		/*System.out.println(count);
+		System.out.println(totalPageNumber);*/
 		int requestPageGroupNumber = ((requestPage - 1) / PageInfo.SHOW_PAGE_COUNT) + 1;
 		int lastPageGroupNumber = ((totalPageNumber - 1) / PageInfo.SHOW_PAGE_COUNT) + 1;
-		
+		System.out.println("q "+requestPageGroupNumber);
 		pageGroupResult.setGroupStartNumber((requestPageGroupNumber-1) * PageInfo.SHOW_PAGE_COUNT + 1);
 		pageGroupResult.setGroupEndNumber(requestPageGroupNumber * PageInfo.SHOW_PAGE_COUNT);
 		if(pageGroupResult.getGroupEndNumber()>totalPageNumber) {
