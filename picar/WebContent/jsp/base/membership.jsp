@@ -79,10 +79,10 @@
 				},																										
 				license : {
 					required : true,
-					minlength : 10,
-					maxlength : 10
+					minlength : 5,
+					maxlength : 20
 				},				
-				validdate : "required"						
+				validate : "required"						
 			},
 		
 			messages : {								
@@ -110,7 +110,7 @@
 					minlength : "면허증번호 최소 {0}글자 입니다.",
 					maxlength : "면허증번호 최소 {0}글자 입니다."
 				},				 
-				validdate : "유효기간을 확인해주세요."
+				validate : "유효기간을 확인해주세요."
 				
 			}	 
 		});
@@ -131,7 +131,7 @@
 		이름<input id="name" type ="text" name="name"/><br />
 		전화번호 <input id="phone" type ="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone"/><br />
 		면허증번호 <input id="license" type ="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="license"/><br />
-		면허유효기간 <input id="validdate" type ="text" placeholder="유효기간(170101)" name="validdate"/><br />
+		면허유효기간 <input id="validate" type ="text" placeholder="유효기간(170101)" name="validate"/><br />
 				
 		<hr />
 		<input type="submit" value="가입" />
