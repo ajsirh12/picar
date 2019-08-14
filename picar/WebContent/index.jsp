@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,7 @@
 <title>picar index</title>
 </head>
 <body>
+
 	<ul>
 		<li><a href="login_input">로그인</a></li> 		
 		<a href="rentedList?reqPage=1">qwe</a>			
@@ -18,7 +21,6 @@
 		<input type = "button" value="회원 정보 수정" />			
 		</form>
 	</c:if>	
-	
 </body>
 </html>
 
