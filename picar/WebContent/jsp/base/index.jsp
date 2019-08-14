@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=utf-8>
-<title>Insert title here</title>
+<meta charset="utf-8">
+<title>로그인 화면</title>
 </head>
 <body>
-	
-	<a href="question_req_list?reqPage=1">리스트로 이동 밑에 순서 표시</a>
-	<a href="rentedList?reqPage=1">RentedList</a>
+<h1>차차차</h1>
+<!-- <a href ="question_list">리스트 이동</a> -->
+<a href="question_req_list?reqPage=1">리스트로 이동 밑에 순서 표시</a>
 </body>
 </html>
