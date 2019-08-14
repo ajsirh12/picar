@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +16,13 @@ import dao.PicarMemberDAO;
 import dao.PicarMemberDAOImpl;
 import model.PicarMember;
 
-@WebServlet(name = "PicarController", urlPatterns = {"/login","/logout","/login_input","/member_save"})
+import dao.JoinDAO;
+import dao.JoinDAOImpl;
+import model.JoinRent;
+import page.PageManager;
+import page.PageSQL;
+
+@WebServlet(name = "PicarController", urlPatterns = {"/rentedList", "/rentedSearch", "/login","/logout","/login_input","/member_save"})
 public class PicarController extends HttpServlet {
 
 	@Override
@@ -71,7 +79,53 @@ public class PicarController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
 			rd.forward(req, resp);	
 		
-		}else if(action.equals("member_save")) {
+		}else if(action.equals("rentedList")) {
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			
+			PageManager manager = new PageManager(requestPage);
+
+			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT));
+			
+			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
+			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
+			System.out.println(rowStartNumber+" "+rowEndNumber);
+			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
+			JoinDAO joinDAO = new JoinDAOImpl();
+			//joinRentList = joinDAO.selectJoin();
+			joinRentList = joinDAO.selectJoin(rowStartNumber, rowEndNumber);
+
+			for(JoinRent j:joinRentList) {
+				System.out.println(j);
+			}
+			req.setAttribute("rentedList", joinRentList);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlist.jsp");
+			rd.forward(req, resp);
+		}
+		else if(action.equals("rentedSearch")) {
+			String carNum = req.getParameter("carNum");
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			
+			PageManager manager = new PageManager(requestPage);
+			
+			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
+			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
+			
+			System.out.println(rowStartNumber+" "+rowEndNumber+" "+carNum);
+			
+			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT));
+			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
+			JoinDAO joinDAO = new JoinDAOImpl();
+			//joinRentList = joinDAO.selectJoinBycarNum(carNum);
+			joinRentList = joinDAO.selectJoinBycarNum(rowStartNumber, rowEndNumber, carNum);
+			for(JoinRent j:joinRentList) {
+				System.out.println(j);
+			}
+			req.setAttribute("rentedList", joinRentList);
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlistsearch.jsp");
+			rd.forward(req, resp);
+		}
+		else if(action.equals("member_save")) {
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			PicarMember picarMember = new PicarMember();
 			
@@ -93,5 +147,5 @@ public class PicarController extends HttpServlet {
 		
 		
 		}
-	}	
-}
+		
+}}

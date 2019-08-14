@@ -1,17 +1,17 @@
 package model;
 
 public class Question {
-	private int questinum;
+	private int questnum;
 	private String questTitle;
 	private String questText;
 	private String questDate;
 	private String answer;
 	private int memberNum;
-	public int getQuestinum() {
-		return questinum;
+	public int getQuestnum() {
+		return questnum;
 	}
-	public void setQuestinum(int questinum) {
-		this.questinum = questinum;
+	public void setQuestnum(int questinum) {
+		this.questnum = questinum;
 	}
 	public String getQuestTitle() {
 		return questTitle;
@@ -45,7 +45,7 @@ public class Question {
 	}
 	@Override
 	public String toString() {
-		return "Question [questinum=" + questinum + ", questTitle=" + questTitle + ", questText=" + questText
+		return "Question [questinum=" + questnum + ", questTitle=" + questTitle + ", questText=" + questText
 				+ ", questDate=" + questDate + ", answer=" + answer + ", memberNum=" + memberNum + "]";
 	}
 	
