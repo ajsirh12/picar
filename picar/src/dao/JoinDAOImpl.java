@@ -16,9 +16,26 @@ public class JoinDAOImpl extends BaseDAO implements JoinDAO {
 			+ " 'yyyy-mm-dd') as rentstart, to_char(rentinfo.rentend, 'yyyy-mm-dd') as rentend, carlist.cost as cost,"
 			+ " carlist.validrent as validrent FROM rentinfo, picarmember, carlist WHERE rentinfo.carnum = carlist.carnum and"
 			+ " rentinfo.membernum = picarmember.membernum and carlist.validrent in ('n', 'N')";
-	private static final String JOIN_SELECT_RENT_BY_CARNUM_SQL = "SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(rentend, 'YYYYMMDD'))) late, carlist.carnum as carnum, picarmember.name as name, picarmember.phone as phone, to_char(rentinfo.rentstart, 'yyyy-mm-dd') as rentstart, to_char(rentinfo.rentend, 'yyyy-mm-dd') as rentend, carlist.cost as cost, carlist.validrent as validrent FROM rentinfo, picarmember, carlist WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum and carlist.validrent in ('n', 'N') and carlist.carnum like ?";
-	private static final String JOIN_SELECT_RENT_PAGE_SQL = "SELECT * FROM (SELECT rownum rn, rented.* FROM (SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(rentend, 'YYYYMMDD'))) late, carlist.carnum as carnum, picarmember.name as name, picarmember.phone as phone, to_char(rentinfo.rentstart, 'yyyy-mm-dd') as rentstart, to_char(rentinfo.rentend, 'yyyy-mm-dd') as rentend, carlist.cost as cost, carlist.validrent as validrent FROM rentinfo, picarmember, carlist WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum and carlist.validrent in ('n', 'N') ORDER BY late desc) rented) WHERE rn between ? and ?";
-	private static final String JOIN_SELECT_RENT_BY_CARNUM_PAGE_SQL = "SELECT rownum rn, TO_CHAR(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(rentend, 'YYYYMMDD'))) late, carlist.carnum as carnum, picarmember.name as name, picarmember.phone as phone, to_char(rentinfo.rentstart, 'yyyy-mm-dd') as rentstart, to_char(rentinfo.rentend, 'yyyy-mm-dd') as rentend, carlist.cost as cost, carlist.validrent as validrent FROM rentinfo, picarmember, carlist WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum and rownum between ? and ? and carlist.validrent in ('n', 'N') and carlist.carnum like ? ORDER BY late desc"; 
+	private static final String JOIN_SELECT_RENT_BY_CARNUM_SQL = "SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(rentend, 'YYYYMMDD'))) late,"
+			+ " carlist.carnum as carnum, picarmember.name as name, picarmember.phone as phone, to_char(rentinfo.rentstart,"
+			+ " 'yyyy-mm-dd') as rentstart, to_char(rentinfo.rentend, 'yyyy-mm-dd') as rentend, carlist.cost as cost,"
+			+ " carlist.validrent as validrent FROM rentinfo, picarmember, carlist"
+			+ " WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum"
+			+ " and carlist.validrent in ('n', 'N') and carlist.carnum like ?";
+	private static final String JOIN_SELECT_RENT_PAGE_SQL = "SELECT * FROM (SELECT rownum rn, rented.*"
+			+ " FROM (SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(rentend, 'YYYYMMDD'))) late,"
+			+ " carlist.carnum as carnum, picarmember.name as name, picarmember.phone as phone,"
+			+ " to_char(rentinfo.rentstart, 'yyyy-mm-dd') as rentstart, to_char(rentinfo.rentend, 'yyyy-mm-dd') as rentend,"
+			+ " carlist.cost as cost, carlist.validrent as validrent FROM rentinfo, picarmember,"
+			+ " carlist WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum"
+			+ " and carlist.validrent in ('n', 'N') ORDER BY late desc) rented) WHERE rn between ? and ?";
+	private static final String JOIN_SELECT_RENT_BY_CARNUM_PAGE_SQL = "SELECT rownum rn,"
+			+ " TO_CHAR(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(rentend, 'YYYYMMDD'))) late,"
+			+ " carlist.carnum as carnum, picarmember.name as name, picarmember.phone as phone,"
+			+ " to_char(rentinfo.rentstart, 'yyyy-mm-dd') as rentstart, to_char(rentinfo.rentend, 'yyyy-mm-dd') as rentend,"
+			+ " carlist.cost as cost, carlist.validrent as validrent FROM rentinfo, picarmember,"
+			+ " carlist WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum"
+			+ " and rownum between ? and ? and carlist.validrent in ('n', 'N') and carlist.carnum like ? ORDER BY late desc"; 
 	@Override
 	public List<JoinRent> selectJoin() {
 		List<JoinRent> joinRentList = new ArrayList<JoinRent>();
