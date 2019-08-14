@@ -68,7 +68,7 @@ public class PicarController1 extends HttpServlet {
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/base/question2.jsp");
 			rd.forward(req, resp);
-			
+			 
 		}
 		
 		else if(action.equals("question_input")) {
