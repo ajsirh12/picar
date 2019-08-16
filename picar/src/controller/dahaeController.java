@@ -85,8 +85,9 @@ public class dahaeController extends HttpServlet {
 			boolean result = dao.insert(picarMember);
 			System.out.println(result);
 		
-			RequestDispatcher rd =req.getRequestDispatcher("/index.jsp");
-			rd.forward(req, resp);
+			/*RequestDispatcher rd =req.getRequestDispatcher("/index.jsp");
+			rd.forward(req, resp);*/
+			resp.sendRedirect("index.jsp");
 	
 		//회원가입 입력화면
 		}else if(action.equals("sign_up")) {
