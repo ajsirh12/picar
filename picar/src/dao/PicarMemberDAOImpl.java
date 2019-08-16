@@ -15,6 +15,9 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	private static final String PICARMEMBER_SELECT_BY_ID_SQL
 	="SELECT * FROM picarmember WHERE id=? and password=?";
 	
+	private static final String PICARMEMBER_CHECK_BY_ID_SQL
+	="SELECT COUNT(*) AS cnt FROM picarmember WHERE id=?";
+	
 	//회원가입
 	@Override
 	public boolean insert(PicarMember picarMember) {
@@ -51,7 +54,6 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	}
 	
 	//로그인
-
 	@Override
 	public PicarMember selectById(String id, String password) {
 		
@@ -90,6 +92,31 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		}
 		
 		return picarMember;		
-	} 
+	}
+
+	//아이디중복체크
+	@Override
+	public int checkById(String id) {
+		int count = 1;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_CHECK_BY_ID_SQL);
+			preparedStatement.setString(1, id);
+			
+			resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next()) {
+				count =resultSet.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 	
 }

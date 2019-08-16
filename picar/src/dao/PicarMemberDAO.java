@@ -7,4 +7,8 @@ public interface PicarMemberDAO {
 	boolean insert (PicarMember picarMember);
 	
 	PicarMember selectById(String id,String password);
+	
+	int checkById(String id);
+	
+	
 }

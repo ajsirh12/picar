@@ -14,7 +14,7 @@ import dao.PicarMemberDAO;
 import dao.PicarMemberDAOImpl;
 import model.PicarMember;
 
-@WebServlet(name = "dahaeController", urlPatterns = {"/login","/logout","/login_input","/member_save","/sign_up"})
+@WebServlet(name = "dahaeController", urlPatterns = {"/login","/logout","/login_input","/member_save","/sign_up","/idcheck","/idinput"})
 public class dahaeController extends HttpServlet {
 
 	@Override
@@ -71,10 +71,10 @@ public class dahaeController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/login.jsp");
 			rd.forward(req, resp);	
 		
-		}else if(action.equals("member_save")) {
+		//회원가입
+		}else if(action.equals("member_save")) {			
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			PicarMember picarMember = new PicarMember();
-			
 			picarMember.setId(req.getParameter("id"));
 			picarMember.setPassword(req.getParameter("password"));
 			picarMember.setName(req.getParameter("name"));
@@ -88,8 +88,33 @@ public class dahaeController extends HttpServlet {
 			RequestDispatcher rd =req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);
 	
+		//회원가입 입력화면
 		}else if(action.equals("sign_up")) {
-			resp.sendRedirect("jsp/base/membership.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/membership.jsp");
+			rd.forward(req, resp);
+									
+		//아이디 입력화면
+		}else if(action.equals("idinput")) {
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/membership.jsp");
+			rd.forward(req, resp);
+	
+		//중복체크
+		}else if(action.equals("idcheck")) {
+
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			int count = dao.checkById(req.getParameter("id"));
+						
+			if(count==0) 
+			{
+				req.setAttribute("message", "사용 할수 있는 아이디입니다.");
+			}else {
+				req.setAttribute("message", "사용 할수 없는 아이디입니다.");				
+			}
+
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/idcheckResult.jsp");
+			rd.forward(req, resp);	
+			
 		}
 	}	
 }
