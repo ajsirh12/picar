@@ -13,10 +13,10 @@
 	
 		<input type="text" name="id" id="id" placeholder="아이디를 입력하세요." /> <br />
 		<input type="password" name="password" id="password" placeholder="비밀번호를 입력하세요."/> <br />
-		<input type="submit" value="로그인">
-		
-		<input type="button" value="회원 가입" onclick="location.href='membership.jsp'">
+		<input type="submit" value="로그인">		
 	</form>	
+	<a href="id_fassword_find">아이디비밀번호찾기</a><br />
+	<a href="sign_up"><button>회원가입</button></a>
 	${message}		
 </body>
 </html>

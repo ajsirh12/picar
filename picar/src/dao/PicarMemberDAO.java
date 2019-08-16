@@ -10,4 +10,8 @@ public interface PicarMemberDAO {
 	List<PicarMember> selectAll();
 	
 	PicarMember selectById(String id,String password);
+	
+	int checkById(String id);
+	
+	
 }

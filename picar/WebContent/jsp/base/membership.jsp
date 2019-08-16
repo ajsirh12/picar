@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-  
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +28,12 @@
     });
 	
 	/* 아이디 중복체크 */
-	$(function(){
-      
+	$(function(){     
       $("#checkid").click(function(){
-         var input_val =$("#id").val();
-         //alert(input_val);      
+         var input_val =$("#id").val();     
          
          if(!input_val){
-         
+        	 alert("아이디를 입력해주세요");
             return false;         
          }
          
@@ -46,13 +44,10 @@
             var result = $(xml).find("result").text();
             $(".console").html(result);
             
-         });
-         
-      });
-      
+         });         
+      });      
    });
-	
-		
+			
 	$(function(){
 		$("#signupForm").validate({
 			debug : false,
@@ -60,7 +55,8 @@
 			rules : {								
 				id : {
 					required : true,	
-					minlength : 4
+					minlength : 4,
+					maxlength : 20
 				},				
 				password : {
 					required : true,	
@@ -82,13 +78,14 @@
 					minlength : 10,
 					maxlength : 10
 				},				
-				validdate : "required"						
+				validate : "required"						
 			},
 		
 			messages : {								
 				id : {
-					required : "아이디를 입력하세요.",	
-					minlength : "아이디는 최소 {0}글자 이상 입력하세요"					
+					required : "아이디는 필수 항목 입니다.",	
+					minlength : "아이디는 최소 {0}글자 이상 입력하세요",
+					maxlength : "아이디는 최대{0}글자 입니다."
 				},
 				password : {
 					required : "비밀번호를 입력하세요",	
@@ -110,13 +107,12 @@
 					minlength : "면허증번호 최소 {0}글자 입니다.",
 					maxlength : "면허증번호 최소 {0}글자 입니다."
 				},				 
-				validdate : "유효기간을 확인해주세요."
+				validate : "유효기간을 확인해주세요."
 				
 			}	 
 		});
 	});	
-	
-	
+		
 </script>
 </head>
 <body>
@@ -124,14 +120,13 @@
 	<form method="post" id="signupForm" action="member_save">
 				
 		아이디<input id="id" type="text" name="id" />
-		<input type="button"  id="chekcid" value="아이디중복검사" />
-		<br />
+		<input type="button" id="checkid" value="중복 확인" /><br />	
 		비밀번호<input id="password" type="password" placeholder="비밀번호는 6~10자리로 입력해주세요." name="password" /><br />
 		비밀번호 확인<input id="repwd" type="password" name="repwd" /><br />
 		이름<input id="name" type ="text" name="name"/><br />
 		전화번호 <input id="phone" type ="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone"/><br />
 		면허증번호 <input id="license" type ="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="license"/><br />
-		면허유효기간 <input id="validdate" type ="text" placeholder="유효기간(170101)" name="validdate"/><br />
+		면허유효기간 <input id="validate" type ="text" placeholder="유효기간(170101)" name="validate"/><br />
 				
 		<hr />
 		<input type="submit" value="가입" />

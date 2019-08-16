@@ -22,6 +22,9 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			+ " FROM picarmember"
 			+ " ORDER BY membernum";
 	
+	private static final String PICARMEMBER_CHECK_BY_ID_SQL
+	="SELECT COUNT(*) AS cnt FROM picarmember WHERE id=?";
+	
 	//회원가입
 	@Override
 	public boolean insert(PicarMember picarMember) {
@@ -135,6 +138,12 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
 		return picarMembers;
+	}
+
+	@Override
+	public int checkById(String id) {
+		// TODO Auto-generated method stub
+		return 0;
 	} 
 	
 }
