@@ -1,6 +1,7 @@
 package model;
 
 public class PicarMember {
+	
 	private int memberNum;
 	private String id;
 	private String password;
@@ -9,7 +10,6 @@ public class PicarMember {
 	private int license;
 	private String validate;
 	private int gradeNo;
-	
 	public int getMemberNum() {
 		return memberNum;
 	}

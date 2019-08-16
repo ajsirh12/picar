@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CommentJoinListDAO;
+import dao.CommentJoinListDAOImpl;
+import dao.PicarMemberDAO;
+import dao.PicarMemberDAOImpl;
 import dao.QuestionDAO1;
 import dao.QuestionDAOImpl1;
+import model.CommentJoinList;
+import model.PicarMember;
 import model.Question;
 import page2.PageManager;
 import page2.PageSQL;
@@ -58,13 +64,15 @@ public class KangController extends HttpServlet {
 			
 			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
 			PageManager pm = new PageManager(requestPage);
+
+			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+			List<CommentJoinList> commentJoinLists = commentJoinListDAO.selectAll(pm.getPageRowResullt().getRowStartNumber(), pm.getPageRowResullt().getRowEndNumber());
 			
-			QuestionDAO1 questionDAO = new QuestionDAOImpl1();
-			List<Question> questions = questionDAO.selectAll(pm.getPageRowResullt().getRowStartNumber(), pm.getPageRowResullt().getRowEndNumber());
+			req.setAttribute("commentJoinLists", commentJoinLists);
 			
-			req.setAttribute("questions", questions);
+			req.setAttribute("pageGroupResult", pm.getPageGroupResult(PageSQL.COMMENTJOINLIST_SELECT_ALL_COUNT));
 			
-			req.setAttribute("pageGroupResult", pm.getPageGroupResult(PageSQL.QUESTION_SELECT_ALL_COUNT));
+			System.out.println(commentJoinLists);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/base/question2.jsp");
 			rd.forward(req, resp);

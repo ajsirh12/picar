@@ -34,12 +34,12 @@
 						<td>작성자</td>
 						<td>답변</td>
 					</tr>
-					<c:forEach var="question" items="${questions}"> 
+					<c:forEach var="commentJoinList" items="${commentJoinLists}">
 					<tr>
-						<td>${question.questnum}</td>
-						<td>${question.questTitle}</td>
-						<td>${question.memberNum}</td>
-						<td>${question.answer}</td>
+						<td>${commentJoinList.questnum}</td>
+						<td>${commentJoinList.questTitle}</td>
+						<td>${commentJoinList.id}</td>
+						<td>${commentJoinList.answer}</td>
 					</tr>		
 					</c:forEach>
 				</table>

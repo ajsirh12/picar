@@ -14,16 +14,18 @@ public class QuestionDAOImpl1 extends BaseDAO implements QuestionDAO1{
 	
 /*	private static final String QUESTION_INSERT_SQL*/
 	
-	private static final String QUESTION_SELECT_ALL_SQL
+	private static final String QUESTION_SELECT_ALL_A_SQL
 	="SELECT *"
-			+ " FROM picarmember,question"
-			+ " WHERE question.membernum = picarmember.membernum"
+			+ " FROM question"
 			+ " ORDER BY questnum DESC";
-	private static final String QUESTION_SELECT_PAGE_ALL_SQL
+	
+/*	private static final String QUESTION_SELECT_PAGE_ALL_SQL
 	="SELECT *"
 			+ " FROM (SELECT ROWNUM RN, questions.*"
-			+ " FROM (SELECT * FROM QUESTION ORDER BY questnum DESC) questions)"
-			+ " WHERE rn BETWEEN ? and ?";
+			+ " FROM (SELECT question.questnum as questnum, question.questtitle as questtitle, question.questtext as questtext, picarmember.membernum as membernum, picarmember.id as id, question.answer as answer, question.questdate as questdate"
+			+ " FROM picarmember,question"
+			+ " WHERE picarmember.membernum = question.membernum order by questnum desc) questions)"
+			+ " WHERE rn BETWEEN ? and ?";*/
 
 	@Override
 	public boolean insert(Question question) {
@@ -48,12 +50,11 @@ public class QuestionDAOImpl1 extends BaseDAO implements QuestionDAO1{
 		
 		try {
 			connection = getConnection();
-			preparedStatement = connection.prepareStatement(QUESTION_SELECT_ALL_SQL);
+			preparedStatement = connection.prepareStatement(QUESTION_SELECT_ALL_A_SQL);
 			resultSet = preparedStatement.executeQuery();
 			
 		while (resultSet.next()) {
 			Question question = new Question();
-			PicarMember picarMember = new PicarMember();
 			
 			question.setQuestnum(resultSet.getInt("questnum"));
 			question.setQuestTitle(resultSet.getString("questTitle"));
@@ -74,7 +75,7 @@ public class QuestionDAOImpl1 extends BaseDAO implements QuestionDAO1{
 		return questions;
 	}
 
-	@Override
+/*	@Override
 	public List<Question> selectAll(int rowStartNumber, int rowEndNumber) {
 		
 		List<Question> questions = new ArrayList<Question>();
@@ -92,6 +93,7 @@ public class QuestionDAOImpl1 extends BaseDAO implements QuestionDAO1{
 			resultSet = preparedStatement.executeQuery();
 			
 		while (resultSet.next()) {
+			
 			Question question = new Question();
 				
 			question.setQuestnum(resultSet.getInt("questnum"));
@@ -100,6 +102,7 @@ public class QuestionDAOImpl1 extends BaseDAO implements QuestionDAO1{
 			question.setQuestDate(resultSet.getString("questDate"));
 			question.setAnswer(resultSet.getString("answer"));
 			question.setMemberNum(resultSet.getInt("memberNum"));
+			
 				
 			questions.add(question);	
 			}
@@ -111,5 +114,5 @@ public class QuestionDAOImpl1 extends BaseDAO implements QuestionDAO1{
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
 		return questions;
-		}
+		}*/
 }
