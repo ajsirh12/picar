@@ -7,15 +7,17 @@
 	</head>
 	<body>
 	<h1>문의사항</h1>
+	<form action="question_update" method="post">
+	<input type="hidden" name="questnum" value="${commentJoinList.questnum}"/>
 	<h2>제목</h2>
-	<input type="text" name="subject" value="${question.questtitle}"/>
+	<input type="text" name="questTitle" value="${commentJoinList.questTitle}"/>
 	<h2>내용</h2>
-	<textarea rows="20" cols="80" name="write" value="${question.questtext}"></textarea><br>
+	<textarea rows="20" cols="80" name="questText" value="${commentJoinList.questText}">${commentJoinList.questText}</textarea><br>
 	<hr>
 	
 	<input type="submit" value="수정하기">
-	<input type="button" value="삭제하기">
-	<input type="button" value="뒤로가기" onclick="location.href='question.jsp'">
-	
+	<input type="button" value="삭제하기" onclick="location.href='question_delete?questnum=${commentJoinList.questnum}'">
+	<input type="button" value="뒤로가기" onclick="location.href='question_req_list?reqPage=1'">
+	</form>
 	</body>
 </html>

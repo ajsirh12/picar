@@ -9,13 +9,13 @@
 </head>
 <body>
 	
-	<a href="question_req_list?reqPage=1">리스트로 이동 밑에 순서 표시</a>
-
+	<a href="question_req_list?reqPage=1">회원 게시판 이동</a><br/>
+	<a href="question_req_admin_list?reqPage=1">관리자 게시판 이동</a>
 	<ul>
 		<li><a href="login_input">로그인</a></li> 		
 		<a href="rentedList?reqPage=1">qwe</a>			
 	</ul>		
-	${picarmember.id}
+	<p>${picarmember.id}</p>
 	<c:if test="${picarmember !=null}">
 		<form action = "logout">
 		<input type = "submit" value="로그 아웃" />

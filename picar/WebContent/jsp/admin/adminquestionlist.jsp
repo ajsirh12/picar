@@ -25,9 +25,6 @@
 	</head>
 	<body>
 		<h1>Q & A</h1>
-		
-<!-- 		<input type="button"  value="글작성" onclick="location.href='jsp/base/input.jsp'"/> -->
-		<a href="question_insert?memberNum=${picarmember.memberNum}">글작성</a>
 				<table border="1" class="table table-striped"> 
 					<tr>
 						<td>번호</td>
@@ -37,31 +34,31 @@
 					</tr>
 					<c:forEach var="commentJoinList" items="${commentJoinLists}">
 					<tr>
-						<td><a href="question_detail?questnum=${commentJoinList.questnum}" onclick="other">${commentJoinList.questnum}</a></td>
+						<td>${commentJoinList.questnum}</td>
 						<td>${commentJoinList.questTitle}</td>
 						<td>${commentJoinList.id}</td>
-						<td>${commentJoinList.answer}</td>
+						<td><a href="question_detail?questnum=${commentJoinList.questnum}" onclick="other">${commentJoinList.answer}</a></td>
 					</tr>		
 					</c:forEach>
 				</table>
 				
 			<c:if test="${pageGroupResult.beforPage}">
-				<a href="question_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
+				<a href="question_req_admin_list?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
 			</c:if>
 	 
 					<c:forEach var="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
 						<c:choose>
 							<c:when test="${pageGroupResult.selectPageNumber==index}">
-								<span class="badge badge-secondary"><a href="question_req_list?reqPage=${index}">${index}</a></span>
+								<span class="badge badge-secondary"><a href="question_req_admin_list?reqPage=${index}">${index}</a></span>
 							</c:when>
 							<c:otherwise>
-								<a href="question_req_list?reqPage=${index}">${index}</a>
+								<a href="question_req_admin_list?reqPage=${index}">${index}</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 	
 	 		<c:if test="${pageGroupResult.afterPage}">
-				<a href="question_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
+				<a href="question_req_admin_list?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
 			</c:if> 
 	</body>
 </html>

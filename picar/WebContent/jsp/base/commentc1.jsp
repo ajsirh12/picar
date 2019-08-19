@@ -7,12 +7,14 @@
 	</head>
 	<body>
 	<h1>문의사항</h1>
+	<form action="question_detail2?questnum=${commentJoinList.questnum}" method="post">
+	<input type="hidden" name="questnum" value="${commentJoinList.questnum}"/>
 	<h2>제목</h2>
-	${question.questtitle}
+	${commentJoinList.questTitle}
 	<h2>내용</h2>
-	${question.questtext}
-	<input type="button" value="수정하기" onclick="location.href='commentc2.jsp'">
-	<input type="button" value="뒤로가기" onclick="location.href='question.jsp'">
-	
+	${commentJoinList.questText}<br>
+	<input type="submit" value="수정하기">
+	<input type="button" value="뒤로가기" onclick="location.href='question_req_list?reqPage=1'">
+	</form>
 	</body>
 </html>

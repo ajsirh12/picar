@@ -36,7 +36,7 @@ public class PicarMemberCheck implements Filter {
 			
 		}else {
 			
-			((HttpServletResponse)res).sendRedirect("/picar/login_input");
+			((HttpServletResponse)res).sendRedirect("login_input.jsp");
 			
 		}
 						
