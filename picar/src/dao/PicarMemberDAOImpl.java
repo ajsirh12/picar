@@ -16,7 +16,17 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	="SELECT * FROM picarmember WHERE id=? and password=?";
 	
 	private static final String PICARMEMBER_CHECK_BY_ID_SQL
-	="SELECT COUNT(*) AS cnt FROM picarmember WHERE id=?";
+	="SELECT COUNT(*) AS cnt FROM picarmember WHERE id=?"; 
+	
+	private static final String PICARMEMBER_FIND_ID_SQL
+	="SELECT * FROM picarmember WHERE name=? AND phone=?";
+	
+	private static final String PICARMEMBER_FIND_PASSWORD_SQL
+	="select * from picarmember where id=? and name=? AND phone=?";
+	
+	private static final String PICARMEMBER_PASSWORD_CHANGE_SQL
+	="update picarmember set password=? WHERE id=? AND NAME=? AND PHONE=?";
+	
 	
 	//회원가입
 	@Override
@@ -49,7 +59,6 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		}finally {
 			closeDBObjects(null, preparedStatement, connection);
 		}
-
 		return result;
 	}
 	
@@ -117,6 +126,113 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	
+	//아이디찾기
+	@Override
+	public PicarMember selectFindId(String name, String phone) {
+		
+		PicarMember picarMember = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+				
+		try {
+			connection = getConnection();
+			preparedStatement =connection.prepareStatement(PICARMEMBER_FIND_ID_SQL);
+			preparedStatement.setString(1,name);
+			preparedStatement.setString(2, phone);
+			resultSet = preparedStatement.executeQuery();
+			
+			 if(resultSet.next()) {
+				 
+				picarMember = new PicarMember();
+						
+				picarMember.setName(resultSet.getString("name"));
+				picarMember.setPhone(resultSet.getString("phone"));				
+				picarMember.setId(resultSet.getString("id"));	
+					
+			}
+						
+		} catch (SQLException e) {			
+			e.printStackTrace();			
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		System.out.println(picarMember);
+		return picarMember;		
+	}
+
+	//비밀번호 찾기
+	@Override
+	public PicarMember selectFindPassword(String id, String name, String phone) {
+		
+		PicarMember picarMember = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+				
+		try {
+			connection = getConnection();
+			preparedStatement =connection.prepareStatement(PICARMEMBER_FIND_PASSWORD_SQL);
+			preparedStatement.setString(1, id);
+			preparedStatement.setString(2,name);
+			preparedStatement.setString(3, phone);
+			resultSet = preparedStatement.executeQuery();
+			
+			 if(resultSet.next()) {
+				 
+				picarMember = new PicarMember();
+												
+				picarMember.setId(resultSet.getString("id"));			
+				picarMember.setName(resultSet.getString("name"));
+				picarMember.setPhone(resultSet.getString("phone"));
+				picarMember.setPassword(resultSet.getString("password"));
+									
+			}
+						
+		} catch (SQLException e) {			
+			e.printStackTrace();			
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return picarMember;
+	}
+
+	//비밀번호 변경
+	@Override
+	public boolean update(PicarMember picarMember) {
+		boolean result = false;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_PASSWORD_CHANGE_SQL);
+			preparedStatement.setString(1, picarMember.getPassword());
+			preparedStatement.setString(2, picarMember.getId());
+			preparedStatement.setString(3, picarMember.getName());
+			preparedStatement.setString(4, picarMember.getPhone());
+		
+			int rowCount = preparedStatement.executeUpdate();
+			
+			if(rowCount>0) {
+					result = true;
+			}
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				closeDBObjects(null, preparedStatement, connection);
+			}
+
+			return result;
+
 	}
 	
 }

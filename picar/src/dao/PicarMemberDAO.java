@@ -10,5 +10,9 @@ public interface PicarMemberDAO {
 	
 	int checkById(String id);
 	
+	PicarMember selectFindId(String name,String phone);
 	
+	PicarMember selectFindPassword(String id,String name,String phone);
+	
+	boolean update (PicarMember picarMember);
 }

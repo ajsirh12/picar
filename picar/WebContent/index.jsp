@@ -15,7 +15,10 @@
 		<li><a href="login_input">로그인</a></li> 		
 		<a href="rentedList?reqPage=1">qwe</a>			
 	</ul>		
+	
+	
 	${picarmember.id}
+	
 	<c:if test="${picarmember !=null}">
 		<form action = "logout">
 		<input type = "submit" value="로그 아웃" />

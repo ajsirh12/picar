@@ -14,7 +14,8 @@ import dao.PicarMemberDAO;
 import dao.PicarMemberDAOImpl;
 import model.PicarMember;
 
-@WebServlet(name = "dahaeController", urlPatterns = {"/login","/logout","/login_input","/member_save","/sign_up","/idcheck","/idinput"})
+@WebServlet(name = "dahaeController", urlPatterns = {"/login","/logout","/login_input","/member_save",
+				"/sign_up","/idcheck","/idinput","/idfind","/id_find","/password_find","/passwordfind","/password_update"})
 public class dahaeController extends HttpServlet {
 
 	@Override
@@ -38,15 +39,15 @@ public class dahaeController extends HttpServlet {
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/login.jsp");
 			rd.forward(req, resp);
-			
+		
+		//로그인
 		}else if(action.equals("login")) {
 			String id = req.getParameter("id");
 			String password = req.getParameter("password");
 			
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			PicarMember picarmember = dao.selectById(id, password);
-			
-			
+						
 			if(picarmember !=null){
 				HttpSession session = req.getSession();
 				session.setAttribute("picarmember", picarmember);
@@ -68,7 +69,7 @@ public class dahaeController extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.removeAttribute("picarmember");
 			
-			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/login.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 			rd.forward(req, resp);	
 		
 		//회원가입
@@ -104,17 +105,81 @@ public class dahaeController extends HttpServlet {
 
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			int count = dao.checkById(req.getParameter("id"));
-						
+			
+			req.setAttribute("count", count);
+			
 			if(count==0) 
 			{
 				req.setAttribute("message", "사용 할수 있는 아이디입니다.");
 			}else {
 				req.setAttribute("message", "사용 할수 없는 아이디입니다.");				
 			}
-
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/idcheckResult.jsp");
 			rd.forward(req, resp);	
+				
+		//아이디찾기 입력화면
+		}else if(action.equals("id_find")) {
 			
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/idFind.jsp");
+			rd.forward(req, resp);	
+					
+		//아이디찾기
+		}else if(action.equals("idfind")){
+			String name = req.getParameter("name");
+			String phone = req.getParameter("phone");
+			
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			
+			PicarMember picarmember = dao.selectFindId(name, phone);
+						
+			req.setAttribute("picarmember", picarmember);
+			System.out.println(picarmember);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/findId.jsp");
+			rd.forward(req, resp);
+	
+		//비밀번호 찾기 입력화면
+		}else if (action.equals("password_find")) {
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/passwordFind.jsp");
+			rd.forward(req, resp);	
+			
+		//비밀번호 찾기
+		}else if (action.equals("passwordfind")) {
+			
+			String id =req.getParameter("id");					
+			String name = req.getParameter("name"); 
+			String phone = req.getParameter("phone");
+			
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			PicarMember picarmember = dao.selectFindPassword(id, name, phone);
+			
+			req.setAttribute("picarmember", picarmember);
+			System.out.println(picarmember);
+
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/passwordChange.jsp");
+			rd.forward(req, resp);	
+		
+		//비밀번호 찾기 변경
+		}else if(action.equals("password_update")) {
+			
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			PicarMember picarMember = new PicarMember();			
+			
+			picarMember.setPassword(req.getParameter("password"));
+			picarMember.setName(req.getParameter("name"));
+			picarMember.setId(req.getParameter("id"));
+			picarMember.setPhone(req.getParameter("phone"));
+			
+			boolean result = dao.update(picarMember);
+
+			System.out.println(picarMember);
+			System.out.println(result);
+
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/login.jsp");
+			rd.forward(req, resp);
 		}
+		
 	}	
 }
