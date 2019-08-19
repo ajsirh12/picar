@@ -7,7 +7,7 @@
 	</head>
 	<body>
 	<h1>문의사항</h1>
-	<form action="question_update" method="post">
+	<form action="question_update.do" method="post">
 	<input type="hidden" name="questnum" value="${commentJoinList.questnum}"/>
 	<h2>제목</h2>
 	<input type="text" name="questTitle" value="${commentJoinList.questTitle}"/>
@@ -16,8 +16,8 @@
 	<hr>
 	
 	<input type="submit" value="수정하기">
-	<input type="button" value="삭제하기" onclick="location.href='question_delete?questnum=${commentJoinList.questnum}'">
-	<input type="button" value="뒤로가기" onclick="location.href='question_req_list?reqPage=1'">
+	<input type="button" value="삭제하기" onclick="location.href='question_delete.do?questnum=${commentJoinList.questnum}'">
+	<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
 	</form>
 	</body>
 </html>
