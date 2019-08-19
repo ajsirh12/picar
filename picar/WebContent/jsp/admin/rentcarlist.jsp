@@ -10,7 +10,7 @@
 <h2>차량 렌트목록</h2>
 <table border="1">
 	<tr>
-		<form action="rentedSearch?reqPage=1" method="post">
+		<form action="rentedSearch.do?reqPage=1" method="post">
 		<td colspan="7"><input type="text" name="carNum" /> <input type="submit" /></td>
 		</form>
 	</tr>
@@ -40,21 +40,21 @@
 	<tr>
 		<td colspan="7" align="center">
 			<c:if test="${pageGroupResult.beforPage}">
-				<a href="rentedList?reqPage=${pageGroupResult.groupStartNumber - 1}">&lt;</a>
+				<a href="rentedList.do?reqPage=${pageGroupResult.groupStartNumber - 1}">&lt;</a>
 			</c:if>
 			<c:if test="${!pageGroupResult.beforPage}">
 				&lt;
 			</c:if>&nbsp&nbsp&nbsp
 			<c:forEach var="index" begin="${pageGroupResult.groupStartNumber }" end="${pageGroupResult.groupEndNumber }">
 				<c:if test="${index == pageGroupResult.selectPageNumber }">
-					<span id="select"><a href="rentedList?reqPage=${index }">${index }</a></span>
+					<span id="select"><a href="rentedList.do?reqPage=${index }">${index }</a></span>
 				</c:if>
 				<c:if test="${index != pageGroupResult.selectPageNumber }">
-					<a href="rentedList?reqPage=${index }">${index }</a>
+					<a href="rentedList.do?reqPage=${index }">${index }</a>
 				</c:if>
 			</c:forEach>&nbsp&nbsp&nbsp
 			<c:if test="${pageGroupResult.afterPage}">
-				<a href="rentedList?reqPage=${pageGroupResult.groupEndNumber + 1}">&gt;</a>
+				<a href="rentedList.do?reqPage=${pageGroupResult.groupEndNumber + 1}">&gt;</a>
 			</c:if>
 			<c:if test="${!pageGroupResult.afterPage}">
 				&gt;

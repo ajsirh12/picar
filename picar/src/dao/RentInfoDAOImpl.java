@@ -1,5 +1,68 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
+import model.RentInfo;
+
 public class RentInfoDAOImpl extends BaseDAO implements RentInfoDAO {
+	private static final String RENTINFO_SELECT_DATE_BY_MEMBERNUM = "SELECT rentnum, to_char(rentstart, 'yyyy/mm/dd') rentstart, to_char(rentend, 'yyyy/mm/dd') rentend, membernum, carnum FROM rentinfo WHERE membernum = ?";
+	private static final String RENTINFO_UPDATE_RENTEND_BY_RENTNUM = "UPDATE rentinfo SET rentend = rentend + ? WHERE rentnum = ?";
+	@Override
+	public RentInfo selectByMemberNum(int memberNum) {
+		RentInfo rentInfo = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(RENTINFO_SELECT_DATE_BY_MEMBERNUM);
+			preparedStatement.setInt(1, memberNum);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				rentInfo = new RentInfo();
+				
+				rentInfo.setRentNum(resultSet.getInt("rentnum"));
+				rentInfo.setRentStart(resultSet.getString("rentstart"));
+				rentInfo.setRentEnd(resultSet.getString("rentend"));
+				rentInfo.setMemberNum(resultSet.getInt("membernum"));
+				rentInfo.setCarNum(resultSet.getString("carnum"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return rentInfo;
+	}
+	@Override
+	public void renewByRentNum(int renew, int rentNum) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(RENTINFO_UPDATE_RENTEND_BY_RENTNUM);
+			preparedStatement.setInt(1, renew);
+			preparedStatement.setInt(2, rentNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+	}
 
 }

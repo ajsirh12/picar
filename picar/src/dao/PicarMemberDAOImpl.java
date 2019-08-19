@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.PicarMember;
 
@@ -14,6 +16,11 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	
 	private static final String PICARMEMBER_SELECT_BY_ID_SQL
 	="SELECT * FROM picarmember WHERE id=? and password=?";
+	
+	private static final String PICARMEMBER_SELECT_ALL_SQL
+	="SELECT *"
+			+ " FROM picarmember"
+			+ " ORDER BY membernum";
 	
 	private static final String PICARMEMBER_CHECK_BY_ID_SQL
 	="SELECT COUNT(*) AS cnt FROM picarmember WHERE id=?"; 
@@ -103,10 +110,11 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		return picarMember;		
 	}
 
-	//아이디중복체크
+	//전체리스트
 	@Override
-	public int checkById(String id) {
-		int count = 1;
+	public List<PicarMember> selectAll() {
+		
+		List<PicarMember> picarMembers = new ArrayList<PicarMember>();
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -114,20 +122,32 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		
 		try {
 			connection = getConnection();
-			preparedStatement = connection.prepareStatement(PICARMEMBER_CHECK_BY_ID_SQL);
-			preparedStatement.setString(1, id);
-			
+			preparedStatement = connection.prepareStatement(PICARMEMBER_SELECT_ALL_SQL);
 			resultSet = preparedStatement.executeQuery();
-
-			if(resultSet.next()) {
-				count =resultSet.getInt("cnt");
+			
+		while(resultSet.next()) {
+			PicarMember picarMember = new PicarMember();
+			
+			picarMember.setMemberNum(resultSet.getInt("memberNum"));
+			picarMember.setId(resultSet.getString("id"));
+			picarMember.setPassword(resultSet.getString("password"));
+			picarMember.setName(resultSet.getString("name"));
+			picarMember.setPassword(resultSet.getString("phone"));
+			picarMember.setLicense(resultSet.getInt("license"));
+			picarMember.setValidate(resultSet.getString("validdate"));
+			picarMember.setGradeNo(resultSet.getInt("gradeNo"));
+			
+			picarMembers.add(picarMember);
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return count;
+		finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return picarMembers;
 	}
-
 	
 	//아이디찾기
 	@Override
@@ -234,5 +254,30 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			return result;
 
 	}
+
+	//아이디중복체크
+		@Override
+		public int checkById(String id) {
+			int count = 1;
+			
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			ResultSet resultSet = null;
+			
+			try {
+				connection = getConnection();
+				preparedStatement = connection.prepareStatement(PICARMEMBER_CHECK_BY_ID_SQL);
+				preparedStatement.setString(1, id);
+				
+				resultSet = preparedStatement.executeQuery();
+
+				if(resultSet.next()) {
+					count =resultSet.getInt("cnt");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return count;
+		}
 	
 }

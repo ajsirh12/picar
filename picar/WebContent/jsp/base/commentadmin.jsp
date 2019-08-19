@@ -8,9 +8,9 @@
 	<body>
 	<h1>문의사항</h1>
 	<h2>제목</h2>
-	<input type="text" name="subject" value="${question.questtitle}"/>
+	${question.questtitle}"
 	<h2>내용</h2>
-	<textarea rows="20" cols="80" name="write" value="${question.questtext}"></textarea><br>
+	${question.questtext}"
 	<hr>
 	<h2>답변</h2>
 	<textarea rows="5" cols="40"></textarea><br>
