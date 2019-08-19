@@ -1,5 +1,7 @@
 package dao;
 
-public interface CarListDAO {
+import model.CarList;
 
+public interface CarListDAO {
+	CarList selectByCarNum(String carNum);
 }

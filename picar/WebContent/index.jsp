@@ -13,7 +13,8 @@
 	<a href="question_req_admin_list?reqPage=1">관리자 게시판 이동</a>
 	<ul>
 		<li><a href="login_input">로그인</a></li> 		
-		<a href="rentedList?reqPage=1">qwe</a>			
+		<li><a href="rentedList.do?reqPage=1">대여목록</a></li>
+		<li><a href="myRentCar.do?membernum=${picarmember.memberNum }">내 차량</a></li>
 	</ul>		
 	<p>${picarmember.id}</p>
 	<c:if test="${picarmember !=null}">
