@@ -1,6 +1,7 @@
 package model;
 
 public class PicarMember {
+	
 	private int memberNum;
 	private String id;
 	private String password;

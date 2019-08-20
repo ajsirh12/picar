@@ -1,5 +1,8 @@
 package dao;
 
-public interface RentInfoDAO {
+import model.RentInfo;
 
+public interface RentInfoDAO {
+	RentInfo selectByMemberNum(int memberNum);
+	void renewByRentNum(int renew, int rentNum);
 }
