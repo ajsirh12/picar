@@ -8,7 +8,8 @@
 <title>myRentCar</title>
 </head>
 <body>
-	<img src="${car.carImage }" alt="" width="500" />
+<c:if test="${rentinfo.memberNum == picarmember.memberNum }">
+<img src="${car.carImage }" alt="" width="500" />
 	<table border="1">
 		<tr>
 			<td>차종</td>
@@ -48,9 +49,12 @@
 		</tr>
 		</form>
 	</table>
+</c:if>
+<c:if test="${rentinfo.memberNum != picarmember.memberNum }">
+	get out here
+</c:if>
 <script type="text/javascript">
 $(function() {
-	
 	$("#renewbtn").click(function() {
 		var renew = $("#renew").val();
 		var cost = ${carlist.cost} * $("#renew").val();

@@ -6,6 +6,7 @@
 <head>
 <meta charset=utf-8>
 <title>picar index</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 	
@@ -15,6 +16,7 @@
 		<li><a href="login_input">로그인</a></li> 		
 		<li><a href="rentedList.do?reqPage=1">대여목록</a></li>
 		<li><a href="myRentCar.do?membernum=${picarmember.memberNum }">내 차량</a></li>
+		<li><a href="allRentCar.do?reqPage=1">관리자 차량목록</a></li>
 	</ul>		
 	${picarmember.id}
 	<c:if test="${picarmember !=null}">
@@ -23,7 +25,6 @@
 		<input type = "button" value="회원 정보 수정" />			
 		</form>
 	</c:if>	
-	
 </body>
 </html>
 
