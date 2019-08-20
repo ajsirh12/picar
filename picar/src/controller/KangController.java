@@ -15,7 +15,9 @@ import dao.CommentJoinListDAO;
 import dao.CommentJoinListDAOImpl;
 import dao.PicarMemberDAO;
 import dao.PicarMemberDAOImpl;
+import dao.QuestionDAO;
 import dao.QuestionDAO1;
+import dao.QuestionDAOImpl;
 import dao.QuestionDAOImpl1;
 import model.CommentJoinList;
 import model.PicarMember;
@@ -23,7 +25,8 @@ import model.Question;
 import page2.PageManager;
 import page2.PageSQL;
 
-@WebServlet(name = "PicarController1", urlPatterns = {"/question_list","/question_insert","/question_req_list","/question_input"})
+@WebServlet(name = "KangController", urlPatterns = {"/question_list.do","/question_insert.do","/question_req_list.do","/question_input.do","/question_req_insert.do",
+													"/question_detail.do","/question_detail2.do","/question_delete.do","/question_update.do","/question_req_admin_list.do"})
 public class KangController extends HttpServlet {
 
 	@Override
@@ -42,12 +45,30 @@ public class KangController extends HttpServlet {
 		int lastIndex = uri.lastIndexOf("/");
 		String action = uri.substring(lastIndex+1);
 		
-		if(action.equals("question_insert")) {
+		if(action.equals("question_insert.do")) {
 			//로그인 페이지로 이동하는 코드 넣어주세요
-			RequestDispatcher rd = req.getRequestDispatcher("/write.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/input.jsp");
 			rd.forward(req, resp);
 		}
-		else if(action.equals("question_list")) {
+		else if(action.equals("question_req_insert.do")) {
+			
+			QuestionDAO1 questionDAO = new QuestionDAOImpl1();
+			Question question = new Question();
+			
+			question.setQuestTitle(req.getParameter("questTitle"));
+			question.setQuestText(req.getParameter("questText"));	
+			question.setMemberNum(Integer.parseInt(req.getParameter("memberNum")));
+			
+			boolean result = questionDAO.insert(question);
+			
+			System.out.println(question);
+			
+			
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
+			rd.forward(req, resp);
+		}
+		
+		else if(action.equals("question_list.do")) {
 			
 			QuestionDAO1 questionDAO = new QuestionDAOImpl1();
 			List<Question> questions = questionDAO.selectAll();
@@ -60,7 +81,7 @@ public class KangController extends HttpServlet {
 			rd.forward(req, resp);	
 		}
 		
-		else if(action.equals("question_req_list")) {
+		else if(action.equals("question_req_list.do")) {
 			
 			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
 			PageManager pm = new PageManager(requestPage);
@@ -72,15 +93,90 @@ public class KangController extends HttpServlet {
 			
 			req.setAttribute("pageGroupResult", pm.getPageGroupResult(PageSQL.COMMENTJOINLIST_SELECT_ALL_COUNT));
 			
-			System.out.println(commentJoinLists);
+			//System.out.println(commentJoinLists);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/base/question2.jsp");
 			rd.forward(req, resp);
 			 
 		}
 		
-		else if(action.equals("question_input")) {
+		else if(action.equals("question_detail.do")) {
 			
+			int questnum = Integer.parseInt(req.getParameter("questnum"));
+			
+			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+			CommentJoinList commentJoinList = commentJoinListDAO.selectByQuestnum(questnum);
+			
+			//System.out.println(commentJoinList);
+			
+			req.setAttribute("commentJoinList", commentJoinList);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/commentc1.jsp");
+			rd.forward(req, resp);
+			
+		}
+		
+		else if(action.equals("question_detail2.do")) {
+			
+			int questnum = Integer.parseInt(req.getParameter("questnum"));
+			
+			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+			CommentJoinList commentJoinList = commentJoinListDAO.selectByQuestnum(questnum);
+			
+			//System.out.println(commentJoinList);
+			
+			req.setAttribute("commentJoinList", commentJoinList);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/commentc2.jsp");
+			rd.forward(req, resp);
+			
+		}
+		
+		else if(action.equals("question_delete.do")) {
+			
+			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+			int questnum = Integer.parseInt(req.getParameter("questnum"));
+			boolean result = commentJoinListDAO.deleteByQuestnum(questnum);
+			
+			System.out.println(result);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
+			rd.forward(req, resp);
+		}
+		else if(action.equals("question_update.do")) {
+			
+			CommentJoinList commentJoinList = new CommentJoinList();
+			
+			commentJoinList.setQuestnum(Integer.parseInt(req.getParameter("questnum")));//오류가 나는 부분 빼고 실행했을 경우 실행은 되나 false가 뜸			
+			commentJoinList.setQuestTitle(req.getParameter("questTitle"));
+			commentJoinList.setQuestText(req.getParameter("questText"));
+			
+			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+			boolean result = commentJoinListDAO.update(commentJoinList);
+			
+			System.out.println(result);
+			System.out.println(commentJoinList);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
+			rd.forward(req, resp);
+			
+		}
+		else if(action.equals("question_req_admin_list.do")) {
+			
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			PageManager pm = new PageManager(requestPage);
+
+			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+			List<CommentJoinList> commentJoinLists = commentJoinListDAO.adminselectAll(pm.getPageRowResullt().getRowStartNumber(), pm.getPageRowResullt().getRowEndNumber());
+			
+			req.setAttribute("commentJoinLists", commentJoinLists);
+			
+			req.setAttribute("pageGroupResult", pm.getPageGroupResult(PageSQL.COMMENTJOINLIST_SELECT_ALL_COUNT));
+			
+			System.out.println(commentJoinLists);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/adminquestionlist.jsp");
+			rd.forward(req, resp);
 		}
 		
 	}

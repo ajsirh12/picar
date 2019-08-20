@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
- 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,26 +28,54 @@
     });
 	
 	/* 아이디 중복체크 */
+	var idck = 0;
 	$(function(){     
-      $("#checkid").click(function(){
-         var input_val =$("#id").val();     
+    	$("#checkid").click(function(){
+        	var input_val =$("#id").val();     
          
-         if(!input_val){
-        	 alert("아이디를 입력해주세요");
-            return false;         
-         }
+        	if(!input_val){
+        		alert("아이디를 입력해주세요");
+            	return false;         
+         	}
          
-         var url="idcheck";
+        	var url="idcheck";
          
-         $.get(url,{"id":input_val},function(xml){
+        	$.get(url,{"id":input_val},function(xml){
             
-            var result = $(xml).find("result").text();
+        	var result = $(xml).find("result").text();
+        	var count = $(xml).find("count").text();
+            alert(count);
+                     
             $(".console").html(result);
+           
+            if(count>=1){
+            	idck = 0;
+            	return false;
+            }else{
+            	idck = 1;
+            	return true;
+            }
             
-         });         
-      });      
+    
+         });   
+       	    	
+      	});      
    });
-			
+	
+	$(function(){     
+    	$("#join").click(function(){
+    		if(idck==1){
+    			return true;
+    		}else{
+    			alert("중복된 아이디는 사용할수 없습니다.");
+    			return false;
+    		}
+      	});      
+   });
+	
+	
+		
+		
 	$(function(){
 		$("#signupForm").validate({
 			debug : false,
@@ -105,10 +133,9 @@
 				license : {
 					required :"면허증 입력은 필수 사항입니다.",
 					minlength : "면허증번호 최소 {0}글자 입니다.",
-					maxlength : "면허증번호 최소 {0}글자 입니다."
+					maxlength : "면허증번호 최대 {0}글자 입니다."
 				},				 
-				validate : "유효기간을 확인해주세요."
-				
+				validate : "유효기간을 확인해주세요."				
 			}	 
 		});
 	});	
@@ -119,18 +146,19 @@
 	<h1>회원 가입</h1>
 	<form method="post" id="signupForm" action="member_save">
 				
-		아이디<input id="id" type="text" name="id" />
-		<input type="button" id="checkid" value="중복 확인" /><br />	
-		비밀번호<input id="password" type="password" placeholder="비밀번호는 6~10자리로 입력해주세요." name="password" /><br />
-		비밀번호 확인<input id="repwd" type="password" name="repwd" /><br />
-		이름<input id="name" type ="text" name="name"/><br />
-		전화번호 <input id="phone" type ="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone"/><br />
-		면허증번호 <input id="license" type ="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="license"/><br />
-		면허유효기간 <input id="validate" type ="text" placeholder="유효기간(170101)" name="validate"/><br />
-				
+		아이디<input id="id" type="text" placeholder="아이디를 입력해주세요" maxlength="20" name="id" />
+		<input type="button" id="checkid" value="중복 확인" /><br />		
+		비밀번호<input id="password" type="password" placeholder="비밀번호는 6~20자리로 입력해주세요." maxlength="20" name="password" /><br />
+		비밀번호 확인<input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" /><br />
+		이름<input id="name" type ="text" placeholder="이름을 입력해주세요" name="name"/><br />
+		전화번호 <input id="phone" type ="tel" placeholder="전화번호를 입력해주세요" maxlength="11" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone"/><br />
+		면허증번호 <input id="license" type ="text" placeholder="면허증번호 10자리를 입력해주세요" maxlength="10" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="license"/><br />
+		면허유효기간 <input id="validate" type="text" placeholder="19/08/18" name="validate" maxlength="6">
+						
 		<hr />
-		<input type="submit" value="가입" />
+		<input type="submit" value="가입" id="join"/>
 	</form>
 	<div class="console"></div>
+	
 </body>
 </html>
