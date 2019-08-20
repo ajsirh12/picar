@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	
+	<a href="insertcar">InsertCar</a><br />
+	<a href="carlistloc">CarList</a><br />
 	<a href="rentedList?reqPage=1">RentedList</a>
 </body>
 </html>

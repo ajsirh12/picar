@@ -1,12 +1,8 @@
 package dao;
 
-import model.Car;
+import model.JoinInsert;
 
 public interface CarDAO {
 
-	boolean insert(Car car);
-	
-	Car selectByLocation(int carloc);
-
-	
+	boolean insert(JoinInsert joininsert);	
 }

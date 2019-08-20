@@ -2,23 +2,23 @@ package model;
 
 public class Car {
 	private int carType;
-	private String carName;
+	private String carNum;
 	private String fuelType;
 	private String colorType;
-	private int people;
+	private int People;
 	private String carImage;
-	
+
 	public int getCarType() {
 		return carType;
 	}
 	public void setCarType(int carType) {
 		this.carType = carType;
 	}
-	public String getCarName() {
-		return carName;
+	public String getCarNum() {
+		return carNum;
 	}
-	public void setCarName(String carName) {
-		this.carName = carName;
+	public void setCarNum(String carNum) {
+		this.carNum = carNum;
 	}
 	public String getFuelType() {
 		return fuelType;
@@ -33,10 +33,10 @@ public class Car {
 		this.colorType = colorType;
 	}
 	public int getPeople() {
-		return people;
+		return People;
 	}
 	public void setPeople(int people) {
-		this.people = people;
+		People = people;
 	}
 	public String getCarImage() {
 		return carImage;
@@ -44,11 +44,11 @@ public class Car {
 	public void setCarImage(String carImage) {
 		this.carImage = carImage;
 	}
+	
 	@Override
 	public String toString() {
-		return "Car [carType=" + carType + ", carName=" + carName + ", fuelType=" + fuelType + ", colorType="
-				+ colorType + ", people=" + people + ", carImage=" + carImage + "]";
+		return "Car [carType=" + carType + ", carNum=" + carNum + ", fuelType=" + fuelType + ", colorType=" + colorType
+				+ ", People=" + People + ", carImage=" + carImage + "]";
 	}
-	
 	
 }

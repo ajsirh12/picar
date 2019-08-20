@@ -44,7 +44,7 @@
 			</c:if>
 			<c:if test="${!pageGroupResult.beforPage}">
 				&lt;
-			</c:if>&nbsp&nbsp&nbsp
+			</c:if>
 			<c:forEach var="index" begin="${pageGroupResult.groupStartNumber }" end="${pageGroupResult.groupEndNumber }">
 				<c:if test="${index == pageGroupResult.selectPageNumber }">
 					<span id="select"><a href="rentedList?reqPage=${index }">${index }</a></span>
@@ -52,7 +52,7 @@
 				<c:if test="${index != pageGroupResult.selectPageNumber }">
 					<a href="rentedList?reqPage=${index }">${index }</a>
 				</c:if>
-			</c:forEach>&nbsp&nbsp&nbsp
+			</c:forEach>
 			<c:if test="${pageGroupResult.afterPage}">
 				<a href="rentedList?reqPage=${pageGroupResult.groupEndNumber + 1}">&gt;</a>
 			</c:if>
