@@ -7,7 +7,7 @@
 		<title>게시판(관리자)</title>
 	</head>
 	<body>
-	<form action="commlist_insert.do" method="post">
+	<form action="commlist.update.do" method="post">
 	<h1>문의사항</h1>
 	<h2>제목</h2>
 	${commentJoinList.questTitle}
@@ -15,18 +15,11 @@
 	${commentJoinList.questText}
 	<hr>
 	<h2>답변</h2>
-
 	<input type="hidden" name="commNum" value="${commList.commNum}"></input>
 	<input type="hidden" name="memberNum" value="${commentJoinList.memberNum}"/>
 	<input type="hidden" name="questNum" value="${commentJoinList.questnum}" />
-	<c:if test="${commList.commText !=null}">
-	${commList.commText}<br/>
-	<input type="button" value="수정하기" onclick="location.href='question_admin_detail2.do?questNum=${commentJoinList.questnum}'">
-	</c:if>
-	<c:if test="${commList.commText ==null}">
 	<textarea rows="5" cols="40" name = "commText">${commList.commText}</textarea><br>
-	<input type="submit" value="답변등록">
-	</c:if>
+	<input type="submit" value="수정하기">
 	<input type="button" value="삭제하기" onclick ="location.href='question_admin_delete.do?questnum=${commentJoinList.questnum}'" >
 	<input type="button" value="뒤로가기" onclick="location.href='question_req_admin_list.do?reqPage=1'"> 
 	</form>

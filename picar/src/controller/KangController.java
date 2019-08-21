@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CommListDAO;
+import dao.CommListDAOImpl;
 import dao.CommentJoinListDAO;
 import dao.CommentJoinListDAOImpl;
 import dao.PicarMemberDAO;
@@ -19,6 +21,7 @@ import dao.QuestionDAO;
 import dao.QuestionDAO1;
 import dao.QuestionDAOImpl;
 import dao.QuestionDAOImpl1;
+import model.CommList;
 import model.CommentJoinList;
 import model.PicarMember;
 import model.Question;
@@ -26,7 +29,8 @@ import page2.PageManager;
 import page2.PageSQL;
 
 @WebServlet(name = "KangController", urlPatterns = {"/question_list.do","/question_insert.do","/question_req_list.do","/question_input.do","/question_req_insert.do",
-													"/question_detail.do","/question_detail2.do","/question_delete.do","/question_update.do","/question_req_admin_list.do"})
+													"/question_detail.do","/question_detail2.do","/question_delete.do","/question_update.do","/question_req_admin_list.do",
+													"/question_admin_detail.do","/question_admin_delete.do","/question_admin_detail2.do","/commlist_insert.do","/commlist.update.do"})
 public class KangController extends HttpServlet {
 
 	@Override
@@ -107,6 +111,11 @@ public class KangController extends HttpServlet {
 			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
 			CommentJoinList commentJoinList = commentJoinListDAO.selectByQuestnum(questnum);
 			
+			CommListDAO commListDAO = new CommListDAOImpl();
+			CommList commList = commListDAO.selectByQuestnum(questnum);
+			
+			req.setAttribute("commList", commList);
+			
 			//System.out.println(commentJoinList);
 			
 			req.setAttribute("commentJoinList", commentJoinList);
@@ -173,12 +182,95 @@ public class KangController extends HttpServlet {
 			
 			req.setAttribute("pageGroupResult", pm.getPageGroupResult(PageSQL.COMMENTJOINLIST_SELECT_ALL_COUNT));
 			
-			System.out.println(commentJoinLists);
+			//System.out.println(commentJoinLists);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/adminquestionlist.jsp");
 			rd.forward(req, resp);
 		}
 		
+			else if(action.equals("question_admin_detail.do")) {
+			
+			int questnum = Integer.parseInt(req.getParameter("questNum"));
+			
+			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+			CommentJoinList commentJoinList = commentJoinListDAO.selectByQuestnum(questnum);
+			
+			req.setAttribute("commentJoinList", commentJoinList);
+			
+			CommListDAO commListDAO = new CommListDAOImpl();
+			CommList commList = commListDAO.selectByQuestnum(questnum);
+			
+			req.setAttribute("commList", commList);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/commentadmin.jsp");
+			rd.forward(req, resp);
+			
+		}
+		
+			else if(action.equals("question_admin_detail2.do")) {
+				
+				int questnum = Integer.parseInt(req.getParameter("questNum"));
+				
+				CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+				CommentJoinList commentJoinList = commentJoinListDAO.selectByQuestnum(questnum);
+				
+				req.setAttribute("commentJoinList", commentJoinList);
+				
+				CommListDAO commListDAO = new CommListDAOImpl();
+				CommList commList = commListDAO.selectByQuestnum(questnum);
+				
+				req.setAttribute("commList", commList);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/commentadmin2.jsp");
+				rd.forward(req, resp);
+				
+			}
+		
+			else if(action.equals("question_admin_delete.do")) {
+				
+				CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+				int questnum = Integer.parseInt(req.getParameter("questnum"));
+				boolean result = commentJoinListDAO.deleteByQuestnum(questnum);
+				
+				System.out.println(result);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("question_req_admin_list.do?reqPage=1");
+				rd.forward(req, resp);
+				
+			}
+		
+			else if(action.equals("commlist_insert.do")) {
+				
+				CommListDAO commListDAO = new CommListDAOImpl();
+				CommList commList = new CommList();
+				
+				commList.setCommText(req.getParameter("commText"));
+				commList.setCommNum(Integer.parseInt(req.getParameter("commNum")));
+				commList.setMemberNum(Integer.parseInt(req.getParameter("memberNum")));
+				commList.setQuestnum(Integer.parseInt(req.getParameter("questNum")));
+				
+				boolean result = commListDAO.insert(commList);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("question_req_admin_list.do?reqPage=1");
+				rd.forward(req, resp);
+			}
+		
+			else if(action.equals("commlist.update.do")) {
+				
+				CommList commList = new CommList();
+				
+				commList.setCommText(req.getParameter("commText"));
+				commList.setMemberNum(Integer.parseInt(req.getParameter("memberNum")));
+				commList.setQuestnum(Integer.parseInt(req.getParameter("questNum")));
+				
+				CommListDAO commListDAO = new CommListDAOImpl();
+				boolean result = commListDAO.update(commList);
+				
+				System.out.println(commList);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("question_req_admin_list.do?reqPage=1");
+				rd.forward(req, resp);
+			}
 	}
 	
 }

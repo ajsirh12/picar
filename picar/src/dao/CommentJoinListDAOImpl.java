@@ -40,7 +40,7 @@ public class CommentJoinListDAOImpl extends BaseDAO implements CommentJoinListDA
 			+ " FROM (SELECT question.questnum as questnum, question.questtitle as questtitle, question.questtext as questtext, picarmember.membernum as membernum, picarmember.id as id, question.answer as answer, question.questdate as questdate"
 			+ " FROM picarmember,question"
 			+ " WHERE picarmember.membernum = question.membernum order by questnum desc) questions)"
-			+ " WHERE rn BETWEEN ? and ? and answer='N'";
+			+ " WHERE rn BETWEEN ? and ?";
 
 	@Override
 	public List<CommentJoinList> selectAll(int rowStartNumber, int rowEndNumber) {
