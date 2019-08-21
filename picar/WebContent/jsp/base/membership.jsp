@@ -27,6 +27,8 @@
         }
     });
 	
+	
+	
 	/* 아이디 중복체크 */
 	var idck = 0;
 	$(function(){     
@@ -136,21 +138,21 @@
 			}	 
 		});
 	});	
-		
+
 </script>
 </head>
 <body>
 	<h1>회원 가입</h1>
 	<form method="post" id="signupForm" action="member_save">
 				
-		아이디<input id="id" type="text" placeholder="아이디를 입력해주세요" maxlength="20" name="id" />
-		<input type="button" id="checkid" value="중복 확인" /><br />		
-		비밀번호<input id="password" type="password" placeholder="비밀번호는 6~20자리로 입력해주세요." maxlength="20" name="password" /><br />
-		비밀번호 확인<input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" /><br />
-		이름<input id="name" type ="text" placeholder="이름을 입력해주세요" name="name"/><br />
-		전화번호 <input id="phone" type ="tel" placeholder="전화번호를 입력해주세요" maxlength="11" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone"/><br />
-		면허증번호 <input id="license" type =text placeholder="면허증번호 10자리를 입력해주세요" maxlength="10" name="license"/><br />
-		
+		아이디<input id="id" type="text" placeholder="아이디를 입력해주세요"  onKeyup="this.value=this.value.replace(' ','',/^[a-zA-Z0-9]+$/);" maxlength="20" name="id" />
+		<input type="button" id="checkid" value="중복 확인" /><br />															
+		비밀번호<input id="password" type="password" placeholder="비밀번호는 6~20자리로 입력해주세요." maxlength="20" name="password" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		비밀번호 확인<input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		이름<input id="name" type ="text" placeholder="이름을 입력해주세요" name="name" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		전화번호 <input id="phone" type ="tel" placeholder="전화번호를 입력해주세요" maxlength="11" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		면허증번호 <input id="license" type =text placeholder="면허증번호 10자리를 입력해주세요" maxlength="10" name="license" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		   
 		면허유효기간 
 		<select name = years>
 			<c:forEach var="year" begin="2019" end="2050" step="1" >			

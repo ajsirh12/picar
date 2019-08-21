@@ -19,34 +19,21 @@
 	면허증 유효기간 : <input type="text" name="validate" value="${picarmember.validate}"/> <br />
 	
 	
-	회원등급 :
+	<%-- 회원등급 :
 	<select name="membergrade">
-	<c:forEach var="member" items="${membergrades}">
-		<c:if test="${picarmember.gradeno == member.gradeno}">
-			<option value="${member.gradeno}" selected="selected">${member.membergrade}</option>		
-		</c:if>	
-	</c:forEach>
-	</select>
-	<br />
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		<c:forEach var="member" items="${membergrades}">
+		
+			<c:if test="${picarmember.gradeno == member.gradeno}">
+				<option value="${member.gradeno}" selected="selected">${member.membergrade}</option>		
+			</c:if>	
 			
-		<%-- <c:if test="${picarmember.gradeno != member.gradeno}">
-			<option value="${member.gradeno}">${member.membergrade}</option>
-		</c:if>	 --%>	
-
+			<c:if test="${picarmember.gradeno != member.gradeno}">
+				<option value="${member.gradeno}">${member.membergrade}</option>
+			</c:if>	
+			
+		</c:forEach>
+	</select> --%>
+	<br />
 	
 	<input type="submit" class="btn btn-primary" value="수정" /> 
 	<a href="employee_delete?empno=${picarmember.memberNum}">삭제</a>

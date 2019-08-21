@@ -321,5 +321,12 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 					
 		return picarmember;
 	}
+
+	//회원정보 수정
+	@Override
+	public boolean memberUpdate(PicarMember picarMember) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

@@ -21,4 +21,9 @@ public interface PicarMemberDAO {
 	PicarMember selectFindPassword(String id,String name,String phone);
 	
 	boolean update (PicarMember picarMember);
+	
+	boolean memberUpdate(PicarMember picarMember);
+	
+	
+
 }
