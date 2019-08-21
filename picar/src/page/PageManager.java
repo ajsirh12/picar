@@ -55,6 +55,39 @@ public class PageManager {
 		
 		return pageGroupResult;
 	}
+	public PageGroupResult getPageGroupResult(String sql, String str) {
+		PageGroupResult pageGroupResult = new PageGroupResult();
+		
+		PageDAO pageDAO = new PageDAOImpl();
+		int count = pageDAO.getCount(sql, str);
+		int totalPageNumber = (int)Math.ceil((double)count/PageInfo.ROW_COUNT_PRE_PAGE);
+		
+		/*System.out.println(count);
+		System.out.println(totalPageNumber);*/
+		int requestPageGroupNumber = ((requestPage - 1) / PageInfo.SHOW_PAGE_COUNT) + 1;
+		int lastPageGroupNumber = ((totalPageNumber - 1) / PageInfo.SHOW_PAGE_COUNT) + 1;
+		System.out.println("q "+requestPageGroupNumber);
+		pageGroupResult.setGroupStartNumber((requestPageGroupNumber-1) * PageInfo.SHOW_PAGE_COUNT + 1);
+		pageGroupResult.setGroupEndNumber(requestPageGroupNumber * PageInfo.SHOW_PAGE_COUNT);
+		if(pageGroupResult.getGroupEndNumber()>totalPageNumber) {
+			pageGroupResult.setGroupEndNumber(totalPageNumber);
+		}
+		
+		if(requestPageGroupNumber == 1) {
+			pageGroupResult.setBeforPage(false);
+		}
+		if(requestPageGroupNumber == lastPageGroupNumber) {
+			pageGroupResult.setAfterPage(false);
+		}
+		if(requestPageGroupNumber != 1 && requestPageGroupNumber != lastPageGroupNumber) {
+			pageGroupResult.setBeforPage(true);
+			pageGroupResult.setAfterPage(true);
+		}
+		
+		pageGroupResult.setSelectPageNumber(requestPage);
+		
+		return pageGroupResult;
+	}
 	public static void main(String[] args) {
 		/*PageManager manager = new PageManager(1);
 		PageRowResult pageRowResult = manager.getPageRowResult();

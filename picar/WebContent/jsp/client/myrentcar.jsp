@@ -8,6 +8,7 @@
 <title>myRentCar</title>
 </head>
 <body>
+<c:if test="${rentinfo.memberNum == picarmember.memberNum }">
 	<img src="${car.carImage }" alt="" width="500" />
 	<table border="1">
 		<tr>
@@ -48,9 +49,13 @@
 		</tr>
 		</form>
 	</table>
+</c:if>
+<c:if test="${rentinfo.memberNum != picarmember.memberNum }">
+	<h1>잘못된 접근입니다.</h1>
+	<a href="go_index">홈으로 돌아가기</a>
+</c:if>
 <script type="text/javascript">
 $(function() {
-	
 	$("#renewbtn").click(function() {
 		var renew = $("#renew").val();
 		var cost = ${carlist.cost} * $("#renew").val();

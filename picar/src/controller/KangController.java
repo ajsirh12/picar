@@ -25,8 +25,8 @@ import model.Question;
 import page2.PageManager;
 import page2.PageSQL;
 
-@WebServlet(name = "KangController", urlPatterns = {"/question_list","/question_insert","/question_req_list","/question_input","/question_req_insert",
-													"/question_detail","/question_detail2","/question_delete","/question_update","/question_req_admin_list"})
+@WebServlet(name = "KangController", urlPatterns = {"/question_list.do","/question_insert.do","/question_req_list.do","/question_input.do","/question_req_insert.do",
+													"/question_detail.do","/question_detail2.do","/question_delete.do","/question_update.do","/question_req_admin_list.do"})
 public class KangController extends HttpServlet {
 
 	@Override
@@ -45,12 +45,12 @@ public class KangController extends HttpServlet {
 		int lastIndex = uri.lastIndexOf("/");
 		String action = uri.substring(lastIndex+1);
 		
-		if(action.equals("question_insert")) {
+		if(action.equals("question_insert.do")) {
 			//로그인 페이지로 이동하는 코드 넣어주세요
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/input.jsp");
 			rd.forward(req, resp);
 		}
-		else if(action.equals("question_req_insert")) {
+		else if(action.equals("question_req_insert.do")) {
 			
 			QuestionDAO1 questionDAO = new QuestionDAOImpl1();
 			Question question = new Question();
@@ -64,11 +64,11 @@ public class KangController extends HttpServlet {
 			System.out.println(question);
 			
 			
-			RequestDispatcher rd = req.getRequestDispatcher("question_req_list?reqPage=1");
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
 			rd.forward(req, resp);
 		}
 		
-		else if(action.equals("question_list")) {
+		else if(action.equals("question_list.do")) {
 			
 			QuestionDAO1 questionDAO = new QuestionDAOImpl1();
 			List<Question> questions = questionDAO.selectAll();
@@ -81,7 +81,7 @@ public class KangController extends HttpServlet {
 			rd.forward(req, resp);	
 		}
 		
-		else if(action.equals("question_req_list")) {
+		else if(action.equals("question_req_list.do")) {
 			
 			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
 			PageManager pm = new PageManager(requestPage);
@@ -100,7 +100,7 @@ public class KangController extends HttpServlet {
 			 
 		}
 		
-		else if(action.equals("question_detail")) {
+		else if(action.equals("question_detail.do")) {
 			
 			int questnum = Integer.parseInt(req.getParameter("questnum"));
 			
@@ -116,7 +116,7 @@ public class KangController extends HttpServlet {
 			
 		}
 		
-		else if(action.equals("question_detail2")) {
+		else if(action.equals("question_detail2.do")) {
 			
 			int questnum = Integer.parseInt(req.getParameter("questnum"));
 			
@@ -132,7 +132,7 @@ public class KangController extends HttpServlet {
 			
 		}
 		
-		else if(action.equals("question_delete")) {
+		else if(action.equals("question_delete.do")) {
 			
 			CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
 			int questnum = Integer.parseInt(req.getParameter("questnum"));
@@ -140,10 +140,10 @@ public class KangController extends HttpServlet {
 			
 			System.out.println(result);
 			
-			RequestDispatcher rd = req.getRequestDispatcher("question_req_list?reqPage=1");
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
 			rd.forward(req, resp);
 		}
-		else if(action.equals("question_update")) {
+		else if(action.equals("question_update.do")) {
 			
 			CommentJoinList commentJoinList = new CommentJoinList();
 			
@@ -157,11 +157,11 @@ public class KangController extends HttpServlet {
 			System.out.println(result);
 			System.out.println(commentJoinList);
 			
-			RequestDispatcher rd = req.getRequestDispatcher("question_req_list?reqPage=1");
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
 			rd.forward(req, resp);
 			
 		}
-		else if(action.equals("question_req_admin_list")) {
+		else if(action.equals("question_req_admin_list.do")) {
 			
 			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
 			PageManager pm = new PageManager(requestPage);

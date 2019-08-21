@@ -6,20 +6,21 @@
 <head>
 <meta charset=utf-8>
 <title>picar index</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 	
-	<a href="question_req_list?reqPage=1">회원 게시판 이동</a><br/>
+	<a href="question_req_list.do?reqPage=1">회원 게시판 이동</a><br/>
 		
 	<c:if test="${picarmember.gradeNo==30}">			
-		<a href="question_req_admin_list?reqPage=1">관리자 게시판 이동</a> <br />
+		<a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a> <br />
 		<a href="picarmemberlist">회원 관리</a>						
 	</c:if>	
 	
-	<ul>
-		 		
-		<li><a href="ren tedList.do?reqPage=1">대여목록</a></li>
+		<ul>		
+		<li><a href="rentedList.do?reqPage=1">대여목록</a></li>
 		<li><a href="myRentCar.do?membernum=${picarmember.memberNum }">내 차량</a></li>
+		<li><a href="allRentCar.do?reqPage=1">관리자 차량목록</a></li>
 	</ul>	
 	<c:if test="${picarmember ==null}">
 	<li><a href="login_input">로그인</a></li>
@@ -32,9 +33,6 @@
 	
 		</form>
 	</c:if>	
-	
-	
-	
 </body>
 </html>
 

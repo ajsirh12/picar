@@ -12,6 +12,7 @@ import model.RentInfo;
 public class RentInfoDAOImpl extends BaseDAO implements RentInfoDAO {
 	private static final String RENTINFO_SELECT_DATE_BY_MEMBERNUM = "SELECT rentnum, to_char(rentstart, 'yyyy/mm/dd') rentstart, to_char(rentend, 'yyyy/mm/dd') rentend, membernum, carnum FROM rentinfo WHERE membernum = ?";
 	private static final String RENTINFO_UPDATE_RENTEND_BY_RENTNUM = "UPDATE rentinfo SET rentend = rentend + ? WHERE rentnum = ?";
+	private static final String RENTINFO_DELETE_BY_CARNUM = "DELETE FROM rentinfo WHERE carnum = ?";
 	@Override
 	public RentInfo selectByMemberNum(int memberNum) {
 		RentInfo rentInfo = null;
@@ -63,6 +64,26 @@ public class RentInfoDAOImpl extends BaseDAO implements RentInfoDAO {
 		finally {
 			closeDBObjects(null, preparedStatement, connection);
 		}
+	}
+	@Override
+	public void deleteByCarNum(String carNum) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(RENTINFO_DELETE_BY_CARNUM);
+			preparedStatement.setString(1, carNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+		
 	}
 
 }
