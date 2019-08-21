@@ -12,8 +12,9 @@
 <table border="1">
 	<tr>
 		<form action="allRentCarSearch.do" method="post">
-		<td colspan="7"><input type="text" name="carNum" /> <input type="submit" /></td>
+		<td colspan="6"><input type="text" name="carNum" /> <input type="submit" /></td>
 		</form>
+		<td><a href="allRentCar.do?reqPage=1"><button>목록</button></a></td>
 	</tr>
 	<tr>
 		<th>carNum</th>
@@ -45,7 +46,7 @@
 		<td><a href="carDetail.do?carNum=${carList2.carnum }"><button>상세보기</button></a></td>
 	</tr>
 	</c:forEach>
-	<tr>
+	<%-- <tr>
 		<td colspan="7" align="center">
 			<c:if test="${pageGroupResult.beforPage}">
 				<a href="allRentCar.do?reqPage=${pageGroupResult.groupStartNumber - 1}">&lt;</a>
@@ -68,7 +69,7 @@
 				&gt;
 			</c:if>
 		</td>
-	</tr>
+	</tr> --%>
 </table>
 </c:if>
 <c:if test="${picarmember.gradeNo != 30 }">

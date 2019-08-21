@@ -36,18 +36,18 @@
 			<c:if test="${rented.late > 0}">${rented.late * rented.cost * 2}</c:if>
 			<c:if test="${rented.late <= 0}">0</c:if>
 		</td>
-		<%-- <td><a href="returnCar.do?carNum=${rented.carNum }"><button>반납</button></a></td> --%>
-		<form action="returnCar.do?carNum=${rented.carNum }" method="post" id="frm">
+		<td><a href="carInfo.do?carNum=${rented.carNum }"><button>반납</button></a></td>
+		<%-- <form action="returnCar.do?carNum=${rented.carNum }" method="post" id="frm">
 			<input type="hidden" value="${rented.late }" class="late" />
 			<input type="hidden" value="${rented.cost }" class="cost" />
 			<c:forEach var="rented2" items="${rentedList }">
 				<c:if test="${rented.carNum == rented2.carNum }">
 					<td><input type=button value="반납" class="returnbtn" /></td>
-					<%-- <td><a href="returnCar.do?carNum=${rented.carNum }" class="returnbtn"><button>반납</button></a></td> --%>
+					<td><a href="returnCar.do?carNum=${rented.carNum }" class="returnbtn"><button>반납</button></a></td>
 					<!-- <td><button class="returnbtn">반납</button></td> -->
 				</c:if>
 			</c:forEach>
-		</form>
+		</form> --%>
 	</tr>
 	</c:forEach>
 	<tr>
