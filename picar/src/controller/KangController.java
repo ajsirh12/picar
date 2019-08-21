@@ -241,15 +241,20 @@ public class KangController extends HttpServlet {
 		
 			else if(action.equals("commlist_insert.do")) {
 				
+				int questnum = Integer.parseInt(req.getParameter("questNum"));
+				
 				CommListDAO commListDAO = new CommListDAOImpl();
 				CommList commList = new CommList();
-				
+			
 				commList.setCommText(req.getParameter("commText"));
 				commList.setCommNum(Integer.parseInt(req.getParameter("commNum")));
 				commList.setMemberNum(Integer.parseInt(req.getParameter("memberNum")));
 				commList.setQuestnum(Integer.parseInt(req.getParameter("questNum")));
 				
 				boolean result = commListDAO.insert(commList);
+				
+				CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+				boolean result1 = commentJoinListDAO.updateAnswer(questnum);
 				
 				RequestDispatcher rd = req.getRequestDispatcher("question_req_admin_list.do?reqPage=1");
 				rd.forward(req, resp);

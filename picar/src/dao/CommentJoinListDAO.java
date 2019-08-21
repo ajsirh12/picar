@@ -15,7 +15,9 @@ public interface CommentJoinListDAO {
 	CommentJoinList selectByQuestnum(int questnum);
 	
 	boolean deleteByQuestnum(int questnum);
-	
 	boolean update(CommentJoinList commentJoinList);
+	boolean updateAnswer(int questnum);
+	
+	
 
 }
