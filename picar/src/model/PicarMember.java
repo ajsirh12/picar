@@ -10,6 +10,8 @@ public class PicarMember {
 	private int license;
 	private String validate;
 	private int gradeNo;
+	private String memberGrade;
+	
 	public int getMemberNum() {
 		return memberNum;
 	}
@@ -58,10 +60,19 @@ public class PicarMember {
 	public void setGradeNo(int gradeNo) {
 		this.gradeNo = gradeNo;
 	}
+
+	public String getMemberGrade() {
+		return memberGrade;
+	}
+	public void setMemberGrade(String memberGrade) {
+		this.memberGrade = memberGrade;
+	}
 	@Override
 	public String toString() {
 		return "PicarMember [memberNum=" + memberNum + ", id=" + id + ", password=" + password + ", name=" + name
-				+ ", phone=" + phone + ", license=" + license + ", validate=" + validate + ", gradeNo=" + gradeNo + "]";
+				+ ", phone=" + phone + ", license=" + license + ", validate=" + validate + ", gradeNo=" + gradeNo
+				+ ", memberGrade=" + memberGrade + "]";
 	}
+	
 	
 }
