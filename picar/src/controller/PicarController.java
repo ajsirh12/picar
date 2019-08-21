@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CarDAO;
 import dao.CarDAOImpl;
@@ -30,7 +31,7 @@ import page.PageManager;
 import page.PageSQL;
 
 @WebServlet(name = "PicarController", urlPatterns = {"/rentedList.do", "/rentedSearch.do", "/myRentCar.do", "/renew_car.do", "/allRentCar.do",
-		"/allRentCarSearch.do", "/carDetail.do", "/returnCar.do", "/carInfoUpdate.do", "/carInfoDelete.do"})
+		"/allRentCarSearch.do", "/carDetail.do", "/returnCar.do", "/carInfoUpdate.do", "/carInfoDelete.do", "/go_index"})
 public class PicarController extends HttpServlet {
 
 	@Override
@@ -89,8 +90,8 @@ public class PicarController extends HttpServlet {
 			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT_SEARCHED, carNum));
 			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 			JoinDAO joinDAO = new JoinDAOImpl();
-			//joinRentList = joinDAO.selectJoinBycarNum(carNum);
-			joinRentList = joinDAO.selectJoinBycarNum(rowStartNumber, rowEndNumber, carNum);
+			joinRentList = joinDAO.selectJoinBycarNum(carNum);
+			//joinRentList = joinDAO.selectJoinBycarNum(rowStartNumber, rowEndNumber, carNum);
 			/*for(JoinRent j:joinRentList) {
 				System.out.println(j);
 			}*/
@@ -228,6 +229,12 @@ public class PicarController extends HttpServlet {
 			carListDAO.deleteCarList(carNum);
 			
 			resp.sendRedirect("allRentCar.do?reqPage=1");
+		}
+		else if(action.equals("go_index")) {
+			HttpSession session = req.getSession();
+			session.removeAttribute("picarmember");
+			
+			resp.sendRedirect("index.jsp");
 		}
 	}
 	

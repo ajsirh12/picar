@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	
+	<img src="img/image.png" width="300" alt="" />
 	<a href="question_req_list.do?reqPage=1">회원 게시판 이동</a><br/>
 	<a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a>
 	<ul>

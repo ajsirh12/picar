@@ -7,8 +7,9 @@
 <title>차량 렌트목록1</title>
 </head>
 <body>
+<c:if test="${picarmember.gradeNo == 30 }">
 <h2>차량 렌트목록</h2>
-<table border="1">
+	<table border="1">
 	<tr>
 		<form action="rentedSearch.do?reqPage=1" method="post">
 		<td colspan="6"><input type="text" name="carNum" /> <input type="submit" /></td>
@@ -38,7 +39,7 @@
 		<td><a href="#"><button>반납</button></a></td>
 	</tr>
 	</c:forEach>
-	<tr>
+	<%-- <tr>
 		<td colspan="7" align="center">
 			<c:if test="${pageGroupResult.beforPage}">
 				<a href="rentedSearch.do?reqPage=1=${pageGroupResult.groupStartNumber - 1}">&lt;</a>
@@ -61,8 +62,12 @@
 				&gt;
 			</c:if>
 		</td>
-	</tr>
-	
+	</tr> --%>
 </table>
+</c:if>
+<c:if test="${picarmember.gradeNo != 30 }">
+	<h1>잘못된 접근입니다.</h1>
+	<a href="go_index">홈으로 돌아가기</a>
+</c:if>
 </body>
 </html>

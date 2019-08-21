@@ -7,6 +7,7 @@
 <title>Detail</title>
 </head>
 <body>
+<c:if test="${picarmember.gradeNo == 30 }">
 	<c:forEach var="car" items="${carList }">
 		<c:if test="${car.carType == carListList.carType }">
 		<img src="${car.carImage }" width="500" alt="" />
@@ -68,5 +69,10 @@
 	<a href="carInfoDelete.do?carnum=${carListList.carnum }"><button>삭제</button></a>
 	<a href="allRentCar.do?reqPage=1"><button>뒤로</button></a></td></tr>
 	</table>
+</c:if>
+<c:if test="${picarmember.gradeNo != 30 }">
+	<h1>잘못된 접근입니다.</h1>
+	<a href="go_index">홈으로 돌아가기</a>
+</c:if>	
 </body>
 </html>

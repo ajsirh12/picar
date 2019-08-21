@@ -7,6 +7,7 @@
 <title>차량 렌트목록</title>
 </head>
 <body>
+<c:if test="${picarmember.gradeNo == 30 }">
 <h2>차량 렌트목록</h2>
 <table border="1">
 	<tr>
@@ -69,5 +70,10 @@
 		</td>
 	</tr>
 </table>
+</c:if>
+<c:if test="${picarmember.gradeNo != 30 }">
+	<h1>잘못된 접근입니다.</h1>
+	<a href="go_index">홈으로 돌아가기</a>
+</c:if>	
 </body>
 </html>
