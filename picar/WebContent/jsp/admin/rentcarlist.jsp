@@ -5,8 +5,10 @@
 <head>
 <meta charset=utf-8>
 <title>차량 렌트목록</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
+<c:if test="${picarmember.gradeNo == 30 }">
 <h2>차량 렌트목록</h2>
 <table border="1">
 	<tr>
@@ -34,7 +36,18 @@
 			<c:if test="${rented.late > 0}">${rented.late * rented.cost * 2}</c:if>
 			<c:if test="${rented.late <= 0}">0</c:if>
 		</td>
-		<td><a href="#"><button>반납</button></a></td>
+		<%-- <td><a href="returnCar.do?carNum=${rented.carNum }"><button>반납</button></a></td> --%>
+		<form action="returnCar.do?carNum=${rented.carNum }" method="post" id="frm">
+			<input type="hidden" value="${rented.late }" class="late" />
+			<input type="hidden" value="${rented.cost }" class="cost" />
+			<c:forEach var="rented2" items="${rentedList }">
+				<c:if test="${rented.carNum == rented2.carNum }">
+					<td><input type=button value="반납" class="returnbtn" /></td>
+					<%-- <td><a href="returnCar.do?carNum=${rented.carNum }" class="returnbtn"><button>반납</button></a></td> --%>
+					<!-- <td><button class="returnbtn">반납</button></td> -->
+				</c:if>
+			</c:forEach>
+		</form>
 	</tr>
 	</c:forEach>
 	<tr>
@@ -61,7 +74,36 @@
 			</c:if>
 		</td>
 	</tr>
-	
 </table>
+</c:if>
+<c:if test="${picarmember.gradeNo != 30 }">
+	<h1>잘못된 접근입니다.</h1>
+	<a href="go_index">홈으로 돌아가기</a>
+</c:if>
+<script type="text/javascript">
+$(function() {
+	$(".returnbtn").click(function() {
+		//<c:forEach var="rented" items="${rentedList }">
+			//alert(${rented.late});
+			var late = $(".late").val();
+			var cost = $(".cost").val();
+			if(late <= 0){
+				late = 0;
+			}
+			var latefee = late * cost * 2;
+			//var late = ${rented.late};
+			//var cost = ${rented.cost};
+			//var carnum = ${rented.carNum};
+			//var latefee = late * cost * 2;
+			//alert(carnum);
+			
+		//</c:forEach>
+		if(confirm("연체료는 "+latefee+"원 입니다. 반납하시겠습니까?")){
+	        document.getElementById('frm').submit();
+	        return false;
+		}
+	})
+});
+</script>	
 </body>
 </html>

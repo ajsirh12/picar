@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,12 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.MemberGradeDAO;
+import dao.MemberGradeDAOImpl;
 import dao.PicarMemberDAO;
 import dao.PicarMemberDAOImpl;
+import model.MemberGrade;
 import model.PicarMember;
 
 @WebServlet(name = "dahaeController", urlPatterns = {"/login","/logout","/login_input","/member_save",
-				"/sign_up","/idcheck","/idinput","/idfind","/id_find","/password_find","/passwordfind","/password_update"})
+				"/sign_up","/idcheck","/idinput","/idfind","/id_find","/password_find","/passwordfind",
+				"/password_update","/picarmemberlist","/member_detail"})
 public class dahaeController extends HttpServlet {
 
 	@Override
@@ -73,7 +78,9 @@ public class dahaeController extends HttpServlet {
 			rd.forward(req, resp);	
 		
 		//회원가입
-		}else if(action.equals("member_save")) {			
+		}else if(action.equals("member_save")) {	
+			
+			
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			PicarMember picarMember = new PicarMember();
 			picarMember.setId(req.getParameter("id"));
@@ -81,8 +88,10 @@ public class dahaeController extends HttpServlet {
 			picarMember.setName(req.getParameter("name"));
 			picarMember.setPhone(req.getParameter("phone"));
 			picarMember.setLicense(Integer.parseInt(req.getParameter("license")));
-			picarMember.setValidate(req.getParameter("validate"));
-					
+			picarMember.setValidate(req.getParameter("years")+req.getParameter("month")+req.getParameter("days"));
+		
+			/*int validate = "years"+"month"+"days";*/
+			
 			boolean result = dao.insert(picarMember);
 			System.out.println(result);
 		
@@ -180,6 +189,37 @@ public class dahaeController extends HttpServlet {
 
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/login.jsp");
 			rd.forward(req, resp);
+		
+		//관리자 회원 리스트
+		}else if(action.equals("picarmemberlist")) {
+			
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+
+			List<PicarMember> picarmemberlists = dao.selectAll();
+			
+			req.setAttribute("picarmemberlists",picarmemberlists);	
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/admin/picarmemberlist.jsp");
+			rd.forward(req, resp);
+			
+		//관리자 회원 디테일
+		}else if (action.equals("member_detail")) {
+			
+			int memnum = Integer.parseInt(req.getParameter("memberdetail"));
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			MemberGradeDAO dao2 = new MemberGradeDAOImpl();
+			
+			PicarMember picarmember = dao.selectByNum(memnum);
+			List<MemberGrade> membergrades = dao2.gradeSelectAll();
+			
+			req.setAttribute("picarmember", picarmember);
+			req.setAttribute("membergrades", membergrades);
+			
+			System.out.println(membergrades);
+			System.out.println(picarmember);
+			
+			RequestDispatcher rd =req.getRequestDispatcher("/jsp/admin/picarmemberdetail.jsp");
+			rd.forward(req, resp);	
 		}
 		
 	}	
