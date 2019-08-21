@@ -35,9 +35,9 @@
 					<c:forEach var="commentJoinList" items="${commentJoinLists}">
 					<tr>
 						<td>${commentJoinList.questnum}</td>
-						<td>${commentJoinList.questTitle}</td>
+						<td><a href="question_admin_detail.do?questNum=${commentJoinList.questnum}" onclick="other">${commentJoinList.questTitle}</a></td>
 						<td>${commentJoinList.id}</td>
-						<td><a href="question_detail.do?questnum=${commentJoinList.questnum}" onclick="other">${commentJoinList.answer}</a></td>
+						<td>${commentJoinList.answer}</td>
 					</tr>		
 					</c:forEach>
 				</table>

@@ -9,7 +9,21 @@ public class CommentJoinList {
 	private String questText;
 	private String questDate;
 	private String answer;
+	private String commText;
+	private int commNum;
 	
+	public String getCommText() {
+		return commText;
+	}
+	public void setCommText(String commText) {
+		this.commText = commText;
+	}
+	public int getCommNum() {
+		return commNum;
+	}
+	public void setCommNum(int commNum) {
+		this.commNum = commNum;
+	}
 	public int getMemberNum() {
 		return memberNum;
 	}
@@ -54,7 +68,8 @@ public class CommentJoinList {
 	}
 	@Override
 	public String toString() {
-		return "Commentlist [memberNum=" + memberNum + ", id=" + id + ", questnum=" + questnum + ", questTitle="
-				+ questTitle + ", questText=" + questText + ", questDate=" + questDate + ", answer=" + answer + "]";
-	}
+		return "CommentJoinList [memberNum=" + memberNum + ", id=" + id + ", questnum=" + questnum + ", questTitle="
+				+ questTitle + ", questText=" + questText + ", questDate=" + questDate + ", answer=" + answer
+				+ ", commText=" + commText + ", commNum=" + commNum + "]";
+	}	
 }

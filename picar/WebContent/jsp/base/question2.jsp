@@ -25,11 +25,10 @@
 		
 	</head>
 	<body>
-		<h1>Q & A</h1>
+	<img onclick="location.href='index.jsp'" src="img/logo1.png" />
+		<h1 align="center">문의사항 게시판</h1>
 		
-<!-- 		<input type="button"  value="글작성" onclick="location.href='jsp/base/input.jsp'"/> -->
 		<a href="question_insert.do?memberNum=${picarmember.memberNum}">글작성</a>
-		<a href="index.jsp">메인메뉴</a>
 				<table border="1" class="table table-striped"> 
 					<tr>
 						<td>번호</td>
@@ -39,8 +38,8 @@
 					</tr>
 					<c:forEach var="commentJoinList" items="${commentJoinLists}">
 					<tr>
-						<td><a href="question_detail.do?questnum=${commentJoinList.questnum}" onclick="other">${commentJoinList.questnum}</a></td>
-						<td>${commentJoinList.questTitle}</td>
+						<td>${commentJoinList.questnum}</td>
+						<td><a href="question_detail.do?questnum=${commentJoinList.questnum}" onclick="other">${commentJoinList.questTitle}</a></td>
 						<td>${commentJoinList.id}</td>
 						<td>${commentJoinList.answer}</td>
 					</tr>		
