@@ -14,6 +14,13 @@
 	${commentJoinList.questTitle}
 	<h2>내용</h2>
 	${commentJoinList.questText}<br>
+	<h2>답변</h2>
+	<c:if test="${commList.commText !=null}">
+	${commList.commText}<br>
+	</c:if>
+	<c:if test="${commList.commText ==null}">
+	<p>답변이 입력이 되지 않았습니다.</p>
+	</c:if>
 	<c:if test="${commentJoinList.id == picarmember.id}">
 	<input type="submit" value="수정하기">
 	</c:if>
