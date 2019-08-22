@@ -23,7 +23,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<div class="logo"><a href="index.html">Road Trip <span>by TEMPLATED</span></a></div>
+				<div class="logo"><a href="index.jsp">Road Trip <span>by TEMPLATED</span></a></div>
 				<a href="#menu"><span>Menu</span></a>
 			</header>
 
@@ -49,32 +49,32 @@
 						<c:if test="${rentinfo.memberNum == picarmember.memberNum }">
 							<img src="${car.carImage }" alt="" width="500" />
 							<table border="1">
-								<tr>
+								<tr align="center">
 									<td>차종</td>
 									<td>${car.carName }</td>
 								</tr>
-								<tr>
+								<tr align="center">
 									<td>차량번호</td>
 									<td>${rentinfo.carNum }</td>
 								</tr>
-								<tr>
+								<tr align="center">
 									<td>1일 대여비용</td>
 									<td>${carlist.cost }</td>
 								</tr>
-								<tr>
+								<tr align="center">
 									<td>연료종류</td>
 									<td>${car.fuelType }</td>
 								</tr>
-								<tr>
+								<tr align="center">
 									<td>대여일</td>
 									<td>${rentinfo.rentStart }</td>
 								</tr>
-								<tr>
+								<tr align="center">
 									<td>반납일</td>
 									<td>${rentinfo.rentEnd }</td>
 								</tr>
 								<form action="renew_car.do" method="post" id="frm">
-								<tr>
+								<tr align="center">
 									<td>연장일수</td>
 									<td>
 									<input type="number" name="renew" id="renew" required="required" min="1" max="7" value="1"/>
@@ -82,7 +82,7 @@
 									<input type="hidden" name="membernum" value="${rentinfo.memberNum }"/>
 									</td>
 								</tr>
-								<tr>
+								<tr align="center">
 									<td colspan="2"><input type=button value="연장" id="renewbtn" /></td>	
 								</tr>
 								</form>
@@ -115,5 +115,6 @@ $(function() {
 		}
 	})
 });
+</script>
 </body>
 </html>

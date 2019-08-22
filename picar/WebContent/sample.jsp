@@ -7,7 +7,7 @@
 -->
 <html>
 <head>
-		<title>Road Trip by TEMPLATED</title>
+		<title>Road Trip by TEMPLATED</title>	<!--타이틀 변경  -->
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -16,13 +16,13 @@
 
 		<!-- Header -->
 			<header id="header">
-				<div class="logo"><a href="index.html">Road Trip <span>by TEMPLATED</span></a></div>
+				<div class="logo"><a href="index.jsp">Road Trip <span>by TEMPLATED</span></a></div>	<!--좌상단 텍스트  -->
 				<a href="#menu"><span>Menu</span></a>
 			</header>
 
 		<!-- Nav -->
 			<nav id="menu">
-				<ul class="links">
+				<ul class="links">	<!--사이드바 메뉴  -->
 					<li><a href="index.jsp">Home</a></li>
 					<li><a href="generic.html">Generic</a></li>
 					<li><a href="elements.html">Elements</a></li>
@@ -38,7 +38,7 @@
 		<!-- One -->
 			<section id="one" class="wrapper post bg-img" data-bg="banner2.jpg">
 				<div class="inner">
-					<article class="box">
+					<article class="box">	<!--본문 내용 입력  -->
 						<header>
 							<h2>Nibh non lobortis mus nibh</h2>
 							<p>01.01.2017</p>
@@ -52,13 +52,12 @@
 				
 			</section>
 
-		<!-- Scripts -->
+		<!-- Scripts --> <!--건들지 말 것  -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
 	</body>
 </html>
