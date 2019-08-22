@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Car;
 import model.JoinInsert;
@@ -114,5 +116,17 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
 		return carList;
+	}
+
+	@Override
+	public boolean insert(Car car) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Car selectByLocation(int carloc) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

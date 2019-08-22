@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset=utf-8>
-<title>picar index</title>
-</head><%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <!--
@@ -42,14 +34,15 @@
 			<nav id="menu">
 				<ul class="links">      
 				   <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
+				   	 <li> <a href="insertcar">InsertCar</a></li>
+					 <li><a href="carlistloc">CarList</a></li>
 				      
 				   <c:if test="${picarmember.gradeNo==30}">         
 				      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
 				      <li><a href="picarmemberlist">회원 관리</a></li>                  
 				      <li><a href="rentedList.do?reqPage=1">대여목록</a></li>
 				      <li><a href="allRentCar.do?reqPage=1">관리자 차량목록</a></li>
-				     	<li> <a href="insertcar">InsertCar</a></li>
-						<li><a href="carlistloc">CarList</a></li>
+				     
 				   </c:if>   
 				      <li><a href="myRentCar.do?membernum=${picarmember.memberNum }">내 차량</a></li>   
 				   <c:if test="${picarmember ==null}">

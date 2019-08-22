@@ -50,7 +50,7 @@ public class EunJungController extends HttpServlet{
 				JoinInsert jis = new JoinInsert();
 				
 				jis.setCarNum(req.getParameter("carnum"));
-				jis.setCarname(req.getParameter("carname"));
+				jis.setCarName(req.getParameter("carname"));
 				jis.setCost(Integer.parseInt(req.getParameter("cost")));
 				jis.setCarloc(Integer.parseInt(req.getParameter("carloc")));
 				
