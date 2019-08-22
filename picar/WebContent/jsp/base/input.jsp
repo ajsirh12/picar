@@ -25,6 +25,28 @@
 	
 	
 	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+	
+	$(function(){
+		$("#checkTitle").click(function(){
+        	var input_val =$("#questTitle").val();
+        	var input_val2 =$("#questText").val();
+         
+        	if(!input_val){
+        		alert("제목을입력해주세요");  
+        		return false;
+         	}
+        	
+        	else if(!input_val2){
+        		alert("내용을 입력해주세요")
+        		return false;
+        	}
+		});
+	});
+	
+	</script>
 	
 	<body class="subpage">
 
@@ -92,12 +114,12 @@
 						<input type="hidden" name="memberNum" value="${picarmember.memberNum}"/>
 					
 					<h3>제목</h3>
-						<input type="text" name="questTitle" placeholder="제목을 입력해주세요" /><br>
+						<input type="text" id="questTitle" name="questTitle" placeholder="제목을 입력해주세요" /><br>
 						
 					<h3>내용</h3>
-						<textarea rows="20" cols="60" name="questText" placeholder="내용을 입력해주세요"></textarea><br>
+						<textarea rows="20" cols="60" id="questText" name="questText" placeholder="내용을 입력해주세요"></textarea><br>
 						<hr>	
-						<input type="submit" value="등록하기">
+						<input type="submit" value="등록하기" id="checkTitle">
 						<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
 				</form>
 						

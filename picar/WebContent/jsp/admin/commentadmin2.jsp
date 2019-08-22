@@ -25,6 +25,23 @@
 	
 	
 	</style>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+	
+	$(function(){
+		$("#commcheck").click(function(){
+        	var input_val =$("#commText").val();
+         
+        	if(!input_val){
+        		alert("답변을 입력해주세요");  
+        		return false;
+         	}
+		});
+	});
+	
+	</script>
 	<body class="subpage">
 
 		<!-- Header -->
@@ -96,8 +113,8 @@
 						<input type="hidden" name="commNum" value="${commList.commNum}"></input>
 						<input type="hidden" name="memberNum" value="${commentJoinList.memberNum}"/>
 						<input type="hidden" name="questNum" value="${commentJoinList.questnum}" />
-						<textarea rows="5" cols="40" name = "commText">${commList.commText}</textarea><br>
-						<input type="submit" value="수정하기">
+						<textarea rows="5" cols="40" id="commText" name = "commText">${commList.commText}</textarea><br>
+						<input type="submit" value="수정하기" id="commcheck">
 						<input type="button" value="삭제하기" onclick ="location.href='question_admin_delete.do?questnum=${commentJoinList.questnum}'" >
 						<input type="button" value="뒤로가기" onclick="location.href='question_req_admin_list.do?reqPage=1'"> 
 						</form>
