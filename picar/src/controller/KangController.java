@@ -99,7 +99,7 @@ public class KangController extends HttpServlet {
 			
 			//System.out.println(commentJoinLists);
 			
-			RequestDispatcher rd = req.getRequestDispatcher("jsp/base/question2.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/question2.jsp");
 			rd.forward(req, resp);
 			 
 		}
