@@ -7,9 +7,12 @@ import model.PicarMember;
 public interface PicarMemberDAO {
 
 	boolean insert (PicarMember picarMember);
+	
 	List<PicarMember> selectAll();
 	
 	PicarMember selectById(String id,String password);
+	
+	PicarMember selectByNum(int membernum);
 	
 	int checkById(String id);
 	
@@ -18,4 +21,9 @@ public interface PicarMemberDAO {
 	PicarMember selectFindPassword(String id,String name,String phone);
 	
 	boolean update (PicarMember picarMember);
+	
+	boolean memberUpdate(PicarMember picarMember);
+	
+	
+
 }

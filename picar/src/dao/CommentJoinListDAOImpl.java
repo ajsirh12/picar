@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,12 @@ public class CommentJoinListDAOImpl extends BaseDAO implements CommentJoinListDA
 			+ " FROM (SELECT question.questnum as questnum, question.questtitle as questtitle, question.questtext as questtext, picarmember.membernum as membernum, picarmember.id as id, question.answer as answer, question.questdate as questdate"
 			+ " FROM picarmember,question"
 			+ " WHERE picarmember.membernum = question.membernum order by questnum desc) questions)"
-			+ " WHERE rn BETWEEN ? and ? and answer='N'";
+			+ " WHERE rn BETWEEN ? and ?";
+	
+	private static final String COMMENTJOINLIST_UPDATE_ANSWER_SQL
+	="UPDATE QUESTION"
+			+ " SET ANSWER=?"
+			+ " WHERE QUESTNUM =?";
 
 	@Override
 	public List<CommentJoinList> selectAll(int rowStartNumber, int rowEndNumber) {
@@ -223,5 +229,35 @@ public class CommentJoinListDAOImpl extends BaseDAO implements CommentJoinListDA
 		}
 		return commentJoinLists;
 		}
+
+	@Override
+	public boolean updateAnswer(int questnum) {
+		
+		boolean result1 = false;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(COMMENTJOINLIST_UPDATE_ANSWER_SQL);
+			
+			preparedStatement.setString(1, "Y");
+			preparedStatement.setInt(2, questnum);
+			
+			int rowCount = preparedStatement.executeUpdate();
+			
+			if(rowCount>0) {System.out.println(result1);
+				result1 = true;
+			} 
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+		return result1;
+	}
 }
 

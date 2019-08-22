@@ -3,6 +3,7 @@ package model;
 public class MemberGrade {
 	private int gradeNo;
 	private String memberGrade;
+	
 	public int getGradeNo() {
 		return gradeNo;
 	}

@@ -18,9 +18,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	="SELECT * FROM picarmember WHERE id=? and password=?";
 	
 	private static final String PICARMEMBER_SELECT_ALL_SQL
-	="SELECT *"
-			+ " FROM picarmember"
-			+ " ORDER BY membernum";
+	="SELECT membernum,id,password,name,phone,license,to_char(validdate,'yyyy-mm-dd')validdate,MEMBERGRADE,membergrade.gradeno FROM picarmember ,membergrade where picarmember.gradeno = membergrade.gradeno ORDER BY membernum";
 	
 	private static final String PICARMEMBER_CHECK_BY_ID_SQL
 	="SELECT COUNT(*) AS cnt FROM picarmember WHERE id=?"; 
@@ -33,6 +31,9 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	
 	private static final String PICARMEMBER_PASSWORD_CHANGE_SQL
 	="update picarmember set password=? WHERE id=? AND NAME=? AND PHONE=?";
+	
+	private static final String PICARMEMBER_SELECT_MEMBERNUM_SQL
+	="SELECT membernum,id,password,name,phone,license,to_char(validdate,'yyyy-mm-dd')validdate ,MEMBERGRADE,membergrade.gradeno FROM picarmember ,membergrade where picarmember.gradeno = membergrade.gradeno and picarmember.membernum =?";
 	
 	
 	//회원가입
@@ -110,7 +111,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		return picarMember;		
 	}
 
-	//전체리스트
+	//회원리스트
 	@Override
 	public List<PicarMember> selectAll() {
 		
@@ -132,10 +133,12 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			picarMember.setId(resultSet.getString("id"));
 			picarMember.setPassword(resultSet.getString("password"));
 			picarMember.setName(resultSet.getString("name"));
-			picarMember.setPassword(resultSet.getString("phone"));
+			picarMember.setPhone(resultSet.getString("phone"));
 			picarMember.setLicense(resultSet.getInt("license"));
-			picarMember.setValidate(resultSet.getString("validdate"));
+			picarMember.setValidate(resultSet.getString("validdate"));			
 			picarMember.setGradeNo(resultSet.getInt("gradeNo"));
+			picarMember.setMemberGrade(resultSet.getString("membergrade"));
+
 			
 			picarMembers.add(picarMember);
 			}
@@ -257,7 +260,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 
 	//아이디중복체크
 		@Override
-		public int checkById(String id) {
+	public int checkById(String id) {
 			int count = 1;
 			
 			Connection connection = null;
@@ -279,5 +282,51 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			}
 			return count;
 		}
+
+	//관리자 회원 디테일
+	@Override
+	public PicarMember selectByNum(int membernum) {
+		
+		PicarMember picarmember = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+				
+		try {
+			connection = getConnection();
+			preparedStatement =connection.prepareStatement(PICARMEMBER_SELECT_MEMBERNUM_SQL);
+			preparedStatement.setInt(1,membernum);
+			resultSet = preparedStatement.executeQuery();
+			
+			 if(resultSet.next()) {
+				picarmember = new PicarMember();
+				picarmember.setMemberNum(resultSet.getInt("membernum"));
+				picarmember.setId(resultSet.getNString("id"));
+				picarmember.setPassword(resultSet.getString("password"));
+				picarmember.setName(resultSet.getString("name"));
+				picarmember.setPhone(resultSet.getString("phone"));
+				picarmember.setLicense(resultSet.getInt("license"));
+				picarmember.setValidate(resultSet.getString("validdate"));
+				picarmember.setMemberGrade(resultSet.getString("membergrade"));
+				picarmember.setGradeNo(resultSet.getInt("gradeno"));
+				 							
+			}
+						
+		} catch (SQLException e) {			
+			e.printStackTrace();			
+		}finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+					
+		return picarmember;
+	}
+
+	//회원정보 수정
+	@Override
+	public boolean memberUpdate(PicarMember picarMember) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

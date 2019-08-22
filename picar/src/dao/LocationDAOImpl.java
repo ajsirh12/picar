@@ -10,39 +10,36 @@ import java.util.List;
 import model.Location;
 
 public class LocationDAOImpl extends BaseDAO implements LocationDAO {
-	
-	private static final String LOCATION_ALL_SQL="select * from location";
-
+	private static final String LOCATION_SELECT_ALL = "SELECT carloc, location FROM location";
 	@Override
 	public List<Location> selectAll() {
-		
-		List<Location> list = new ArrayList<Location>();
+		List<Location> locationList = new ArrayList<Location>();
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		
-		
 		try {
 			connection = getConnection();
-			preparedStatement = connection.prepareStatement(LOCATION_ALL_SQL);
-			resultSet = preparedStatement.executeQuery();	
-			
+			preparedStatement = connection.prepareStatement(LOCATION_SELECT_ALL);
+			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next()) {
+				Location location = new Location();
 				
-				Location loc = new Location();
-				
-				loc.setCarLoc(resultSet.getInt("carloc"));
-				loc.setLocation(resultSet.getString("location"));
-				
-				list.add(loc);	
-			}			
-		}catch(SQLException e){
+				location.setCarLoc(resultSet.getInt("carloc"));
+				location.setLocation(resultSet.getString("location"));
+				locationList.add(location);
+			}
+		}
+		catch(SQLException e) {
 			e.printStackTrace();
-		}finally {
+		}
+		finally {
 			closeDBObjects(resultSet, preparedStatement, connection);
 		}
-		return list;
+		
+		return locationList;
 	}
+
 }

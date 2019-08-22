@@ -36,6 +36,9 @@ public class JoinDAOImpl extends BaseDAO implements JoinDAO {
 			+ " carlist.cost as cost, carlist.validrent as validrent FROM rentinfo, picarmember,"
 			+ " carlist WHERE rentinfo.carnum = carlist.carnum and rentinfo.membernum = picarmember.membernum"
 			+ " and rownum between ? and ? and carlist.validrent in ('n', 'N') and carlist.carnum like ? ORDER BY late desc"; 
+	private static final String JOIN_SELECT_RENTINFO = "SELECT TO_CHAR(TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD')) - TO_DATE(TO_CHAR(rentend, 'YYYYMMDD'))) late,"
+			+ " carlist.cost as cost, carlist.validrent as validrent FROM rentinfo, carlist"
+			+ " WHERE rentinfo.carnum = carlist.carnum and carlist.carnum = ?";
 	@Override
 	public List<JoinRent> selectJoin() {
 		List<JoinRent> joinRentList = new ArrayList<JoinRent>();
@@ -181,6 +184,36 @@ List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 		}
 		
 		return joinRentList;
+	}
+	@Override
+	public JoinRent selectReturn(String carNum) {
+		JoinRent joinRent = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement =null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(JOIN_SELECT_RENTINFO);
+			preparedStatement.setString(1, carNum);
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				joinRent = new JoinRent();
+				joinRent.setLate(resultSet.getInt("late"));
+				joinRent.setCost(resultSet.getInt("cost"));
+				joinRent.setValidRent(resultSet.getString("validrent"));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		
+		return joinRent;
 	}
 	
 }

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CarDAO;
 import dao.CarDAOImpl;
@@ -17,20 +18,20 @@ import dao.CarListDAO;
 import dao.CarListDAOImpl;
 import dao.JoinDAO;
 import dao.JoinDAOImpl;
+import dao.LocationDAO;
+import dao.LocationDAOImpl;
 import dao.RentInfoDAO;
 import dao.RentInfoDAOImpl;
 import model.Car;
 import model.CarList;
 import model.JoinRent;
+import model.Location;
 import model.RentInfo;
 import page.PageManager;
 import page.PageSQL;
 
-<<<<<<< HEAD
-@WebServlet(name = "PicarController", urlPatterns = {"/rentedList", "/rentedSearch"})
-=======
-@WebServlet(name = "PicarController", urlPatterns = {"/rentedList.do", "/rentedSearch.do", "/myRentCar.do", "/renew_car.do"})
->>>>>>> branch 'master' of https://github.com/ajsirh12/picar
+@WebServlet(name = "PicarController", urlPatterns = {"/rentedList.do", "/rentedSearch.do", "/myRentCar.do", "/renew_car.do", "/allRentCar.do",
+		"/allRentCarSearch.do", "/carDetail.do", "/returnCar.do", "/carInfoUpdate.do", "/carInfoDelete.do", "/go_index", "/carInfo.do"})
 public class PicarController extends HttpServlet {
 
 	@Override
@@ -60,15 +61,16 @@ public class PicarController extends HttpServlet {
 			
 			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
 			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
-			System.out.println(rowStartNumber+" "+rowEndNumber);
+			//System.out.println(rowStartNumber+" "+rowEndNumber);
+			
 			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 			JoinDAO joinDAO = new JoinDAOImpl();
 			//joinRentList = joinDAO.selectJoin();
 			joinRentList = joinDAO.selectJoin(rowStartNumber, rowEndNumber);
 
-			for(JoinRent j:joinRentList) {
+			/*for(JoinRent j:joinRentList) {
 				System.out.println(j);
-			}
+			}*/
 			req.setAttribute("rentedList", joinRentList);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlist.jsp");
@@ -83,22 +85,20 @@ public class PicarController extends HttpServlet {
 			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
 			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
 			
-			System.out.println(rowStartNumber+" "+rowEndNumber+" "+carNum);
+			//System.out.println(rowStartNumber+" "+rowEndNumber+" "+carNum);
 			
-			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT));
+			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.RENTED_SELECT_ALL_COUNT_SEARCHED, carNum));
 			List<JoinRent> joinRentList = new ArrayList<JoinRent>();
 			JoinDAO joinDAO = new JoinDAOImpl();
-			//joinRentList = joinDAO.selectJoinBycarNum(carNum);
-			joinRentList = joinDAO.selectJoinBycarNum(rowStartNumber, rowEndNumber, carNum);
-			for(JoinRent j:joinRentList) {
+			joinRentList = joinDAO.selectJoinBycarNum(carNum);
+			//joinRentList = joinDAO.selectJoinBycarNum(rowStartNumber, rowEndNumber, carNum);
+			/*for(JoinRent j:joinRentList) {
 				System.out.println(j);
-			}
+			}*/
 			req.setAttribute("rentedList", joinRentList);
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/rentcarlistsearch.jsp");
 			rd.forward(req, resp);
 		}
-<<<<<<< HEAD
-=======
 		else if(action.equals("myRentCar.do")) {
 			int membernum = Integer.parseInt(req.getParameter("membernum"));
 			//System.out.println(membernum);
@@ -141,6 +141,139 @@ public class PicarController extends HttpServlet {
 			
 			resp.sendRedirect("myRentCar.do?membernum=" + memberNum);
 		}
->>>>>>> branch 'master' of https://github.com/ajsirh12/picar
+		else if(action.equals("allRentCar.do")) {
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			
+			PageManager manager = new PageManager(requestPage);
+
+			req.setAttribute("pageGroupResult", manager.getPageGroupResult(PageSQL.CARLIST_SELECT_ALL_COUNT));
+			
+			int rowStartNumber = manager.getPageRowResult().getRowStartNumber();
+			int rowEndNumber = manager.getPageRowResult().getRowEndNumber();
+			
+			CarListDAO carListDAO = new CarListDAOImpl();
+			List<CarList> carListList = carListDAO.selectAll(rowStartNumber, rowEndNumber);
+			/*for(CarList c:carListList) {
+				System.out.println(c);
+			}*/
+			CarDAO carDAO = new CarDAOImpl();
+			List<Car> carList = carDAO.selectAll();
+			/*for(Car c:carList) {
+				System.out.println(c);
+			}*/
+			LocationDAO locationDAO = new LocationDAOImpl();
+			List<Location> locationList = locationDAO.selectAll();
+			/*for(Location c:locationList) {
+				System.out.println(c);
+			}*/
+			req.setAttribute("carListList", carListList);
+			req.setAttribute("carList", carList);
+			req.setAttribute("locationList", locationList);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/allrentcar.jsp");
+			rd.forward(req, resp);
+		}
+		else if(action.equals("allRentCarSearch.do")) {
+			String carNum = req.getParameter("carNum");
+			System.out.println("qwe");
+			CarListDAO carListDAO = new CarListDAOImpl();
+			List<CarList> carListList = carListDAO.selectByNum(carNum);
+			
+			CarDAO carDAO = new CarDAOImpl();
+			List<Car> carList = carDAO.selectAll();
+			
+			LocationDAO locationDAO = new LocationDAOImpl();
+			List<Location> locationList = locationDAO.selectAll();
+			
+			req.setAttribute("carListList", carListList);
+			req.setAttribute("carList", carList);
+			req.setAttribute("locationList", locationList);
+			
+			for(CarList c:carListList) {
+				System.out.println(c);
+			}
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/allrentcarsearch.jsp");
+			rd.forward(req, resp);
+		}
+		else if(action.equals("carDetail.do")) {
+			String carNum = req.getParameter("carNum");
+			
+			CarListDAO carListDAO = new CarListDAOImpl();
+			CarList carListList = carListDAO.selectByCarNum(carNum);
+				
+			System.out.println(carListList);
+				
+			CarDAO carDAO = new CarDAOImpl();
+			List<Car> carList = carDAO.selectAll();
+			LocationDAO locationDAO = new LocationDAOImpl();
+			List<Location> locationList = locationDAO.selectAll();
+			for(Location c:locationList) {
+				System.out.println("1"+c);
+			}
+			for(Car c:carList) {
+				System.out.println("2"+c);
+			}
+			req.setAttribute("carListList", carListList);
+			req.setAttribute("carList", carList);
+			req.setAttribute("locationList", locationList);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/carDetail.jsp");
+			rd.forward(req, resp);
+		}
+		else if(action.equals("returnCar.do")) {
+			String carNum = req.getParameter("carNum");
+			
+			CarListDAO carListDAO = new CarListDAOImpl();
+			carListDAO.updateValidRent(carNum);
+			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
+			rentInfoDAO.deleteByCarNum(carNum);
+			
+			resp.sendRedirect("rentedList.do?reqPage=1");
+		}
+		else if(action.equals("carInfoUpdate.do")) {
+			CarListDAO carListDAO = new CarListDAOImpl();
+			CarList carList = new CarList();
+			
+			//String carNum = req.getParameter("carnum");
+			
+			carList.setCost(Integer.parseInt(req.getParameter("cost")));
+			carList.setValidRent(req.getParameter("validrent"));
+			carList.setCarLoc(Integer.parseInt(req.getParameter("carloc")));
+			carList.setCarnum(req.getParameter("carnum"));
+			carListDAO.updateCost(carList);
+			
+			resp.sendRedirect("allRentCar.do?reqPage=1");
+		}
+		else if(action.equals("carInfoDelete.do")) {
+			String carNum = req.getParameter("carnum");
+			System.out.println(carNum);
+			CarListDAO carListDAO = new CarListDAOImpl();
+			carListDAO.deleteCarList(carNum);
+			
+			resp.sendRedirect("allRentCar.do?reqPage=1");
+		}
+		else if(action.equals("go_index")) {
+			HttpSession session = req.getSession();
+			session.removeAttribute("picarmember");
+			
+			resp.sendRedirect("index.jsp");
+		}
+		else if(action.equals("carInfo.do")) {
+			String carNum = req.getParameter("carNum");
+			System.out.println(carNum);
+			CarListDAO carListDAO = new CarListDAOImpl();
+			CarList carList = carListDAO.selectCarInfo(carNum);
+			JoinDAO joinDAO = new JoinDAOImpl();
+			JoinRent joinRent = joinDAO.selectReturn(carNum);
+			System.out.println(joinRent);
+			
+			req.setAttribute("carList", carList);
+			req.setAttribute("joinRent", joinRent);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/carinfo.jsp");
+			rd.forward(req, resp);
+		}
 	}
+	
 }

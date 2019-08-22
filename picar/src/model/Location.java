@@ -3,6 +3,7 @@ package model;
 public class Location {
 	private int carLoc;
 	private String location;
+<<<<<<< HEAD
 	
 	public int getCarLoc() {
 		return carLoc;
@@ -24,4 +25,22 @@ public class Location {
 	
 	
 	
+=======
+	public int getCarLoc() {
+		return carLoc;
+	}
+	public void setCarLoc(int carLoc) {
+		this.carLoc = carLoc;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	@Override
+	public String toString() {
+		return "Location [carLoc=" + carLoc + ", location=" + location + "]";
+	}
+>>>>>>> branch 'master' of https://github.com/ajsirh12/picar
 }

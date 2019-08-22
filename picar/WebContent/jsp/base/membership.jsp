@@ -22,10 +22,12 @@
 	
 	/* 전화번호,면허번호 숫자만 받기 */
 	$(function inNumber(){
-        if(event.keyCode<48 || event.keyCode>57){
+        if(event.keyCode<=48 || event.keyCode>=57){
            event.returnValue=false;
         }
     });
+	
+	
 	
 	/* 아이디 중복체크 */
 	var idck = 0;
@@ -54,27 +56,24 @@
             }else{
             	idck = 1;
             	return true;
-            }
-            
+            }           
     
          });   
        	    	
       	});      
    });
 	
+	//중복 체크 확인
 	$(function(){     
     	$("#join").click(function(){
     		if(idck==1){
     			return true;
     		}else{
-    			alert("중복된 아이디는 사용할수 없습니다.");
+    			alert("중복체크는 필수입니다.");
     			return false;
     		}
       	});      
-   });
-	
-	
-		
+   });		
 		
 	$(function(){
 		$("#signupForm").validate({
@@ -139,22 +138,76 @@
 			}	 
 		});
 	});	
-		
+
 </script>
 </head>
 <body>
 	<h1>회원 가입</h1>
 	<form method="post" id="signupForm" action="member_save">
 				
-		아이디<input id="id" type="text" placeholder="아이디를 입력해주세요" maxlength="20" name="id" />
-		<input type="button" id="checkid" value="중복 확인" /><br />		
-		비밀번호<input id="password" type="password" placeholder="비밀번호는 6~20자리로 입력해주세요." maxlength="20" name="password" /><br />
-		비밀번호 확인<input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" /><br />
-		이름<input id="name" type ="text" placeholder="이름을 입력해주세요" name="name"/><br />
-		전화번호 <input id="phone" type ="tel" placeholder="전화번호를 입력해주세요" maxlength="11" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone"/><br />
-		면허증번호 <input id="license" type ="text" placeholder="면허증번호 10자리를 입력해주세요" maxlength="10" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="license"/><br />
-		면허유효기간 <input id="validate" type="text" placeholder="19/08/18" name="validate" maxlength="6">
-						
+		아이디<input id="id" type="text" placeholder="아이디를 입력해주세요"  onKeyup="this.value=this.value.replace(' ','',/^[a-zA-Z0-9]+$/);" maxlength="20" name="id" />
+		<input type="button" id="checkid" value="중복 확인" /><br />															
+		비밀번호<input id="password" type="password" placeholder="비밀번호는 6~20자리로 입력해주세요." maxlength="20" name="password" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		비밀번호 확인<input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		이름<input id="name" type ="text" placeholder="이름을 입력해주세요" name="name" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		전화번호 <input id="phone" type ="tel" placeholder="전화번호를 입력해주세요" maxlength="11" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		면허증번호 <input id="license" type =text placeholder="면허증번호 10자리를 입력해주세요" maxlength="10" name="license" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		   
+		면허유효기간 
+		<select name = years>
+			<c:forEach var="year" begin="2019" end="2050" step="1" >			
+				<option value = "${year}">${year}년</option>											
+			</c:forEach>
+		</select>
+		
+		<select name = month>
+		<option value = "01">1월</option>
+		<option value = "02">2월</option>	
+		<option value = "03">3월</option>	
+		<option value = "04">4월</option>	
+		<option value = "05">5월</option>	
+		<option value = "06">6월</option>	
+		<option value = "07">7월</option>	
+		<option value = "08">8월</option>	
+		<option value = "09">9월</option>	
+		<option value = "10">10월</option>	
+		<option value = "11">11월</option>	
+		<option value = "12">12월</option>					
+		</select>
+		
+		<select name = days>
+		<option value = "01">1일</option>
+		<option value = "02">2일</option>
+		<option value = "03">3일</option>
+		<option value = "04">4일</option>
+		<option value = "05">5일</option>
+		<option value = "06">6일</option>
+		<option value = "07">7일</option>
+		<option value = "08">8일</option>
+		<option value = "09">9일</option>
+		<option value = "10">10일</option>
+		<option value = "11">11일</option>
+		<option value = "12">12일</option>
+		<option value = "13">13일</option>
+		<option value = "14">14일</option>
+		<option value = "15">15일</option>
+		<option value = "17">17일</option>
+		<option value = "18">18일</option>
+		<option value = "19">19일</option>
+		<option value = "20">20일</option>
+		<option value = "21">21일</option>
+		<option value = "22">22일</option>
+		<option value = "23">23일</option>
+		<option value = "24">24일</option>
+		<option value = "25">25일</option>
+		<option value = "26">26일</option>
+		<option value = "27">27일</option>
+		<option value = "28">28일</option>
+		<option value = "29">29일</option>
+		<option value = "30">30일</option>
+		<option value = "31">31일</option>					
+		</select>
+					
 		<hr />
 		<input type="submit" value="가입" id="join"/>
 	</form>

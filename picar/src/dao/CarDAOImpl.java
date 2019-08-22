@@ -16,7 +16,8 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 												+ " join location on carlist.carloc = location.carloc"
 												+ " where location.carloc=? order by carlist.carnum";
 	private static final String CAR_SELECT_BY_CARTYPE = "SELECT carname, fueltype, colortype, carimage FROM car WHERE cartype=?";
-	
+	private static final String CAR_SELECT_ALL = "SELECT cartype, carname, fueltype, colortype, people, carimage FROM car";	
+		
 	
 	@Override// 차량등록- 관리자
 	public boolean insert(JoinInsert joininsert) {	
@@ -80,5 +81,38 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 		}
 		
 		return car;
+	}
+	@Override
+	public List<Car> selectAll() {
+		List<Car> carList = new ArrayList<Car>();
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(CAR_SELECT_ALL);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				Car car = new Car();
+				
+				car.setCarType(resultSet.getInt("cartype"));
+				car.setCarName(resultSet.getString("carname"));
+				car.setFuelType(resultSet.getString("fueltype"));
+				car.setColorType(resultSet.getString("colortype"));
+				car.setPeople(resultSet.getInt("people"));
+				car.setCarImage(resultSet.getString("carimage"));
+				carList.add(car);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return carList;
 	}
 }

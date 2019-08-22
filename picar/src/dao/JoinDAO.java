@@ -9,4 +9,5 @@ public interface JoinDAO {
 	List<JoinRent> selectJoinBycarNum(String carNum);
 	List<JoinRent> selectJoin(int rowStartNumber, int rowEndNumber);
 	List<JoinRent> selectJoinBycarNum(int rowStartNumber, int rowEndNumber,String carNum);
+	JoinRent selectReturn(String carNum);
 }

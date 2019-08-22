@@ -5,7 +5,8 @@ public class CommList {
 	private String commText;
 	private String commDate;
 	private int memberNum;
-	private int questNum;
+	private int questnum;
+	
 	public int getCommNum() {
 		return commNum;
 	}
@@ -30,17 +31,15 @@ public class CommList {
 	public void setMemberNum(int memberNum) {
 		this.memberNum = memberNum;
 	}
-	public int getQuestNum() {
-		return questNum;
+	public int getQuestnum() {
+		return questnum;
 	}
-	public void setQuestNum(int questNum) {
-		this.questNum = questNum;
+	public void setQuestnum(int questnum) {
+		this.questnum = questnum;
 	}
 	@Override
 	public String toString() {
 		return "CommList [commNum=" + commNum + ", commText=" + commText + ", commDate=" + commDate + ", memberNum="
-				+ memberNum + ", questNum=" + questNum + "]";
+				+ memberNum + ", questnum=" + questnum + "]";
 	}
-	
-	
 }
