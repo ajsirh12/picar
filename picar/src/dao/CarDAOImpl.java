@@ -4,14 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.sun.corba.se.impl.orb.PrefixParserAction;
 
 import model.Car;
 import model.JoinInsert;
-import model.Location;
 
 public class CarDAOImpl extends BaseDAO implements CarDAO {
 	private static final String CAR_INSERT_SQL="insert into carlist values(?,(select cartype from car where cartype=?),?,"
@@ -20,17 +15,13 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 												+ " from car join carlist on car.cartype = carlist.cartype"
 												+ " join location on carlist.carloc = location.carloc"
 												+ " where location.carloc=? order by carlist.carnum";
-<<<<<<< HEAD
-	@Override
-	public boolean insert(JoinInsert joininsert) {
-=======
 	private static final String CAR_SELECT_BY_CARTYPE = "SELECT carname, fueltype, colortype, carimage FROM car WHERE cartype=?";
 	
 	
-	@Override // 차량등록- 관리자
-	public boolean insert(Car car) {
->>>>>>> branch 'master' of https://github.com/ajsirh12/picar
-		boolean result = false;
+	@Override// 차량등록- 관리자
+	public boolean insert(JoinInsert joininsert) {	
+	
+	boolean result = false;
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -57,8 +48,6 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 		}	
 		return result;
 	}
-<<<<<<< HEAD
-=======
 
 	@Override
 	public Car selectByCarType(int cartype) {
@@ -92,6 +81,4 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 		
 		return car;
 	}
-
->>>>>>> branch 'master' of https://github.com/ajsirh12/picar
 }

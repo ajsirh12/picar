@@ -62,6 +62,11 @@ public class EunJungController extends HttpServlet{
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 				rd.forward(req, resp);			
+			
+			}else if(action.equals("carlistloc")) {
+				
+				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/carlistloc.jsp");
+				rd.forward(req, resp);
 			}			
 		}			
 }
