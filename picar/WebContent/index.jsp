@@ -8,7 +8,7 @@
 -->
 <html>
 <head>
-	<title>Road Trip by TEMPLATED</title>
+	<title>PICAR</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -33,16 +33,16 @@
 	.qwe{
 		color: white;
 		text-decoration: none;
-	};
+	}
 	.qwe:hover {
 		color: black;
-	};
+	}
 	</style>
 </head>
 <body>
 	<!-- Header -->
 		<header id="header">
-			<div class="logo"><a href="index.jsp">Road Trip <span>by TEMPLATED</span></a></div>
+			<div class="logo"><a href="index.jsp">PICAR <span>Pick your CAR</span></a></div>
 			<a href="#menu"><span>Menu</span></a>
 		</header>
 
