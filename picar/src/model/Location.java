@@ -3,6 +3,8 @@ package model;
 public class Location {
 	private int carLoc;
 	private String location;
+
+	
 	public int getCarLoc() {
 		return carLoc;
 	}
@@ -15,6 +17,7 @@ public class Location {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
 	@Override
 	public String toString() {
 		return "Location [carLoc=" + carLoc + ", location=" + location + "]";

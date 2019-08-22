@@ -6,4 +6,5 @@ import model.Location;
 
 public interface LocationDAO {
 	List<Location> selectAll();
+
 }
