@@ -8,7 +8,7 @@
 -->
 <html>
 <head>
-	<title>Road Trip by TEMPLATED</title>
+	<title>PICAR - Pick your CAR</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -42,7 +42,7 @@
 <body>
 	<!-- Header -->
 		<header id="header">
-			<div class="logo"><a href="index.jsp">Road Trip <span>by TEMPLATED</span></a></div>
+			<div class="logo"><a href="index.jsp">PICAR <span>Pick your CAR</span></a></div>
 			<a href="#menu"><span>Menu</span></a>
 		</header>
 
@@ -50,8 +50,8 @@
 		<nav id="menu">
 			<ul class="links">      
 			   <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
-			     <li><a href="insertcar">InsertCar</a></li>
-					<li><a href="carlistloc">CarList</a></li>
+			   <li><a href="insertcar">InsertCar</a></li>
+			   <li><a href="carlistloc">CarList</a></li>
 			   <c:if test="${picarmember.gradeNo==30}">         
 			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
 			      <li><a href="picarmemberlist">회원 관리</a></li>                  
