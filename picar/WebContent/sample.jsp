@@ -98,7 +98,7 @@
 			<div class="inner">
 				<article class="box">
 					<header>
-						<h2>Nibh non lobortis mus nibh</h2>
+						<center><h2>Nibh non lobortis mus nibh</h2></center>
 						<p>01.01.2017</p>
 					</header>
 					<div class="content">

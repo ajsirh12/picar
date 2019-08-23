@@ -11,7 +11,7 @@ import model.CarList;
 
 public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 
-	private static final String CARLIST_SELECT_BY_CARNUM = "SELECT carnum, cartype, cost, carloc, validrent, usedtime FROM carlist WHERE carnum=?";
+	private static final String CARLIST_SELECT_BY_CARNUM = "SELECT carnum, cartype, cost, carloc, validrent, usedtime, carinfo FROM carlist WHERE carnum=?";
 	private static final String CARLIST_SELECT_BY_NUM = "SELECT carnum, cartype, cost, carloc, validrent, usedtime FROM carlist WHERE carnum like ?";
 	private static final String CARLIST_SELECT_ALL = "SELECT carnum, cartype, cost, carloc, validrent, usedtime FROM carlist";
 	private static final String CARLIST_SELECT_ALL_PAGE = "SELECT * FROM (SELECT rownum rn, carlist.* FROM (SELECT carnum, cartype, cost, carloc, validrent, usedtime FROM carlist ) carlist) WHERE rn between ? and ?";
@@ -19,6 +19,7 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 	private static final String CARLIST_UPDATE_COST_VALID_BY_CARNUM = "UPDATE carlist SET cost = ?, validrent = ?, carloc = ? WHERE carnum = ?";
 	private static final String CARLIST_DELETE_BY_CARNUM = "DELETE FROM carlist WHERE carnum = ?";
 	private static final String CARLIST_SELECT_CARINFO = "SELECT carnum, carinfo FROM carlist WHERE carnum = ?";
+	private static final String CARLIST_UPDATE_CARINFO_BY_CARNUM = "UPDATE carlist set carinfo = ? WHERE carnum = ?";
 	@Override
 	public CarList selectByCarNum(String carNum) {
 		CarList carList = null;
@@ -42,6 +43,7 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 				carList.setCarLoc(resultSet.getInt("carloc"));
 				carList.setValidRent(resultSet.getString("validrent"));
 				carList.setUsedTime(resultSet.getInt("usedtime"));
+				carList.setCarInfo(resultSet.getString("carinfo"));
 			}
 		}
 		catch(SQLException e) {
@@ -251,6 +253,25 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 		
 		
 		return carList;
+	}
+	@Override
+	public void updateCarInfo(String carInfo, String carNum) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(CARLIST_UPDATE_CARINFO_BY_CARNUM);
+			preparedStatement.setString(1, carInfo);
+			preparedStatement.setString(2, carNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
 	}
 
 }
