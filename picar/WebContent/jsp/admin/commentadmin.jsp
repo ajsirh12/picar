@@ -41,6 +41,19 @@
 		});
 	});
 	
+	$(function(){
+		$("#deletebutton").click(function(){
+			var result = confirm("정말 게시물을 삭제하시겠습니까?");
+			if(result == true) {
+				alert("삭제되었습니다.");
+			}
+			else if (result == false) {
+				return false;
+			}
+		});
+		
+	});
+	
 	</script>
 
 	<body class="subpage">
@@ -105,17 +118,17 @@
 						<header>
 							<h2>답변달기</h2>
 						</header>
-					<form action="commlist_insert.do" method="post">
+					<form action="commlist_insert.do" method="post" style="display:inline">
 					<h3>제목</h3>
-					${commentJoinList.questTitle}
+					<input type="text" value="${commentJoinList.questTitle}" readOnly />
 					<h3>내용</h3>
-					${commentJoinList.questText}
+					<input type="text" value="${commentJoinList.questText}" readOnly />
 					<h3>답변</h3>
 					<input type="hidden" name="commNum" value="${commList.commNum}"></input>
 					<input type="hidden" name="memberNum" value="${commentJoinList.memberNum}"/>
 					<input type="hidden" name="questNum" value="${commentJoinList.questnum}" />
 					<c:if test="${commList.commText !=null}">
-					${commList.commText}
+					<input type="text" value="${commList.commText}" readOnly />
 					<hr>
 					<input type="button" value="수정하기" onclick="location.href='question_admin_detail2.do?questNum=${commentJoinList.questnum}'">
 					</c:if>
@@ -123,9 +136,12 @@
 					<textarea rows="5" cols="40" id="commText"  name = "commText">${commList.commText}</textarea><br>
 					<input type="submit" value="답변등록" id="commcheck">
 					</c:if>
-					<input type="button" value="삭제하기" onclick ="location.href='question_admin_delete.do?questnum=${commentJoinList.questnum}'" >
-					<input type="button" value="뒤로가기" onclick="location.href='question_req_admin_list.do?reqPage=1'"> 
+					</form>							
+					<form action="question_admin_delete.do?questnum=${commentJoinList.questnum}" style="display:inline">
+					<input type="hidden" name="questnum" value="${commentJoinList.questnum}" />
+					<input type="submit" value="삭제하기" id="deletebutton">
 					</form>
+					<input type="button" value="뒤로가기" onclick="location.href='question_req_admin_list.do?reqPage=1'"> 
 					</article>
 				</div>
 				

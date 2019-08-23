@@ -45,6 +45,19 @@
 		});
 	});
 	
+	$(function(){
+		$("#deletebutton").click(function(){
+			var result = confirm("정말 게시물을 삭제하시겠습니까?");
+			if(result == true) {
+				alert("삭제되었습니다.");
+			}
+			else if (result == false) {
+				return false;
+			}
+		});
+		
+	});
+	
 	</script>
 	
 	<body class="subpage">
@@ -109,7 +122,7 @@
 						<header>
 							<h2>문의사항</h2>
 						</header>
-						<form action="question_update.do" method="post">
+						<form action="question_update.do" method="post" style="display:inline">
 							<input type="hidden" id="questnum" name="questnum" value="${commentJoinList.questnum}"/>
 							
 							<h3>제목</h3>
@@ -119,9 +132,13 @@
 							<textarea rows="20" cols="80" id="questText" name="questText" value="${commentJoinList.questText}">${commentJoinList.questText}</textarea><br>
 							<hr>	
 							<input type="submit" value="수정하기" id="checkTitle">
-							<input type="button" value="삭제하기" onclick="location.href='question_delete.do?questnum=${commentJoinList.questnum}'">
-							<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
 						</form>
+						<form action="question_delete.do?questnum=${commentJoinList.questnum}" style="display:inline">
+						<input type="hidden" id="questnum" name="questnum" value="${commentJoinList.questnum}"/>
+							<input type="submit" value="삭제하기" id="deletebutton">
+						</form>	
+							<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
+						
 					</article>
 				</div>
 				
