@@ -42,7 +42,7 @@
 <body>
 	<!-- Header -->
 		<header id="header">
-			<div class="logo"><a href="index.jsp">Road Trip <span>by TEMPLATED</span></a></div>
+			<div class="logo"><a href="index.jsp">PICAR <span>Pick your CAR</span></a></div>
 			<a href="#menu"><span>Menu</span></a>
 		</header>
 
