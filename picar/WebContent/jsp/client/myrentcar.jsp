@@ -106,7 +106,7 @@
 									<td colspan="2"><img src="${car.carImage }" alt="" width="100%" /></td>
 								</tr>
 								<tr align="center">
-									<td>차종</td>
+									<td>차량종류</td>
 									<td>${car.carName }</td>
 								</tr>
 								<tr align="center">
