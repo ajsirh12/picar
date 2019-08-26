@@ -15,7 +15,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	="insert into picarmember VALUES(SEQ_MEMBERNUM.nextval,?,?,?,?,?,?,10)";
 	
 	private static final String PICARMEMBER_SELECT_BY_ID_SQL
-	="SELECT * FROM picarmember WHERE id=? and password=?";
+	="SELECT MEMBERNUM,ID,PASSWORD,NAME,PHONE,LICENSE,to_char(validdate,'yyyy-mm-dd')VALIDDATE,GRADENO FROM picarmember WHERE id=? and password=?";
 	
 	private static final String PICARMEMBER_SELECT_ALL_SQL
 	="SELECT membernum,id,password,name,phone,license,to_char(validdate,'yyyy-mm-dd')validdate,MEMBERGRADE,membergrade.gradeno FROM picarmember ,membergrade where picarmember.gradeno = membergrade.gradeno ORDER BY membernum";
@@ -35,6 +35,17 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	private static final String PICARMEMBER_SELECT_MEMBERNUM_SQL
 	="SELECT membernum,id,password,name,phone,license,to_char(validdate,'yyyy-mm-dd')validdate ,MEMBERGRADE,membergrade.gradeno FROM picarmember ,membergrade where picarmember.gradeno = membergrade.gradeno and picarmember.membernum =?";
 	
+	private static final String PICARMEMBER_UPDATE_SQL
+	="update picarmember set id=?, password=?,name=?, phone=?,LICENSE=?,validdate=?,gradeno=? where membernum=?";
+	
+	private static final String PICARMEMBER_DELETE_SQL
+	="delete from picarmember where membernum=?";
+	
+	private static final String PICARMEMBER_INFOR_UPDATE_SQL
+	="UPDATE picarmember SET PASSWORD=?, NAME=?, PHONE=?, LICENSE=?, VALIDDATE=? WHERE membernum=?";
+	
+	private static final String PICAEMEMBER_CHECK_BY_SQL
+	="select count(*) as cnt from picarmember where password=?";
 	
 	//회원가입
 	@Override
@@ -53,7 +64,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			preparedStatement.setString(2, picarMember.getPassword());
 			preparedStatement.setString(3, picarMember.getName());
 			preparedStatement.setString(4, picarMember.getPhone());
-			preparedStatement.setInt(5,picarMember.getLicense());
+			preparedStatement.setString(5,picarMember.getLicense());
 			preparedStatement.setString(6, picarMember.getValidate());			
 							
 			int rowCount = preparedStatement.executeUpdate();
@@ -96,7 +107,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 				picarMember.setPassword(resultSet.getString("password"));
 				picarMember.setName(resultSet.getString("name"));
 				picarMember.setPhone(resultSet.getString("phone"));
-				picarMember.setLicense(resultSet.getInt("license"));
+				picarMember.setLicense(resultSet.getString("license"));
 				picarMember.setValidate(resultSet.getString("validdate"));
 				picarMember.setGradeNo(resultSet.getInt("gradeno"));
 	
@@ -134,7 +145,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			picarMember.setPassword(resultSet.getString("password"));
 			picarMember.setName(resultSet.getString("name"));
 			picarMember.setPhone(resultSet.getString("phone"));
-			picarMember.setLicense(resultSet.getInt("license"));
+			picarMember.setLicense(resultSet.getString("license"));
 			picarMember.setValidate(resultSet.getString("validdate"));			
 			picarMember.setGradeNo(resultSet.getInt("gradeNo"));
 			picarMember.setMemberGrade(resultSet.getString("membergrade"));
@@ -259,29 +270,29 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	}
 
 	//아이디중복체크
-		@Override
+	@Override
 	public int checkById(String id) {
-			int count = 1;
+		int count = 1;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_CHECK_BY_ID_SQL);
+			preparedStatement.setString(1, id);
 			
-			Connection connection = null;
-			PreparedStatement preparedStatement = null;
-			ResultSet resultSet = null;
-			
-			try {
-				connection = getConnection();
-				preparedStatement = connection.prepareStatement(PICARMEMBER_CHECK_BY_ID_SQL);
-				preparedStatement.setString(1, id);
-				
-				resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 
-				if(resultSet.next()) {
-					count =resultSet.getInt("cnt");
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if(resultSet.next()) {
+				count =resultSet.getInt("cnt");
 			}
-			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return count;
+	}
 
 	//관리자 회원 디테일
 	@Override
@@ -306,7 +317,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 				picarmember.setPassword(resultSet.getString("password"));
 				picarmember.setName(resultSet.getString("name"));
 				picarmember.setPhone(resultSet.getString("phone"));
-				picarmember.setLicense(resultSet.getInt("license"));
+				picarmember.setLicense(resultSet.getString("license"));
 				picarmember.setValidate(resultSet.getString("validdate"));
 				picarmember.setMemberGrade(resultSet.getString("membergrade"));
 				picarmember.setGradeNo(resultSet.getInt("gradeno"));
@@ -322,11 +333,127 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		return picarmember;
 	}
 
-	//회원정보 수정
+	//관리자가 회원정보 수정
 	@Override
 	public boolean memberUpdate(PicarMember picarMember) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		
+		Connection connection =null;
+		PreparedStatement preparedStatement =null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_UPDATE_SQL);
+								
+			preparedStatement.setString(1, picarMember.getId());
+			preparedStatement.setString(2, picarMember.getPassword());	
+			preparedStatement.setString(3, picarMember.getName());
+			preparedStatement.setString(4, picarMember.getPhone());		
+			preparedStatement.setString(5, picarMember.getLicense());
+			preparedStatement.setString(6, picarMember.getValidate());
+			preparedStatement.setInt(7, picarMember.getGradeNo());
+			preparedStatement.setInt(8, picarMember.getMemberNum());
+										
+			int rowCount = preparedStatement.executeUpdate();
+				
+			if(rowCount>0) {
+				result = true;
+			}
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				closeDBObjects(null, preparedStatement, connection);
+			}			
+			return result;
+	}
+		
+	//관리자가 회원정보 삭제 
+	@Override
+	public boolean deleteByMemberNum(int membernum) {
+		boolean result = false;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;		
+	
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_DELETE_SQL);
+
+			preparedStatement.setInt(1, membernum);
+			
+			int rowCount=preparedStatement.executeUpdate();
+			
+			if(rowCount>0) {
+	            result=true;
+	         }
+						
+		}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			closeDBObjects(null, preparedStatement, connection);				
+		}
+		return result;
+	}
+
+	
+	//회원이 정보 수정
+	@Override
+	public boolean memberInforUpdate(PicarMember picarMember) {
+		boolean result = false;
+		
+		Connection connection =null;
+		PreparedStatement preparedStatement =null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_INFOR_UPDATE_SQL);
+			
+			preparedStatement.setString(1, picarMember.getPassword());	
+			preparedStatement.setString(2, picarMember.getName());
+			preparedStatement.setString(3, picarMember.getPhone());		
+			preparedStatement.setString(4, picarMember.getLicense());
+			preparedStatement.setString(5, picarMember.getValidate());
+			preparedStatement.setInt(6, picarMember.getMemberNum());
+										
+			int rowCount = preparedStatement.executeUpdate();
+				
+			if(rowCount>0) {
+				result = true;
+			}
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				closeDBObjects(null, preparedStatement, connection);
+			}			
+			return result;
+	}
+
+	//비밀번호 확인
+	@Override
+	public int checkBypwd(String password) {
+		int count = 1;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICAEMEMBER_CHECK_BY_SQL);
+			preparedStatement.setString(1, password);
+			
+			resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next()) {
+				count =resultSet.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 	
 }

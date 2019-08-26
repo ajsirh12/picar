@@ -16,6 +16,8 @@
 <!-- --유효성 검사plugin-- -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript">
+
+
 	$(function(){
 		alert("면허증 유효기간은 6개월 이상 남아있어야 회원 가입이 가능 합니다.");		
 	});	
@@ -25,9 +27,7 @@
         if(event.keyCode<=48 || event.keyCode>=57){
            event.returnValue=false;
         }
-    });
-	
-	
+    });	
 	
 	/* 아이디 중복체크 */
 	var idck = 0;
@@ -69,7 +69,7 @@
     		if(idck==1){
     			return true;
     		}else{
-    			alert("중복체크는 필수입니다.");
+    			alert("아이디 중복체크는 필수입니다.");
     			return false;
     		}
       	});      
@@ -138,19 +138,19 @@
 			}	 
 		});
 	});	
-
+	
 </script>
 </head>
 <body>
 	<h1>회원 가입</h1>
 	<form method="post" id="signupForm" action="member_save">
-				
-		아이디<input id="id" type="text" placeholder="아이디를 입력해주세요"  onKeyup="this.value=this.value.replace(' ','',/^[a-zA-Z0-9]+$/);" maxlength="20" name="id" />
+						
+		아이디<input id="id" type="text" placeholder="아이디를 입력해주세요"  onKeyup="this.value=this.value.replace(/[^0-9a-zA-Z]/g,'');" maxlength="20" name="id" />
 		<input type="button" id="checkid" value="중복 확인" /><br />															
 		비밀번호<input id="password" type="password" placeholder="비밀번호는 6~20자리로 입력해주세요." maxlength="20" name="password" onKeyup="this.value=this.value.replace(' ','');"/><br />
 		비밀번호 확인<input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" onKeyup="this.value=this.value.replace(' ','');"/><br />
-		이름<input id="name" type ="text" placeholder="이름을 입력해주세요" name="name" onKeyup="this.value=this.value.replace(' ','');"/><br />
-		전화번호 <input id="phone" type ="tel" placeholder="전화번호를 입력해주세요" maxlength="11" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone" onKeyup="this.value=this.value.replace(' ','');"/><br />
+		이름<input id="name" type ="text" placeholder="이름을 입력해주세요" name="name" onKeyup="this.value=this.value.replace(/[^가-힣]/g,'');"/><br />
+		전화번호 <input id="phone" type ="text" placeholder="전화번호를 입력해주세요" maxlength="13" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone" onKeyup="this.value=this.value.replace(' ','');"/><br />
 		면허증번호 <input id="license" type =text placeholder="면허증번호 10자리를 입력해주세요" maxlength="10" name="license" onKeyup="this.value=this.value.replace(' ','');"/><br />
 		   
 		면허유효기간 
@@ -160,52 +160,53 @@
 			</c:forEach>
 		</select>
 		
-		<select name = month>
-		<option value = "01">1월</option>
-		<option value = "02">2월</option>	
-		<option value = "03">3월</option>	
-		<option value = "04">4월</option>	
-		<option value = "05">5월</option>	
-		<option value = "06">6월</option>	
-		<option value = "07">7월</option>	
-		<option value = "08">8월</option>	
-		<option value = "09">9월</option>	
-		<option value = "10">10월</option>	
-		<option value = "11">11월</option>	
-		<option value = "12">12월</option>					
+		<select name = month>			
+			<option value = "01">01월</option>
+			<option value = "02">02월</option>
+			<option value = "03">03월</option>
+			<option value = "04">04월</option>
+			<option value = "05">05월</option>
+			<option value = "06">06월</option>
+			<option value = "07">07월</option>
+			<option value = "08">08월</option>
+			<option value = "09">09월</option>
+			<option value = "10">10월</option>
+			<option value = "11">11월</option>
+			<option value = "12">12월</option>													
 		</select>
-		
-		<select name = days>
-		<option value = "01">1일</option>
-		<option value = "02">2일</option>
-		<option value = "03">3일</option>
-		<option value = "04">4일</option>
-		<option value = "05">5일</option>
-		<option value = "06">6일</option>
-		<option value = "07">7일</option>
-		<option value = "08">8일</option>
-		<option value = "09">9일</option>
-		<option value = "10">10일</option>
-		<option value = "11">11일</option>
-		<option value = "12">12일</option>
-		<option value = "13">13일</option>
-		<option value = "14">14일</option>
-		<option value = "15">15일</option>
-		<option value = "17">17일</option>
-		<option value = "18">18일</option>
-		<option value = "19">19일</option>
-		<option value = "20">20일</option>
-		<option value = "21">21일</option>
-		<option value = "22">22일</option>
-		<option value = "23">23일</option>
-		<option value = "24">24일</option>
-		<option value = "25">25일</option>
-		<option value = "26">26일</option>
-		<option value = "27">27일</option>
-		<option value = "28">28일</option>
-		<option value = "29">29일</option>
-		<option value = "30">30일</option>
-		<option value = "31">31일</option>					
+
+		<select name = days>		
+			<option value = "01">01일</option>	
+			<option value = "02">02일</option>	
+			<option value = "03">03일</option>	
+			<option value = "04">04일</option>	
+			<option value = "05">05일</option>	
+			<option value = "06">06일</option>	
+			<option value = "07">07일</option>	
+			<option value = "08">08일</option>	
+			<option value = "09">09일</option>	
+			<option value = "10">10일</option>	
+			<option value = "11">11일</option>
+			<option value = "12">12일</option>	
+			<option value = "13">13일</option>	
+			<option value = "14">14일</option>	
+			<option value = "15">15일</option>	
+			<option value = "16">16일</option>	
+			<option value = "17">17일</option>
+			<option value = "18">18일</option>
+			<option value = "19">19일</option>
+			<option value = "20">20일</option>
+			<option value = "21">21일</option>
+			<option value = "22">22일</option>
+			<option value = "23">23일</option>
+			<option value = "24">24일</option>
+			<option value = "25">25일</option>
+			<option value = "26">26일</option>
+			<option value = "27">27일</option>
+			<option value = "28">28일</option>
+			<option value = "29">29일</option>	
+			<option value = "30">30일</option>		
+			<option value = "31">31일</option>	
 		</select>
 					
 		<hr />

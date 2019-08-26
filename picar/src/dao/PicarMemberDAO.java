@@ -24,6 +24,9 @@ public interface PicarMemberDAO {
 	
 	boolean memberUpdate(PicarMember picarMember);
 	
+	boolean deleteByMemberNum(int membernum);		
 	
-
+	boolean memberInforUpdate(PicarMember picarMember);
+	
+	int checkBypwd(String password);
 }
