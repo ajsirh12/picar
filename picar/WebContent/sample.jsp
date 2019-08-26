@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 -->
 <html>
 <head>
-	<title>PICAR</title>
+	<title>PICAR - Pick your CAR</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -42,7 +43,7 @@
 <body class="subpage">
 	<!-- Header -->
 		<header id="header" class="alt">
-			<div class="logo"><a href="index.jsp">Road Trip <span>by TEMPLATED</span></a></div>
+			<div class="logo"><a href="index.jsp">PICAR <span>Pick your CAR</span></a></div>
 			<a href="#menu"><span>Menu</span></a>
 		</header>
 
@@ -97,7 +98,7 @@
 			<div class="inner">
 				<article class="box">
 					<header>
-						<h2>Nibh non lobortis mus nibh</h2>
+						<center><h2>Nibh non lobortis mus nibh</h2></center>
 						<p>01.01.2017</p>
 					</header>
 					<div class="content">

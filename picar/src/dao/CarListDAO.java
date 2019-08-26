@@ -13,4 +13,5 @@ public interface CarListDAO {
 	void updateCost(CarList carList);
 	void deleteCarList(String carNum);
 	CarList selectCarInfo(String carNum);
+	void updateCarInfo(String carInfo, String carNum);
 }

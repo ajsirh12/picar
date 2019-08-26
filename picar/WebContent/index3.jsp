@@ -31,6 +31,6 @@
       <input type = "submit" value="내 정보" />   
    
       </form>
-   </c:if>   
+   </c:if>  
 </body>
 </html>

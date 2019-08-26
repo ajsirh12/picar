@@ -5,9 +5,8 @@ public class Car {
 	private String carName;
 	private String fuelType;
 	private String colorType;
-	private int people;
+	private int People;
 	private String carImage;
-	
 	public int getCarType() {
 		return carType;
 	}
@@ -33,10 +32,10 @@ public class Car {
 		this.colorType = colorType;
 	}
 	public int getPeople() {
-		return people;
+		return People;
 	}
 	public void setPeople(int people) {
-		this.people = people;
+		People = people;
 	}
 	public String getCarImage() {
 		return carImage;
@@ -47,8 +46,9 @@ public class Car {
 	@Override
 	public String toString() {
 		return "Car [carType=" + carType + ", carName=" + carName + ", fuelType=" + fuelType + ", colorType="
-				+ colorType + ", people=" + people + ", carImage=" + carImage + "]";
+				+ colorType + ", People=" + People + ", carImage=" + carImage + "]";
 	}
-	
+
+
 	
 }

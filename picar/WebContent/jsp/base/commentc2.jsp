@@ -24,6 +24,42 @@
 	}
 	
 	</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+	
+	$(function(){
+		$("#checkTitle").click(function(){
+        	var input_val =$("#questTitle").val();
+        	var input_val2 =$("#questText").val();
+         
+        	if(!input_val){
+        		alert("제목을입력해주세요");  
+        		return false;
+         	}
+        	
+        	else if(!input_val2){
+        		alert("내용을 입력해주세요")
+        		return false;
+        	}
+		});
+	});
+	
+	$(function(){
+		$("#deletebutton").click(function(){
+			var result = confirm("정말 게시물을 삭제하시겠습니까?");
+			if(result == true) {
+				alert("삭제되었습니다.");
+			}
+			else if (result == false) {
+				return false;
+			}
+		});
+		
+	});
+	
+	</script>
+	
 	<body class="subpage">
 
 		<!-- Header -->
@@ -86,19 +122,23 @@
 						<header>
 							<h2>문의사항</h2>
 						</header>
-						<form action="question_update.do" method="post">
-							<input type="hidden" name="questnum" value="${commentJoinList.questnum}"/>
+						<form action="question_update.do" method="post" style="display:inline">
+							<input type="hidden" id="questnum" name="questnum" value="${commentJoinList.questnum}"/>
 							
 							<h3>제목</h3>
-							<input type="text" name="questTitle" value="${commentJoinList.questTitle}"/><br>
+							<input type="text" id="questTitle" name="questTitle" value="${commentJoinList.questTitle}"/><br>
 							
 							<h3>내용</h3>
-							<textarea rows="20" cols="80" name="questText" value="${commentJoinList.questText}">${commentJoinList.questText}</textarea><br>
+							<textarea rows="20" cols="80" id="questText" name="questText" value="${commentJoinList.questText}">${commentJoinList.questText}</textarea><br>
 							<hr>	
-							<input type="submit" value="수정하기">
-							<input type="button" value="삭제하기" onclick="location.href='question_delete.do?questnum=${commentJoinList.questnum}'">
-							<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
+							<input type="submit" value="수정하기" id="checkTitle">
 						</form>
+						<form action="question_delete.do?questnum=${commentJoinList.questnum}" style="display:inline">
+						<input type="hidden" id="questnum" name="questnum" value="${commentJoinList.questnum}"/>
+							<input type="submit" value="삭제하기" id="deletebutton">
+						</form>	
+							<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
+						
 					</article>
 				</div>
 				

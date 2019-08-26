@@ -34,7 +34,7 @@
 
 		<!-- Header -->
 			<header id="header" class="alt">
-				<div class="logo"><a href="index.jsp">PICAR <span>Pick up your CAR</span></a></div>
+				<div class="logo"><a href="index.jsp">PICAR <span>Pick your CAR</span></a></div>
 				<a href="#menu"><span>Menu</span></a>
 			</header>
 
@@ -70,7 +70,7 @@
 				${message}
 			   </c:if>   
 			      
-			   <p>${picarmember.id}</p>
+			   ${picarmember.id}
 			   <c:if test="${picarmember !=null}">
 			      <form action = "logout">
 			      <input type = "submit" value="로그 아웃" />   
