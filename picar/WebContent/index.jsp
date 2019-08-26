@@ -107,7 +107,7 @@
 		<section id="one" class="wrapper post bg-img" data-bg="banner2.jpg" heigth>
 			<div class="inner">
 				<article class="box">
-					<p style="font-size:35px; color:white">지금 피카에서 함께 떠날차를 골라보세요</p>	
+				<p style="font-size:35px; color:white">지금 피카에서 함께 떠날차를 골라보세요</p>
 				<img src="img/santape.png" width="100%"/>	
 				<br><br><br>
 				<img src="img/sonata.png" width="100%"/>
@@ -123,56 +123,29 @@
 			<div class="inner">
 				<article class="box">
 					<header>
-						<h2>Mus elit a ultricies at</h2>
-						<p>12.21.2016</p>
-					</header>
-					<div class="content">
-						<p>Scelerisque enim mi curae erat ultricies lobortis donec velit in per cum consectetur purus a enim platea vestibulum lacinia et elit ante scelerisque vestibulum. At urna condimentum sed vulputate a duis in senectus ullamcorper lacus cubilia consectetur odio proin sociosqu a parturient nam ac blandit praesent aptent. Eros dignissim mus mauris a natoque ad suspendisse nulla a urna in tincidunt tristique enim arcu litora scelerisque eros suspendisse.</p>
+					<p style="font-size:35px; color:white">피카와 함께 떠나는 Trip</p>
+					<video src="img/pick movie.mp4" width="100%" height="100%" controls="controls"></video>
+					
+					<h3 align="left">유의사항</h3>
+					<div align="left">
+					- 피카는 면허증은 기간이 6개월 이하인 회원은 이용이 불가능 합니다<br>
+					- 회원가입을 하시지 않을 경우 이용이 불가능 합니다.<br>
+					- 대여기간을 지키시지 않을 경우 연체료를 납부해야합니다.<br>
 					</div>
-					<footer>
-						<a href="generic.html" class="button alt">Learn More</a>
-					</footer>
 				</article>
 			</div>
 			<a href="#three" class="more">Learn More</a>
 		</section>
-
-	<!-- Three -->
-		<section id="three" class="wrapper post bg-img" data-bg="banner4.jpg">
-			<div class="inner">
-				<article class="box">
-					<header>
-						<h2>Varius a cursus aliquet</h2>
-						<p>11.11.2016</p>
-					</header>
-					<div class="content">
-						<p>Scelerisque enim mi curae erat ultricies lobortis donec velit in per cum consectetur purus a enim platea vestibulum lacinia et elit ante scelerisque vestibulum. At urna condimentum sed vulputate a duis in senectus ullamcorper lacus cubilia consectetur odio proin sociosqu a parturient nam ac blandit praesent aptent. Eros dignissim mus mauris a natoque ad suspendisse nulla a urna in tincidunt tristique enim arcu litora scelerisque eros suspendisse.</p>
+			<footer id="footer">
+				<div class="inner" align="center">
+					(주)피카 대표자:임동건
+					<div class="copyright">
+						&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
 					</div>
-					<footer>
-						<a href="generic.html" class="button alt">Learn More</a>
-					</footer>
-				</article>
-			</div>
-			<a href="#four" class="more">Learn More</a>
-		</section>
 
-	<!-- Four -->
-		<section id="four" class="wrapper post bg-img" data-bg="banner3.jpg">
-			<div class="inner">
-				<article class="box">
-					<header>
-						<h2>Luctus blandit mi lectus in nascetur</h2>
-						<p>10.30.2016</p>
-					</header>
-					<div class="content">
-						<p>Scelerisque enim mi curae erat ultricies lobortis donec velit in per cum consectetur purus a enim platea vestibulum lacinia et elit ante scelerisque vestibulum. At urna condimentum sed vulputate a duis in senectus ullamcorper lacus cubilia consectetur odio proin sociosqu a parturient nam ac blandit praesent aptent. Eros dignissim mus mauris a natoque ad suspendisse nulla a urna in tincidunt tristique enim arcu litora scelerisque eros suspendisse.</p>
-					</div>
-					<footer>
-						<a href="generic.html" class="button alt">Learn More</a>
-					</footer>
-				</article>
-			</div>
-		</section>
+				</div>
+			</footer>
+		
 
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
