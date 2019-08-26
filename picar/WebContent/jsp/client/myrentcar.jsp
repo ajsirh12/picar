@@ -139,9 +139,11 @@
 									</td>
 								</tr>
 								<tr align="center">
-									<td colspan="2"><input type=button value="연장" id="renewbtn" /></td>	
-								</tr>
+									<td colspan="2"><input type=button value="연장" id="renewbtn" />	
 								</form>
+								<input type="button" value="뒤로" onclick="history.back(-1);" />
+								</td>
+								</tr>
 							</table>
 						</c:if>
 						<c:if test="${rentinfo.memberNum != picarmember.memberNum }">

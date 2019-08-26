@@ -106,7 +106,9 @@
 					<table border="1">
 						<tr>
 							<form action="allRentCarSearch.do" method="post">
-							<td colspan="6"><input type="text" name="carNum" placeholder="차량번호" /></td><td><input type="submit" value="검색" /></td>
+							<td colspan="2"><input type="text" name="carNum" placeholder="차량번호" />
+							</td><td><input type="submit" value="검색" /></td>
+							<td colspan="4"></td>
 							</form>
 						</tr>
 						<tr>
