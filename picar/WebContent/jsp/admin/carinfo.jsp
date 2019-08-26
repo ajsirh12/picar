@@ -121,8 +121,9 @@
 							<input type="hidden" value="${joinRent.late }" class="late" />
 							<input type="hidden" value="${joinRent.cost }" class="cost" />
 							<textarea rows="20" cols="40" name="carinfo">${carList.carInfo }</textarea> <br />
-							<center><input type="button" id="returnbtn" value="반납" /></center>
+							<center><input type="button" id="returnbtn" value="반납" />
 						</form>
+						<input type="button" value="뒤로" onclick="history.back(-1);"/></center>
 						</td>
 					</tr>
 					</table>

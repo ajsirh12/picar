@@ -105,9 +105,11 @@
 						<table border="1">
 						<tr>
 							<form action="rentedSearch.do?reqPage=1" method="post">
-							<td colspan="5"><input type="text" name="carNum" placeholder="차량번호" /> <td><input type="submit" /></td></td>
+							<td colspan="2"><input type="text" name="carNum" placeholder="차량번호" /> 
+							<td><input type="submit" value="검색" /></td>
 							</form>
-							<td><a href="rentedList.do?reqPage=1"><button>목록</button></a></td>
+							<td></td><td></td><td></td><td><input type="button" value="목록" onclick="location.href='rentedList.do?reqPage=1'" />
+							</td>
 						</tr>
 						<tr>
 							<th>carNum</th>

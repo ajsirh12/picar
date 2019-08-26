@@ -28,8 +28,9 @@
    <c:if test="${picarmember !=null}">
       <form action = "logout">
       <input type = "submit" value="로그 아웃" />   
+      <input type = "submit" value="내 정보" />   
    
       </form>
-   </c:if>   
+   </c:if>  
 </body>
 </html>

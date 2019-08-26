@@ -107,6 +107,17 @@
 		<section id="one" class="wrapper post bg-img" data-bg="banner2.jpg" heigth>
 			<div class="inner">
 				<article class="box">
+					<header>
+						<h2>Nibh non lobortis mus nibh</h2>
+						<p>01.01.2017</p>
+					</header>
+					<div class="content">
+						<p>Scelerisque enim mi curae erat ultricies lobortis donec velit in per cum consectetur purus a enim platea vestibulum lacinia et elit ante scelerisque vestibulum. At urna condimentum sed vulputate a duis in senectus ullamcorper lacus cubilia consectetur odio proin sociosqu a parturient nam ac blandit praesent aptent. Eros dignissim mus mauris a natoque ad suspendisse nulla a urna in tincidunt tristique enim arcu litora scelerisque eros suspendisse.</p>
+					</div>
+					<footer>
+						<a href="generic.html" class="button alt">Learn More</a>
+					</footer>
+				
 					<p style="font-size:35px; color:white">지금 피카에서 함께 떠날차를 골라보세요</p>	
 				<img src="img/santape.png" width="100%"/>	
 				<br><br><br>

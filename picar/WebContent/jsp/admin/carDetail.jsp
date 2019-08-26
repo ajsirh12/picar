@@ -212,7 +212,7 @@
 							<td colspan="2">
 							<input type="submit" value="수정" /></form>
 							<input type="button" value="삭제" onclick="location.href='carInfoDelete.do?carnum=${carListList.carnum }'"/>
-							<input type="button" value="뒤로" onclick="location.href='allRentCar.do?reqPage=1'"/>
+							<input type="button" value="뒤로" onclick="history.back(-1);"/>
 							<%-- <a href="carInfoDelete.do?carnum=${carListList.carnum }"><button>삭제</button></a>
 							<a href="allRentCar.do?reqPage=1"><button>뒤로</button></a> --%>
 							</td>

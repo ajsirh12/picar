@@ -11,16 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CommentJoinListDAO;
+import dao.CommentJoinListDAOImpl;
 import dao.MemberGradeDAO;
 import dao.MemberGradeDAOImpl;
 import dao.PicarMemberDAO;
 import dao.PicarMemberDAOImpl;
+import model.CommentJoinList;
 import model.MemberGrade;
 import model.PicarMember;
+import page2.PageManager;
+import page2.PageSQL;
 
 @WebServlet(name = "dahaeController", urlPatterns = {"/login","/logout","/login_input","/member_save",
 				"/sign_up","/idcheck","/idinput","/idfind","/id_find","/password_find","/passwordfind",
-				"/password_update","/picarmemberlist","/member_detail"})
+				"/password_update","/picarmemberlist","/member_detail","/picarmember_update",
+				"/picarmember_delete","/member_infor","/member_infor_update","/passwodcheck"})
 public class dahaeController extends HttpServlet {
 
 	@Override
@@ -79,18 +85,16 @@ public class dahaeController extends HttpServlet {
 		
 		//회원가입
 		}else if(action.equals("member_save")) {	
-			
-			
+						
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			PicarMember picarMember = new PicarMember();
+			
 			picarMember.setId(req.getParameter("id"));
 			picarMember.setPassword(req.getParameter("password"));
 			picarMember.setName(req.getParameter("name"));
 			picarMember.setPhone(req.getParameter("phone"));
-			picarMember.setLicense(Integer.parseInt(req.getParameter("license")));
-			picarMember.setValidate(req.getParameter("years")+req.getParameter("month")+req.getParameter("days"));
-		
-			/*int validate = "years"+"month"+"days";*/
+			picarMember.setLicense(req.getParameter("license"));
+			picarMember.setValidate(req.getParameter("years")+req.getParameter("month")+req.getParameter("days"));			
 			
 			boolean result = dao.insert(picarMember);
 			System.out.println(result);
@@ -101,6 +105,7 @@ public class dahaeController extends HttpServlet {
 	
 		//회원가입 입력화면
 		}else if(action.equals("sign_up")) {
+			
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/membership.jsp");
 			rd.forward(req, resp);
 									
@@ -120,9 +125,9 @@ public class dahaeController extends HttpServlet {
 			
 			if(count==0) 
 			{
-				req.setAttribute("message", "사용 할수 있는 아이디입니다.");
+				req.setAttribute("message", "멋진 아이디네요!");
 			}else {
-				req.setAttribute("message", "사용 할수 없는 아이디입니다.");				
+				req.setAttribute("message", "이미 사용중이거나 탈퇴한 아이디입니다.");				
 			}
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/idcheckResult.jsp");
@@ -206,6 +211,7 @@ public class dahaeController extends HttpServlet {
 		}else if (action.equals("member_detail")) {
 			
 			int memnum = Integer.parseInt(req.getParameter("memberdetail"));
+			
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			MemberGradeDAO dao2 = new MemberGradeDAOImpl();
 			
@@ -214,13 +220,94 @@ public class dahaeController extends HttpServlet {
 			
 			req.setAttribute("picarmember", picarmember);
 			req.setAttribute("membergrades", membergrades);
-			
-			System.out.println(membergrades);
-			System.out.println(picarmember);
-			
+				
 			RequestDispatcher rd =req.getRequestDispatcher("/jsp/admin/picarmemberdetail.jsp");
 			rd.forward(req, resp);	
+		
+		//관리자 회원정보 수정
+		}else if(action.equals("picarmember_update")) {
+			
+			PicarMember picarmember = new PicarMember();
+			
+			picarmember.setId(req.getParameter("id"));
+			picarmember.setPassword(req.getParameter("password"));
+			picarmember.setName(req.getParameter("name"));
+			picarmember.setPhone(req.getParameter("phone"));
+			picarmember.setLicense(req.getParameter("license"));
+			picarmember.setValidate(req.getParameter("validate"));
+			picarmember.setGradeNo(Integer.parseInt(req.getParameter("membergrade")));
+			picarmember.setMemberNum(Integer.parseInt(req.getParameter("membernum")));
+							
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			boolean result = dao.memberUpdate(picarmember);
+			
+			System.out.println(picarmember+"1212");
+			System.out.println(result);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("picarmemberlist");
+			rd.forward(req, resp);
+			
+		//관리자가 회원 정보 삭제
+		}else if(action.equals("picarmember_delete")) {
+			
+			int membernum = Integer.parseInt(req.getParameter("membernum"));
+			
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			boolean result = dao.deleteByMemberNum(membernum);
+					
+			System.out.println(result);
+						
+			RequestDispatcher rd =req.getRequestDispatcher("index.jsp");
+			rd.forward(req, resp);
+		
+		
+		//회원의 정보 화면
+		}else if(action.equals("member_infor")) {
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/client/memberinfor.jsp");
+			rd.forward(req, resp);
+			
+		//회원의 정보 수정
+		}else if(action.equals("member_infor_update")) {
+			
+			PicarMember picarmember = new PicarMember();
+			
+			picarmember.setPassword(req.getParameter("newpassword"));
+			picarmember.setName(req.getParameter("name"));
+			picarmember.setPhone(req.getParameter("phone"));
+			picarmember.setLicense(req.getParameter("license"));
+			picarmember.setValidate(req.getParameter("validate"));
+			picarmember.setMemberNum(Integer.parseInt(req.getParameter("membernum")));
+							
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			boolean result = dao.memberInforUpdate(picarmember);
+			
+			System.out.println(picarmember);
+			System.out.println(result);
+			
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/client/memberinfor.jsp");
+			rd.forward(req, resp);
+		
+		
+		}else if(action.equals("passwodcheck")) {
+	
+			PicarMemberDAO dao = new PicarMemberDAOImpl();
+			int count = dao.checkBypwd(req.getParameter("password"));
+			
+			req.setAttribute("count", count);
+			
+			if(count==0) 
+			{
+				req.setAttribute("message", "기존 비밀번호가 다릅니다.");
+			}else {
+				req.setAttribute("message", "비밀번호가 확인 되었습니다.");				
+			}
+			
+			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/idcheckResult.jsp");
+			rd.forward(req, resp);	
+			
 		}
+
 		
 	}	
 }
