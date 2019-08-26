@@ -125,14 +125,14 @@
 						<h3>답변</h3>
 						<input type="hidden" name="commNum" value="${commList.commNum}"></input>
 						<input type="hidden" name="memberNum" value="${commentJoinList.memberNum}"/>
-						<input type="hidden" name="questnum" value="${commentJoinList.questnum}" />
+						<input type="hidden" name="questNum" value="${commentJoinList.questnum}" />
 						<textarea rows="5" cols="40" id="commText" name = "commText">${commList.commText}</textarea><br>
-						<input type="submit" value="수정하기" id="commcheck">
+						<input type="submit" value="수정하기" id="commcheck" />
 						</form>
-						<form action="question_admin_delete.do?questnum=${commentJoinList.questnum}" style="display:inline">
-					<input type="hidden" name="questnum" value="${commentJoinList.questnum}" />
-					<input type="submit" value="삭제하기" id="deletebutton">
-					</form>
+						<form action="question_admin_delete.do?questNum=${commentJoinList.questnum}" style="display:inline">
+						<input type="hidden" name="questnum" value="${commentJoinList.questnum}" />
+						<input type="submit" value="삭제하기" id="deletebutton">
+						</form>
 						<input type="button" value="뒤로가기" onclick="location.href='question_req_admin_list.do?reqPage=1'"> 
 					</article>
 				</div>
