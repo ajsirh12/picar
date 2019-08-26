@@ -50,7 +50,8 @@
 		<nav id="menu">
 			<ul class="links">      
 			   <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
-			      
+			   <li><a href="insertcar">InsertCar</a></li>
+			   <li><a href="carlistloc">CarList</a></li>
 			   <c:if test="${picarmember.gradeNo==30}">         
 			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
 			      <li><a href="picarmemberlist">회원 관리</a></li>                  
@@ -81,10 +82,8 @@
 			   <p>${picarmember.id}</p>
 			   <c:if test="${picarmember !=null}">
 			      <form action = "logout">
-			      <input type = "submit" value="로그 아웃" /> 		
-			      <input type="button" value="내 정보" onclick="location.href='member_infor?membernum=${picarmember.memberNum}'" />	         
-			      </form>	
-			     
+			      <input type = "submit" value="로그 아웃" />   
+			      </form>
 			   </c:if>   
 			</ul>
 		</nav>
