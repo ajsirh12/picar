@@ -9,6 +9,7 @@ public class CarList {
 	private int driveRange;
 	private int usedTime;
 	private String carInfo;
+	private String carName;
 	
 	public String getCarInfo() {
 		return carInfo;
@@ -58,11 +59,19 @@ public class CarList {
 	public void setUsedTime(int usedTime) {
 		this.usedTime = usedTime;
 	}
+	public String getCarName() {
+		return carName;
+	}
+	public void setCarName(String carName) {
+		this.carName = carName;
+	}
 	@Override
 	public String toString() {
 		return "CarList [carnum=" + carnum + ", carType=" + carType + ", cost=" + cost + ", carLoc=" + carLoc
 				+ ", validRent=" + validRent + ", driveRange=" + driveRange + ", usedTime=" + usedTime + ", carInfo="
-				+ carInfo + "]";
+				+ carInfo + ", carName=" + carName + "]";
 	}
+	
+	
 		
 }

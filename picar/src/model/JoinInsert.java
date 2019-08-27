@@ -6,7 +6,7 @@ public class JoinInsert {
 	private int carType;
 	private int cost;
 	private int carloc;
-	private String carName;
+	
 	public String getCarNum() {
 		return carNum;
 	}
@@ -31,16 +31,9 @@ public class JoinInsert {
 	public void setCarloc(int carloc) {
 		this.carloc = carloc;
 	}
-	public String getCarName() {
-		return carName;
-	}
-	public void setCarName(String carName) {
-		this.carName = carName;
-	}
 	
 	@Override
 	public String toString() {
-		return "JoinInsert [carNum=" + carNum + ", carType=" + carType + ", cost=" + cost + ", carloc=" + carloc
-				+ ", carName=" + carName + "]";
+		return "JoinInsert [carNum=" + carNum + ", carType=" + carType + ", cost=" + cost + ", carloc=" + carloc + "]";
 	}
 }
