@@ -16,4 +16,5 @@ public interface CarListDAO {
 	void deleteCarList(String carNum);
 	CarList selectCarInfo(String carNum);
 	CarList selectByCarloc(int carloc);
+	void updateCarInfo(String carInfo, String carNum);
 }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.CarList;
-import model.Location;
 
 public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 
@@ -20,11 +19,8 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 	private static final String CARLIST_UPDATE_COST_VALID_BY_CARNUM = "UPDATE carlist SET cost = ?, validrent = ?, carloc = ? WHERE carnum = ?";
 	private static final String CARLIST_DELETE_BY_CARNUM = "DELETE FROM carlist WHERE carnum = ?";
 	private static final String CARLIST_SELECT_CARINFO = "SELECT carnum, carinfo FROM carlist WHERE carnum = ?";
-	
-	
 	private static final String CARLIST_SELECT_CARLOC = "select carnum, car.carname, carloc, validrent from carlist join car on carlist.cartype = car.cartype where carloc=?"; 
-														
-	
+	private static final String CARLIST_UPDATE_CARINFO_BY_CARNUM = "UPDATE carlist set carinfo = ? WHERE carnum = ?";
 	@Override
 	public CarList selectByCarNum(String carNum) {
 		CarList carList = null;
@@ -319,4 +315,24 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 			}			
 			return carListList;
 		}
+	@Override
+	public void updateCarInfo(String carInfo, String carNum) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(CARLIST_UPDATE_CARINFO_BY_CARNUM);
+			preparedStatement.setString(1, carInfo);
+			preparedStatement.setString(2, carNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+	}	
+	
 }

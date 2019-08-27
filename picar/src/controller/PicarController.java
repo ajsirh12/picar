@@ -175,7 +175,7 @@ public class PicarController extends HttpServlet {
 		}
 		else if(action.equals("allRentCarSearch.do")) {
 			String carNum = req.getParameter("carNum");
-			System.out.println("qwe");
+
 			CarListDAO carListDAO = new CarListDAOImpl();
 			List<CarList> carListList = carListDAO.selectByNum(carNum);
 			
@@ -223,9 +223,12 @@ public class PicarController extends HttpServlet {
 		}
 		else if(action.equals("returnCar.do")) {
 			String carNum = req.getParameter("carNum");
-			
+			String carInfo = req.getParameter("carinfo");
+			System.out.println(carInfo);
 			CarListDAO carListDAO = new CarListDAOImpl();
 			carListDAO.updateValidRent(carNum);
+			carListDAO.updateCarInfo(carInfo, carNum);
+			
 			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
 			rentInfoDAO.deleteByCarNum(carNum);
 			

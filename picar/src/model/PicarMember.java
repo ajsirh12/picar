@@ -7,9 +7,9 @@ public class PicarMember {
 	private String password;
 	private String name;
 	private String phone;
-	private int license;
+	private String license;
 	private String validate;
-	private int gradeNo;
+	private int gradeNo;	
 	private String memberGrade;
 	
 	public int getMemberNum() {
@@ -42,10 +42,10 @@ public class PicarMember {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getLicense() {
+	public String getLicense() {
 		return license;
 	}
-	public void setLicense(int license) {
+	public void setLicense(String license) {
 		this.license = license;
 	}
 	public String getValidate() {
@@ -60,7 +60,6 @@ public class PicarMember {
 	public void setGradeNo(int gradeNo) {
 		this.gradeNo = gradeNo;
 	}
-
 	public String getMemberGrade() {
 		return memberGrade;
 	}
@@ -73,6 +72,7 @@ public class PicarMember {
 				+ ", phone=" + phone + ", license=" + license + ", validate=" + validate + ", gradeNo=" + gradeNo
 				+ ", memberGrade=" + memberGrade + "]";
 	}
+	
 	
 	
 }
