@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.CarList;
+import model.Location;
 
 public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 
@@ -19,6 +20,11 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 	private static final String CARLIST_UPDATE_COST_VALID_BY_CARNUM = "UPDATE carlist SET cost = ?, validrent = ?, carloc = ? WHERE carnum = ?";
 	private static final String CARLIST_DELETE_BY_CARNUM = "DELETE FROM carlist WHERE carnum = ?";
 	private static final String CARLIST_SELECT_CARINFO = "SELECT carnum, carinfo FROM carlist WHERE carnum = ?";
+	
+	
+	private static final String CARLIST_SELECT_CARLOC = "select carnum, car.carname, carloc, validrent from carlist join car on carlist.cartype = car.cartype where carloc=?"; 
+														
+	
 	@Override
 	public CarList selectByCarNum(String carNum) {
 		CarList carList = null;
@@ -252,5 +258,65 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 		
 		return carList;
 	}
-
+	
+	@Override
+	public CarList selectByCarloc(int carloc) {
+		CarList carlist = null;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+				connection = getConnection();
+				preparedStatement = connection.prepareStatement(CARLIST_SELECT_CARLOC);
+				preparedStatement.setInt(1, carloc);
+				resultSet = preparedStatement.executeQuery();
+				
+				if(resultSet.next()) {
+					carlist = new CarList();
+					
+					carlist.setCarnum(resultSet.getString("carnum"));
+					carlist.setCarName(resultSet.getString("carname"));
+					carlist.setValidRent(resultSet.getString("validrent"));
+					carlist.setCarLoc(resultSet.getInt("carloc"));					
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				closeDBObjects(resultSet, preparedStatement, connection);
+			}			
+			return carlist;
+		}
+	@Override
+	public List<CarList> selectbyCarloc(int carloc) {
+		List<CarList> carListList = new ArrayList<CarList>();
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+				connection = getConnection();
+				preparedStatement = connection.prepareStatement(CARLIST_SELECT_CARLOC);
+				preparedStatement.setInt(1, carloc);
+				resultSet = preparedStatement.executeQuery();
+				
+				while(resultSet.next()) {
+					CarList carList = new CarList();
+					
+					carList.setCarnum(resultSet.getString("carnum"));
+					carList.setCarName(resultSet.getString("carname"));
+					carList.setValidRent(resultSet.getString("validrent"));
+					carList.setCarLoc(resultSet.getInt("carloc"));
+					
+					carListList.add(carList);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				closeDBObjects(resultSet, preparedStatement, connection);
+			}			
+			return carListList;
+		}
 }

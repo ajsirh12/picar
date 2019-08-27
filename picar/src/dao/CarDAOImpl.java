@@ -11,12 +11,7 @@ import model.Car;
 import model.JoinInsert;
 
 public class CarDAOImpl extends BaseDAO implements CarDAO {
-	private static final String CAR_INSERT_SQL="insert into carlist values(?,(select cartype from car where cartype=?),?,"
-												+ " (select carloc from location where carloc=?),y,0,0)";
-	private static final String CAR_LIST_SQL="select carlist.carnum as carnum, carlist.validrent as validrent, car.carname as carname"
-												+ " from car join carlist on car.cartype = carlist.cartype"
-												+ " join location on carlist.carloc = location.carloc"
-												+ " where location.carloc=? order by carlist.carnum";
+	private static final String CAR_INSERT_SQL="insert into carlist values(?,?,?,?,'Y',0,null)";
 	private static final String CAR_SELECT_BY_CARTYPE = "SELECT carname, fueltype, colortype, carimage FROM car WHERE cartype=?";
 	private static final String CAR_SELECT_ALL = "SELECT cartype, carname, fueltype, colortype, people, carimage FROM car";	
 		
@@ -118,15 +113,5 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 		return carList;
 	}
 
-	@Override
-	public boolean insert(Car car) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Car selectByLocation(int carloc) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

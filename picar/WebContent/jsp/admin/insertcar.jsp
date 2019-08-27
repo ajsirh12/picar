@@ -16,6 +16,7 @@
 		<option value="1"> 마티즈 </option>
 		<option value="2"> K7 </option>
 		<option value="3"> 아반떼 </option>
+		<option value="4"> 소나타 </option>
 		</select>
 	<h4>대여비용</h4>
 		<input type="text" placeholder="대여비용" name="cost" /><br />		
