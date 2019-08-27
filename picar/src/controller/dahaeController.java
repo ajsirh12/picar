@@ -141,14 +141,14 @@ public class dahaeController extends HttpServlet {
 					
 		//아이디찾기
 		}else if(action.equals("idfind")){
-			String name = req.getParameter("name");
-			String phone = req.getParameter("phone");
+			String name = req.getParameter("name2");
+			String phone = req.getParameter("phone2");
 			
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			
 			PicarMember picarmember = dao.selectFindId(name, phone);
 						
-			req.setAttribute("picarmember", picarmember);
+			req.setAttribute("picarrmember", picarmember);
 			System.out.println(picarmember);
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/findId.jsp");
@@ -303,7 +303,7 @@ public class dahaeController extends HttpServlet {
 				req.setAttribute("message", "비밀번호가 확인 되었습니다.");				
 			}
 			
-			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/idcheckResult.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 			rd.forward(req, resp);	
 			
 		}

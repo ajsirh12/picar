@@ -63,7 +63,7 @@
 			      <form action="login" method="post">
 					대소문자를 구분해 주세요 . <br />
 					<input type="text" name="id" id="id" placeholder="Username" /> <br />
-					<input type="password" name="password" id="password" placeholder="password"/> 
+					<input type="password" name="password" id="password" placeholder="password" /> 
 					
 					<tr>
 					<td><input type="submit" value="로그인"></td>		
