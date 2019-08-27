@@ -106,7 +106,7 @@
 									<td colspan="2"><img src="${car.carImage }" alt="" width="100%" /></td>
 								</tr>
 								<tr align="center">
-									<td>차종</td>
+									<td>차량종류</td>
 									<td>${car.carName }</td>
 								</tr>
 								<tr align="center">
@@ -141,7 +141,7 @@
 								<tr align="center">
 									<td colspan="2"><input type=button value="연장" id="renewbtn" />	
 								</form>
-								<input type="button" value="뒤로" onclick="history.back(-1);" />
+								<input type="button" value="뒤로" onclick="location.href='index.jsp'" />
 								</td>
 								</tr>
 							</table>

@@ -111,13 +111,13 @@
 								<td colspan="3"></td><td><input type="button" value="목록" onclick="location.href='allRentCar.do?reqPage=1'"/></td>
 							</tr>
 							<tr>
-								<th>carNum</th>
-								<th>carType</th>
-								<th>cost</th>
-								<th>people</th>
-								<th>location</th>
-								<th>valid</th>
-								<th>detail</th>
+								<th>차량번호</th>
+								<th>차량종류</th>
+								<th>대여비용</th>
+								<th>탑승인원</th>
+								<th>현재위치</th>
+								<th>대여여부</th>
+								<th>상세보기</th>
 							</tr>
 							<c:forEach var="carList2" items="${carListList }">
 							<tr>

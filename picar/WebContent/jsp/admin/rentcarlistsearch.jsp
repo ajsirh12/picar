@@ -112,12 +112,12 @@
 							</td>
 						</tr>
 						<tr>
-							<th>carNum</th>
-							<th>name</th>
-							<th>phone</th>
-							<th>rentStart</th>
-							<th>rentEnd</th>
-							<th>late</th>
+							<th>차량번호</th>
+							<th>대여자</th>
+							<th>핸드폰</th>
+							<th>대여일</th>
+							<th>반납일</th>
+							<th>연체료</th>
 							<th>반납</th>
 						</tr>
 						<c:forEach var="rented" items="${rentedList }">

@@ -42,7 +42,7 @@
 <body>
 	<!-- Header -->
 		<header id="header">
-			<div class="logo"><a href="index.jsp">Road Trip <span>by TEMPLATED</span></a></div>
+			<div class="logo"><a href="index.jsp">PICAR <span>Pick your CAR</span></a></div>
 			<a href="#menu"><span>Menu</span></a>
 		</header>
 
@@ -50,7 +50,8 @@
 		<nav id="menu">
 			<ul class="links">      
 			   <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
-			      
+			   <li><a href="insertcar">InsertCar</a></li>
+			   <li><a href="carlistloc">CarList</a></li>
 			   <c:if test="${picarmember.gradeNo==30}">         
 			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
 			      <li><a href="picarmemberlist">회원 관리</a></li>                  
@@ -61,7 +62,7 @@
 			   <c:if test="${picarmember ==null}">
 			      <table>
 			      <form action="login" method="post">
-					대소문자를 구분해 주세요 . <br />
+					
 					<input type="text" name="id" id="id" placeholder="Username" /> <br />
 					<input type="password" name="password" id="password" placeholder="password" /> 
 					
@@ -98,26 +99,26 @@
 		<section id="banner" class="bg-img" data-bg="banner.jpg">
 			<div class="inner">
 				<header>
-					<h1>This is Road Trip</h1>
+					<h1>Pick Car YourSelf</h1>
 				</header>
 			</div>
 			<a href="#one" class="more">Learn More</a>
 		</section>
 
 	<!-- One -->
-		<section id="one" class="wrapper post bg-img" data-bg="banner2.jpg">
+		<section id="one" class="wrapper post bg-img" data-bg="banner2.jpg" heigth>
 			<div class="inner">
 				<article class="box">
-					<header>
-						<h2>Nibh non lobortis mus nibh</h2>
-						<p>01.01.2017</p>
-					</header>
-					<div class="content">
-						<p>Scelerisque enim mi curae erat ultricies lobortis donec velit in per cum consectetur purus a enim platea vestibulum lacinia et elit ante scelerisque vestibulum. At urna condimentum sed vulputate a duis in senectus ullamcorper lacus cubilia consectetur odio proin sociosqu a parturient nam ac blandit praesent aptent. Eros dignissim mus mauris a natoque ad suspendisse nulla a urna in tincidunt tristique enim arcu litora scelerisque eros suspendisse.</p>
-					</div>
-					<footer>
-						<a href="generic.html" class="button alt">Learn More</a>
-					</footer>
+				<header>
+					<p style="font-size:35px; color:white">지금 피카에서 함께 떠날차를 골라보세요</p>
+				</header>
+				<div class="content">
+					<img src="img/santape.png" width="100%"/>	
+					<br><br><br>
+					<img src="img/sonata.png" width="100%"/>
+					<br><br>
+					<input type="button" onclick="location.href='carlistloc'" value="차량 리스트로 이동"/>
+				</div>
 				</article>
 			</div>
 			<a href="#two" class="more">Learn More</a>
@@ -128,56 +129,30 @@
 			<div class="inner">
 				<article class="box">
 					<header>
-						<h2>Mus elit a ultricies at</h2>
-						<p>12.21.2016</p>
+						<p style="font-size:35px; color:white">피카와 함께 떠나는 Trip</p>
 					</header>
 					<div class="content">
-						<p>Scelerisque enim mi curae erat ultricies lobortis donec velit in per cum consectetur purus a enim platea vestibulum lacinia et elit ante scelerisque vestibulum. At urna condimentum sed vulputate a duis in senectus ullamcorper lacus cubilia consectetur odio proin sociosqu a parturient nam ac blandit praesent aptent. Eros dignissim mus mauris a natoque ad suspendisse nulla a urna in tincidunt tristique enim arcu litora scelerisque eros suspendisse.</p>
+						<video src="img/pick movie.mp4" width="100%" height="100%" controls="controls"></video>
+						<h3 align="left">유의사항</h3>
+						<div align="left">
+						- 피카는 면허증은 기간이 6개월 이하인 회원은 이용이 불가능 합니다<br>
+						- 회원가입을 하시지 않을 경우 이용이 불가능 합니다.<br>
+						- 대여기간을 지키시지 않을 경우 연체료를 납부해야합니다.<br>
+						</div>
 					</div>
-					<footer>
-						<a href="generic.html" class="button alt">Learn More</a>
-					</footer>
 				</article>
 			</div>
-			<a href="#three" class="more">Learn More</a>
 		</section>
+	<footer id="footer">
+				<div class="inner" align="center">
+					(주)피카 대표자:임동건
+					<div class="copyright">
+						&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
+					</div>
 
-	<!-- Three -->
-		<section id="three" class="wrapper post bg-img" data-bg="banner4.jpg">
-			<div class="inner">
-				<article class="box">
-					<header>
-						<h2>Varius a cursus aliquet</h2>
-						<p>11.11.2016</p>
-					</header>
-					<div class="content">
-						<p>Scelerisque enim mi curae erat ultricies lobortis donec velit in per cum consectetur purus a enim platea vestibulum lacinia et elit ante scelerisque vestibulum. At urna condimentum sed vulputate a duis in senectus ullamcorper lacus cubilia consectetur odio proin sociosqu a parturient nam ac blandit praesent aptent. Eros dignissim mus mauris a natoque ad suspendisse nulla a urna in tincidunt tristique enim arcu litora scelerisque eros suspendisse.</p>
-					</div>
-					<footer>
-						<a href="generic.html" class="button alt">Learn More</a>
-					</footer>
-				</article>
-			</div>
-			<a href="#four" class="more">Learn More</a>
-		</section>
-
-	<!-- Four -->
-		<section id="four" class="wrapper post bg-img" data-bg="banner3.jpg">
-			<div class="inner">
-				<article class="box">
-					<header>
-						<h2>Luctus blandit mi lectus in nascetur</h2>
-						<p>10.30.2016</p>
-					</header>
-					<div class="content">
-						<p>Scelerisque enim mi curae erat ultricies lobortis donec velit in per cum consectetur purus a enim platea vestibulum lacinia et elit ante scelerisque vestibulum. At urna condimentum sed vulputate a duis in senectus ullamcorper lacus cubilia consectetur odio proin sociosqu a parturient nam ac blandit praesent aptent. Eros dignissim mus mauris a natoque ad suspendisse nulla a urna in tincidunt tristique enim arcu litora scelerisque eros suspendisse.</p>
-					</div>
-					<footer>
-						<a href="generic.html" class="button alt">Learn More</a>
-					</footer>
-				</article>
-			</div>
-		</section>
+				</div>
+			</footer>
+	
 
 <!-- Scripts -->
 <script src="assets/js/jquery.min.js"></script>
