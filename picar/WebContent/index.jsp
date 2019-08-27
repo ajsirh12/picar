@@ -94,10 +94,10 @@
 		to the full filename of your image. This is used in each section to set
 		the background image.
 	-->
-		<section id="banner" class="bg-img" data-bg="banner.jpg">
+		<section id="banner" class="bg-img" data-bg="load.jpg">
 			<div class="inner">
 				<header>
-					<h1>This is Road Trip</h1>
+					<h1>Pick Car YourSelf</h1>
 				</header>
 			</div>
 			<a href="#one" class="more">Learn More</a>
