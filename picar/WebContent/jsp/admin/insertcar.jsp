@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,19 +14,18 @@
 	<h4>차종 </h4> 
 	    <select name=cartype>
 		<option value="" selected disabled hidden> === 차 종  선 택 === </option>
-		<option value="1"> 마티즈 </option>
-		<option value="2"> K7 </option>
-		<option value="3"> 아반떼 </option>
-		<option value="4"> 소나타 </option>
+		<c:forEach var="car" items="${carlist }">
+			<option value="${car.carType }">${car.carName }</option>
+		</c:forEach>
 		</select>
 	<h4>대여비용</h4>
 		<input type="text" placeholder="대여비용" name="cost" /><br />		
 	<h4>보유지점 </h4>
 		<select name="carloc">
 		<option value="" selected disabled hidden> === 지 점  선 택 === </option>
-		<option value="1"> 강남점 </option>
-		<option value="2"> 영등포점 </option>
-		<option value="3"> 마포점</option>
+		<c:forEach var="loc" items="${locationlist }">
+			<option value="${loc.carLoc }">${loc.location }</option>
+		</c:forEach>
 		</select><br />
 		<br />
 	<input type="submit" value="등 록" />
