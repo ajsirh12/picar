@@ -14,13 +14,17 @@ import dao.CarDAO;
 import dao.CarDAOImpl;
 import dao.CarListDAO;
 import dao.CarListDAOImpl;
+import dao.JoinDetailDAO;
+import dao.JoinDetailDAOImpl;
 import dao.LocationDAO;
 import dao.LocationDAOImpl;
+import model.Car;
 import model.CarList;
+import model.JoinDetail;
 import model.JoinInsert;
 import model.Location;
 
-@WebServlet(name = "EunJungController", urlPatterns = {"/insertcar","/registercar","/carlistloc","/carlists","/carlisty"})
+@WebServlet(name = "EunJungController", urlPatterns = {"/insertcar","/registercar","/carlistloc","/carlists","/carlisty","/cardetail","/carsearch"})
 
 public class EunJungController extends HttpServlet{
 
@@ -48,8 +52,17 @@ public class EunJungController extends HttpServlet{
 			req.setCharacterEncoding("utf-8");
 			
 			if(action.equals("insertcar")) {
-				RequestDispatcher rd = req.getRequestDispatcher("/jsp/admin/insertcar.jsp");
-				rd.forward(req, resp);
+	            CarDAO carDAO = new CarDAOImpl();
+	            List<Car> carList = carDAO.selectAll();
+	            
+	            LocationDAO locationDAO = new LocationDAOImpl();
+	            List<Location> locationLIst = locationDAO.selectAll();
+	            
+	            req.setAttribute("carlist", carList);
+	            req.setAttribute("locationlist", locationLIst);
+	            
+	            RequestDispatcher rd = req.getRequestDispatcher("/jsp/admin/insertcar.jsp");
+	            rd.forward(req, resp);
 			
 			// 차량등록
 			}else if(action.equals("registercar")) {
@@ -112,8 +125,33 @@ public class EunJungController extends HttpServlet{
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/carlist.jsp");
 				rd.forward(req, resp);
-			}	
-			
-			
+		     
+			//차량상세보기			
+			}else if(action.equals("cardetail")) {
+				
+				String carnum = req.getParameter("carnum");
+				
+				JoinDetailDAO dao = new JoinDetailDAOImpl();
+				JoinDetail detail = dao.selectByCarNum(carnum);
+				
+				System.out.println(detail);
+								
+				req.setAttribute("detail", detail);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/cardetail.jsp");
+				rd.forward(req, resp);
+				
+			}else if(action.equals("carsearch")) {
+				String carName = req.getParameter("carName");
+				
+				CarDAO dao = new CarDAOImpl();
+				List<Car> namelist = dao.selectByCarname(carName);
+				
+				req.setAttribute("carlists", namelist);
+
+				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/carlist.jsp");
+				rd.forward(req, resp);				
+			}
+		
 		}			
 }

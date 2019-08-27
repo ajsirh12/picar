@@ -19,8 +19,10 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 	private static final String CARLIST_UPDATE_COST_VALID_BY_CARNUM = "UPDATE carlist SET cost = ?, validrent = ?, carloc = ? WHERE carnum = ?";
 	private static final String CARLIST_DELETE_BY_CARNUM = "DELETE FROM carlist WHERE carnum = ?";
 	private static final String CARLIST_SELECT_CARINFO = "SELECT carnum, carinfo FROM carlist WHERE carnum = ?";
-	private static final String CARLIST_SELECT_CARLOC = "select carnum, car.carname, carloc, validrent from carlist join car on carlist.cartype = car.cartype where carloc=?"; 
+	private static final String CARLIST_SELECT_CARLOC = "select carlist.carnum, car.carname, carlist.carloc, carlist.validrent, location.location from carlist join car on carlist.cartype = car.cartype join location on carlist.carloc = location.carloc where carlist.carloc=?"; 
 	private static final String CARLIST_UPDATE_CARINFO_BY_CARNUM = "UPDATE carlist set carinfo = ? WHERE carnum = ?";
+	
+	
 	@Override
 	public CarList selectByCarNum(String carNum) {
 		CarList carList = null;
@@ -255,6 +257,7 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 		return carList;
 	}
 	
+	//보유지점 리스트
 	@Override
 	public CarList selectByCarloc(int carloc) {
 		CarList carlist = null;
@@ -305,6 +308,7 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 					carList.setCarName(resultSet.getString("carname"));
 					carList.setValidRent(resultSet.getString("validrent"));
 					carList.setCarLoc(resultSet.getInt("carloc"));
+					carList.setLocation(resultSet.getString("location"));
 					
 					carListList.add(carList);
 				}

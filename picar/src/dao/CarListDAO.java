@@ -3,7 +3,6 @@ package dao;
 import java.util.List;
 
 import model.CarList;
-import model.Location;
 
 public interface CarListDAO {
 	CarList selectByCarNum(String carNum);

@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import model.Location;
 
 public class LocationDAOImpl extends BaseDAO implements LocationDAO {
 	private static final String LOCATION_SELECT_ALL = "SELECT carloc, location FROM location";
+	
 	@Override
 	public List<Location> selectAll() {
 		List<Location> locationList = new ArrayList<Location>();
@@ -41,5 +44,5 @@ public class LocationDAOImpl extends BaseDAO implements LocationDAO {
 		
 		return locationList;
 	}
-
+	
 }
