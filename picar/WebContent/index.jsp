@@ -107,12 +107,16 @@
 		<section id="one" class="wrapper post bg-img" data-bg="banner2.jpg" heigth>
 			<div class="inner">
 				<article class="box">
-				<p style="font-size:35px; color:white">지금 피카에서 함께 떠날차를 골라보세요</p>
-				<img src="img/santape.png" width="100%"/>	
-				<br><br><br>
-				<img src="img/sonata.png" width="100%"/>
-				<br><br>
-				<input type="button" onclick="location.href='carlistloc'" value="차량 리스트로 이동"/>
+				<header>
+					<p style="font-size:35px; color:white">지금 피카에서 함께 떠날차를 골라보세요</p>
+				</header>
+				<div class="content">
+					<img src="img/santape.png" width="100%"/>	
+					<br><br><br>
+					<img src="img/sonata.png" width="100%"/>
+					<br><br>
+					<input type="button" onclick="location.href='carlistloc'" value="차량 리스트로 이동"/>
+				</div>
 				</article>
 			</div>
 			<a href="#two" class="more">Learn More</a>
@@ -123,18 +127,19 @@
 			<div class="inner">
 				<article class="box">
 					<header>
-					<p style="font-size:35px; color:white">피카와 함께 떠나는 Trip</p>
-					<video src="img/pick movie.mp4" width="100%" height="100%" controls="controls"></video>
-					
-					<h3 align="left">유의사항</h3>
-					<div align="left">
-					- 피카는 면허증은 기간이 6개월 이하인 회원은 이용이 불가능 합니다<br>
-					- 회원가입을 하시지 않을 경우 이용이 불가능 합니다.<br>
-					- 대여기간을 지키시지 않을 경우 연체료를 납부해야합니다.<br>
+						<p style="font-size:35px; color:white">피카와 함께 떠나는 Trip</p>
+					</header>
+					<div class="content">
+						<video src="img/pick movie.mp4" width="100%" height="100%" controls="controls"></video>
+						<h3 align="left">유의사항</h3>
+						<div align="left">
+						- 피카는 면허증은 기간이 6개월 이하인 회원은 이용이 불가능 합니다<br>
+						- 회원가입을 하시지 않을 경우 이용이 불가능 합니다.<br>
+						- 대여기간을 지키시지 않을 경우 연체료를 납부해야합니다.<br>
+						</div>
 					</div>
 				</article>
 			</div>
-			<a href="#three" class="more">Learn More</a>
 		</section>
 			<footer id="footer">
 				<div class="inner" align="center">
