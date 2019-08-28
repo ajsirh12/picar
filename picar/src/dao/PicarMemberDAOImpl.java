@@ -15,7 +15,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	="insert into picarmember VALUES(SEQ_MEMBERNUM.nextval,?,?,?,?,?,?,10)";
 	
 	private static final String PICARMEMBER_SELECT_BY_ID_SQL
-	="SELECT MEMBERNUM,ID,PASSWORD,NAME,PHONE,LICENSE,to_char(validdate,'yyyy-mm-dd')VALIDDATE,GRADENO FROM picarmember WHERE id=? and password=?";
+	="SELECT MEMBERNUM,ID,PASSWORD,NAME,PHONE,LICENSE,to_char(validdate,'yyyy-mm-dd')VALIDDATE,GRADENO,RENTED FROM picarmember WHERE id=? and password=?";
 	
 	private static final String PICARMEMBER_SELECT_ALL_SQL
 	="SELECT membernum,id,password,name,phone,license,to_char(validdate,'yyyy-mm-dd')validdate,MEMBERGRADE,membergrade.gradeno FROM picarmember ,membergrade where picarmember.gradeno = membergrade.gradeno ORDER BY membernum";
@@ -110,7 +110,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 				picarMember.setLicense(resultSet.getString("license"));
 				picarMember.setValidate(resultSet.getString("validdate"));
 				picarMember.setGradeNo(resultSet.getInt("gradeno"));
-	
+				picarMember.setRented(resultSet.getString("rented"));
 			}
 						
 		} catch (SQLException e) {			

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -31,7 +32,7 @@ import page.PageManager;
 import page.PageSQL;
 
 @WebServlet(name = "PicarController", urlPatterns = {"/rentedList.do", "/rentedSearch.do", "/myRentCar.do", "/renew_car.do", "/allRentCar.do",
-		"/allRentCarSearch.do", "/carDetail.do", "/returnCar.do", "/carInfoUpdate.do", "/carInfoDelete.do", "/go_index", "/carInfo.do"})
+		"/allRentCarSearch.do", "/carDetail.do", "/returnCar.do", "/carInfoUpdate.do", "/carInfoDelete.do", "/go_index", "/carInfo.do", "/reserveCar.do"})
 public class PicarController extends HttpServlet {
 
 	@Override
@@ -276,6 +277,31 @@ public class PicarController extends HttpServlet {
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/carinfo.jsp");
 			rd.forward(req, resp);
+		}
+		else if(action.equals("reserveCar.do")) {
+			String firstDate = req.getParameter("firstdate");
+			String lastDate = req.getParameter("lastdate");
+			int memberNum = Integer.parseInt(req.getParameter("membernum"));
+			String carNum = req.getParameter("carnum");
+			
+			/*System.out.println(firstDate);
+			System.out.println(lastDate);
+			System.out.println(memberNum);
+			System.out.println(carNum);*/
+			
+			CarListDAO carListDAO = new CarListDAOImpl();
+			carListDAO.updateValidRentToN(carNum);
+			
+			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
+			RentInfo rentInfo = new RentInfo();
+			rentInfo.setRentStart(firstDate);
+			rentInfo.setRentEnd(lastDate);
+			rentInfo.setMemberNum(memberNum);
+			rentInfo.setCarNum(carNum);
+			System.out.println(rentInfo);
+			rentInfoDAO.insertRentInfo(rentInfo);
+			
+			resp.sendRedirect("myRentCar.do?membernum="+memberNum);
 		}
 	}
 	
