@@ -47,6 +47,12 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	private static final String PICAEMEMBER_CHECK_BY_SQL
 	="select count(*) as cnt from picarmember where password=?";
 	
+	private static final String PICARMEMBER_UPDATE_TO_Y
+	="UPDATE picarmember SET rented = 'Y' WHERE membernum=?";
+	
+	private static final String PICARMEMBER_UPDATE_TO_N
+	="UPDATE picarmember SET rented = 'N' WHERE membernum=?";
+	
 	//회원가입
 	@Override
 	public boolean insert(PicarMember picarMember) {
@@ -455,5 +461,44 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		}
 		return count;
 	}
+
+	@Override
+	public void updateRentedToY(int memberNum) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_UPDATE_TO_Y);
+			preparedStatement.setInt(1, memberNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+	}
+
+	@Override
+	public void updateRentedToN(int memberNum) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_UPDATE_TO_N);
+			preparedStatement.setInt(1, memberNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+	}
+
 	
 }

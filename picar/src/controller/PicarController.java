@@ -21,6 +21,8 @@ import dao.JoinDAO;
 import dao.JoinDAOImpl;
 import dao.LocationDAO;
 import dao.LocationDAOImpl;
+import dao.PicarMemberDAO;
+import dao.PicarMemberDAOImpl;
 import dao.RentInfoDAO;
 import dao.RentInfoDAOImpl;
 import model.Car;
@@ -223,12 +225,17 @@ public class PicarController extends HttpServlet {
 			rd.forward(req, resp);
 		}
 		else if(action.equals("returnCar.do")) {
-			String carNum = req.getParameter("carNum");
+			int memberNum = Integer.parseInt(req.getParameter("membernum"));
+			String carNum = req.getParameter("carnum");
 			String carInfo = req.getParameter("carinfo");
-			System.out.println(carInfo);
+			/*System.out.println(carInfo);*/
+			
 			CarListDAO carListDAO = new CarListDAOImpl();
 			carListDAO.updateValidRent(carNum);
 			carListDAO.updateCarInfo(carInfo, carNum);
+			
+			PicarMemberDAO picarMemberDAO = new PicarMemberDAOImpl();
+			picarMemberDAO.updateRentedToY(memberNum);
 			
 			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
 			rentInfoDAO.deleteByCarNum(carNum);
@@ -270,10 +277,15 @@ public class PicarController extends HttpServlet {
 			CarList carList = carListDAO.selectCarInfo(carNum);
 			JoinDAO joinDAO = new JoinDAOImpl();
 			JoinRent joinRent = joinDAO.selectReturn(carNum);
-			System.out.println(joinRent);
+			
+			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
+			RentInfo rentInfo = rentInfoDAO.selectByCarnum(carNum);
 			
 			req.setAttribute("carList", carList);
 			req.setAttribute("joinRent", joinRent);
+			req.setAttribute("rentInfo", rentInfo);
+			
+			System.out.println(rentInfo.getMemberNum());
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/carinfo.jsp");
 			rd.forward(req, resp);
@@ -291,6 +303,9 @@ public class PicarController extends HttpServlet {
 			
 			CarListDAO carListDAO = new CarListDAOImpl();
 			carListDAO.updateValidRentToN(carNum);
+			
+			PicarMemberDAO picarMemberDAO = new PicarMemberDAOImpl();
+			picarMemberDAO.updateRentedToN(memberNum);
 			
 			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
 			RentInfo rentInfo = new RentInfo();

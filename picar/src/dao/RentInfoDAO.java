@@ -7,4 +7,5 @@ public interface RentInfoDAO {
 	void renewByRentNum(int renew, int rentNum);
 	void deleteByCarNum(String carNum);
 	void insertRentInfo(RentInfo rentinfo);
+	RentInfo selectByCarnum(String carNum);
 }

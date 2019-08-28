@@ -83,7 +83,7 @@
 			   <c:if test="${picarmember !=null}">
 			      <form action = "logout">
 			      <input type = "submit" value="로그 아웃" /> 		
-			      <input type="button" value="내 정보" onclick="location.href='member_infor?membernum=${picarmember.memberNum}'" />	         
+			      <input type="button" value="내 정보" onclick="location.href='member_infor?membernum='${picarmember.memberNum}'" />	         
 			      </form>	
 			     
 			   </c:if>   
