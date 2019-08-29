@@ -23,5 +23,6 @@
 			</c:forEach>
 		</table>	
 	</form>	
+	<input type="button" value="뒤로가기" onclick="history.back(-1);" />
 </body>
 </html>

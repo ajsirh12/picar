@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Car;
 import model.CarList;
 
 public class CarListDAOImpl extends BaseDAO implements CarListDAO {
@@ -22,7 +21,9 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 	private static final String CARLIST_SELECT_CARINFO = "SELECT carnum, carinfo FROM carlist WHERE carnum = ?";
 	private static final String CARLIST_SELECT_CARLOC = "select carlist.carnum, car.carname, carlist.carloc, carlist.validrent, location.location from carlist join car on carlist.cartype = car.cartype join location on carlist.carloc = location.carloc where carlist.carloc=? and validrent in ('Y','y')"; 
 	private static final String CARLIST_UPDATE_CARINFO_BY_CARNUM = "UPDATE carlist set carinfo = ? WHERE carnum = ?";
+	private static final String CARLIST_UPDATE_VALIDRENT_TO_N = "UPDATE carlist SET validrent = 'N' WHERE carnum=?";
 	private static final String CAR_SELECT_CARNAME="select carlist.carnum, car.carname, carlist.validrent, location.location from carlist join car on carlist.cartype = car.cartype join location on carlist.carloc = location.carloc where location.carloc=? and car.carname like ?";
+	
 	
 	@Override
 	public CarList selectByCarNum(String carNum) {
@@ -331,6 +332,25 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 			preparedStatement = connection.prepareStatement(CARLIST_UPDATE_CARINFO_BY_CARNUM);
 			preparedStatement.setString(1, carInfo);
 			preparedStatement.setString(2, carNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+	}
+	
+	@Override
+	public void updateValidRentToN(String carNum) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(CARLIST_UPDATE_VALIDRENT_TO_N);
+			preparedStatement.setString(1, carNum);
 			preparedStatement.execute();
 		}
 		catch(SQLException e) {

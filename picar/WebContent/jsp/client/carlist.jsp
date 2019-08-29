@@ -14,6 +14,7 @@
 		<input type="text" placeholder="차량 종류" name="carname" />
 		<input type="submit" value="검 색" />
 		</form>
+		<input type="button" value="뒤로가기" onclick="history.back(-1);" />
 		<br />
 		<c:if test="${empty carlists}">
 			검색된 결과가 존재하지 않습니다.

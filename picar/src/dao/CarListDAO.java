@@ -18,4 +18,5 @@ public interface CarListDAO {
 	CarList selectCarInfo(String carNum);
 	CarList selectByCarloc(int carloc);
 	void updateCarInfo(String carInfo, String carNum);
+	void updateValidRentToN(String carNum);
 }
