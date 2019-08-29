@@ -117,7 +117,8 @@
 					<tr>
 						<td colspan="2">
 						<form action="returnCar.do" method="post" id="frm">
-						<input type="hidden" value="${carList.carnum }" name="carNum" />
+						<input type="hidden" value="${rentInfo.memberNum}" name="membernum" />
+						<input type="hidden" value="${carList.carnum }" name="carnum" />
 							<input type="hidden" value="${joinRent.late }" class="late" />
 							<input type="hidden" value="${joinRent.cost }" class="cost" />
 							<textarea rows="20" cols="40" name="carinfo">${carList.carInfo }</textarea> <br />

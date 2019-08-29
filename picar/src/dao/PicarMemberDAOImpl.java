@@ -15,7 +15,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	="insert into picarmember VALUES(SEQ_MEMBERNUM.nextval,?,?,?,?,?,?,10)";
 	
 	private static final String PICARMEMBER_SELECT_BY_ID_SQL
-	="SELECT MEMBERNUM,ID,PASSWORD,NAME,PHONE,LICENSE,to_char(validdate,'yyyy-mm-dd')VALIDDATE,GRADENO FROM picarmember WHERE id=? and password=?";
+	="SELECT MEMBERNUM,ID,PASSWORD,NAME,PHONE,LICENSE,to_char(validdate,'yyyy-mm-dd')VALIDDATE,GRADENO,RENTED FROM picarmember WHERE id=? and password=?";
 	
 	private static final String PICARMEMBER_SELECT_ALL_SQL
 	="SELECT membernum,id,password,name,phone,license,to_char(validdate,'yyyy-mm-dd')validdate,MEMBERGRADE,membergrade.gradeno FROM picarmember ,membergrade where picarmember.gradeno = membergrade.gradeno ORDER BY membernum";
@@ -46,6 +46,12 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	
 	private static final String PICAEMEMBER_CHECK_BY_SQL
 	="select count(*) as cnt from picarmember where password=?";
+	
+	private static final String PICARMEMBER_UPDATE_TO_Y
+	="UPDATE picarmember SET rented = 'Y' WHERE membernum=?";
+	
+	private static final String PICARMEMBER_UPDATE_TO_N
+	="UPDATE picarmember SET rented = 'N' WHERE membernum=?";
 	
 	//회원가입
 	@Override
@@ -110,7 +116,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 				picarMember.setLicense(resultSet.getString("license"));
 				picarMember.setValidate(resultSet.getString("validdate"));
 				picarMember.setGradeNo(resultSet.getInt("gradeno"));
-	
+				picarMember.setRented(resultSet.getString("rented"));
 			}
 						
 		} catch (SQLException e) {			
@@ -455,5 +461,44 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		}
 		return count;
 	}
+
+	@Override
+	public void updateRentedToY(int memberNum) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_UPDATE_TO_Y);
+			preparedStatement.setInt(1, memberNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+	}
+
+	@Override
+	public void updateRentedToN(int memberNum) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_UPDATE_TO_N);
+			preparedStatement.setInt(1, memberNum);
+			preparedStatement.execute();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(null, preparedStatement, connection);
+		}
+	}
+
 	
 }
