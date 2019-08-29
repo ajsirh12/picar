@@ -16,7 +16,7 @@
 			<td> 지점명 </td>
 		</tr>
 				
-			<c:forEach var="carlocy" items="${carlocc}">
+			<c:forEach var="carlocy" items="${carlocc}"> 
 				<tr>			
 					<td><a href="carlisty?carloc=${carlocy.carLoc}">${carlocy.location}</a></td>					
 				</tr>
