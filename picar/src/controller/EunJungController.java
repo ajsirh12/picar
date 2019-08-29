@@ -24,7 +24,8 @@ import model.JoinDetail;
 import model.JoinInsert;
 import model.Location;
 
-@WebServlet(name = "EunJungController", urlPatterns = {"/insertcar","/registercar","/carlistloc","/carlists","/carlisty","/cardetail","/carsearch"})
+@WebServlet(name = "EunJungController", urlPatterns = {"/insertcar","/registercar","/carlistloc",
+													"/carlists","/carlisty","/cardetail","/carsearch"})
 
 public class EunJungController extends HttpServlet{
 
@@ -120,7 +121,8 @@ public class EunJungController extends HttpServlet{
 				
 				CarListDAO dao = new CarListDAOImpl();
 				List<CarList> carlists = dao.selectbyCarloc(carloc);
-		
+				
+				req.setAttribute("carloc", carloc);
 				req.setAttribute("carlists", carlists);
 				
 				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/carlist.jsp");
@@ -141,17 +143,27 @@ public class EunJungController extends HttpServlet{
 				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/cardetail.jsp");
 				rd.forward(req, resp);
 				
+			// 차량검색	
 			}else if(action.equals("carsearch")) {
-				String carName = req.getParameter("carName");
 				
-				CarDAO dao = new CarDAOImpl();
-				List<Car> namelist = dao.selectByCarname(carName);
+				String carname = req.getParameter("carname");
+				int carloc = Integer.parseInt(req.getParameter("carloc"));
 				
-				req.setAttribute("carlists", namelist);
+				CarListDAO listdao = new CarListDAOImpl();
+				List<CarList> carlists = listdao.selectByName(carloc, carname);
+				
+				LocationDAO locdao = new LocationDAOImpl();
+				Location loc = locdao.selectByCarloc(carloc);
+							
+				req.setAttribute("carlists", carlists);
+				req.setAttribute("loc", loc);
+				
+				for(CarList carlist : carlists) {
+					System.out.println(carlist);
+				}
 
 				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/carlist.jsp");
 				rd.forward(req, resp);				
-			}
-		
+			}		
 		}			
 }

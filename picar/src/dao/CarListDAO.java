@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import model.Car;
 import model.CarList;
 
 public interface CarListDAO {
@@ -10,6 +11,7 @@ public interface CarListDAO {
 	List<CarList> selectAll();
 	List<CarList> selectAll(int rowStartNumber, int rowEndNumber);
 	List<CarList> selectbyCarloc(int carloc);
+	List<CarList> selectByName(int carloc, String carname);
 	void updateValidRent(String carNum);
 	void updateCost(CarList carList);
 	void deleteCarList(String carNum);
