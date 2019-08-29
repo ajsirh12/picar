@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+ <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
 	<style>
 	.qwe{
 		color: white;
@@ -45,136 +45,11 @@
 		float: left;
   width: 33.33%;
 	}
+	#signupForm input.error, #signupForm textarea.error{
+		border : 1px dashed red;			
+	}
 </style>
 
-
-<!-- --유효성 검사plugin-- -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript">
-
-	$(function(){
-		alert("면허증 유효기간은 6개월 이상 남아있어야 회원 가입이 가능 합니다.");		
-	});	
-	
-	$(function(){
-		$("#join").click(function(){
-			alert("회원가입이 완료 되었습니다.");
-		});
-		
-	});
-		
-
-	/* 아이디 중복체크 */
-	var idck = 0;
-	$(function(){     
-    	$("#checkid").click(function(){
-        	var input_val =$("#id").val();     
-         
-        	if(!input_val){
-        		alert("아이디를 입력해주세요");
-            	return false;         
-         	}
-         
-        	var url="idcheck";
-         
-        	$.get(url,{"id":input_val},function(xml){
-            
-	        	var result = $(xml).find("result").text();
-	        	var count = $(xml).find("count").text();
-	            alert(count);
-	                     
-	            $(".console").html(result);
-	           
-	            if(count>=1){
-	            	idck = 0;
-	            	return false;
-	            	
-	            }else{
-	            	idck = 1;
-	            	return true;
-	            }           
-	    
-	        });         	    	
-      	});      
-   });
-	
-	//중복 체크 확인
-	$(function(){     
-    	$("#join").click(function(){
-    		if(idck==1){
-    			return true;
-    		}else{
-    			alert("아이디 중복체크는 필수입니다.");
-    			return false;
-    		}
-      	});      
-   });		
-		
-	$(function(){
-		$("#signupForm").validate({
-			debug : false,
-			
-			rules : {								
-				id : {
-					required : true,	
-					minlength : 4,
-					maxlength : 20
-				},				
-				password : {
-					required : true,	
-					minlength : 6,
-					maxlength : 10
-				},
-				repwd :{
-					required : true,
-					equalTo :"#password"
-				},
-				name : "required",									
-			
-				phone : {
-					required : true,
-					maxlength : 11
-				},																										
-				license : {
-					required : true,
-					minlength : 10,
-					maxlength : 10
-				},				
-				validate : "required"						
-			},
-		
-			messages : {								
-				id : {
-					required : "아이디는 필수 항목 입니다.",	
-					minlength : "아이디는 최소 {0}글자 이상 입력하세요",
-					maxlength : "아이디는 최대{0}글자 입니다."
-				},
-				password : {
-					required : "비밀번호를 입력하세요",	
-					minlength : "비밀번호는 최소{0}글자 입니다.",
-					maxlength : "비밀번호는 최대{0}글자 입니다."
-				},
-				repwd :{
-					required : "비밀번호 확인값을 입력하세요.",
-					equalTo :"비밀번호가 일치하지 않습니다."
-				},
-				name : "이름은 필수 항목입니다.",								
-				
-				phone : {
-					required : "숫자만 입력해 주세요 (- 제외 11자리)",
-					maxlength : "전화번호는 최대{0}글자 입니다."					
-				},
-				license : {
-					required :"면허증 입력은 필수 사항입니다.",
-					minlength : "면허증번호 최소 {0}글자 입니다.",
-					maxlength : "면허증번호 최대 {0}글자 입니다."
-				},				 
-				validate : "유효기간을 확인해주세요."				
-			}	 
-		});
-	});	
-	
-</script>
 </head>
 
 <body class="subpage">
@@ -204,10 +79,13 @@
 					<input type="password" name="password" id="password" placeholder="password"/> 
 					
 					<tr>
-					<td><input type="submit" value="로그인"></td>		
-				</form>				
-				<td><a href="sign_up"><button>회원가입</button></a></td>
-				</tr>
+						<td><input type="submit" value="로그인"></td>		
+					</form>				
+					
+						<td><input type="button" value="회원가입" onclick="location.href='sign_up'"></td>
+				
+					</tr>
+				
 				<tr align="center">
 					&nbsp<a href="id_find" class="qwe">아이디찾기</a>&nbsp&nbsp&nbsp
 					<a href="password_find" class="qwe">비밀번호 찾기</a>
@@ -249,7 +127,7 @@
 					<div class="lic_y">			
 						<select name = years width="8px">
 							<c:forEach var="year" begin="2019" end="2050" step="1" >			
-								<option value = "${year}">${year}년</option>											
+								<option value = "${year}">${year}년 </option>											
 							</c:forEach>
 						</select>			
 					</div>
@@ -325,6 +203,130 @@
 		<script src="assets/js/skel.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+		<script type="text/javascript">
+
+		$(function(){
+			alert("면허증 유효기간은 6개월 이상 남아있어야 예약이 가능 합니다.");		
+		});	
+		
+		$(function(){
+			$("#join").click(function(){
+				alert("회원가입이 완료 되었습니다.");
+			});
+			
+		});
+			
+		/* 아이디 중복체크 */
+		var idck = 0;
+		$(function(){     
+	    	$("#checkid").click(function(){
+	        	var input_val =$("#id").val();     
+	         
+	        	if(!input_val){
+	        		alert("아이디를 입력해주세요");
+	            	return false;         
+	         	}
+	         
+	        	var url="idcheck";
+	         
+	        	$.get(url,{"id":input_val},function(xml){
+	            
+		        	var result = $(xml).find("result").text();
+		        	var count = $(xml).find("count").text();
+		                     
+		            $(".console").html(result);
+		           
+		            if(count>=1){
+		            	idck = 0;
+		            	return false;
+		            	
+		            }else{
+		            	idck = 1;
+		            	return true;
+		            }           
+		    
+		        });         	    	
+	      	});      
+	   });
+		
+		//중복 체크 확인
+		$(function(){     
+	    	$("#join").click(function(){
+	    		if(idck==1){
+	    			return true;
+	    		}else{
+	    			alert("아이디 중복체크는 필수입니다.");
+	    			return false;
+	    		}
+	      	});      
+	   });		
+			
+		$(function(){
+			$("#signupForm").validate({
+				debug : false,
+				
+				rules : {								
+					id : {
+						required : true,	
+						minlength : 4,
+						maxlength : 20
+					},				
+					password : {
+						required : true,	
+						minlength : 6,
+						maxlength : 10
+					},
+					repwd :{
+						required : true,
+						equalTo :"#password"
+					},
+					name : "required",									
+				
+					phone : {
+						required : true,
+						maxlength : 11
+					},																										
+					license : {
+						required : true,
+						minlength : 10,
+						maxlength : 10
+					},				
+					validate : "required"						
+				},
+			
+				messages : {								
+					id : {
+						required : "아이디는 필수 항목 입니다.",	
+						minlength : "아이디는 최소 {0}글자 이상 입력하세요",
+						maxlength : "아이디는 최대{0}글자 입니다."
+					},
+					password : {
+						required : "비밀번호를 입력하세요",	
+						minlength : "비밀번호는 최소{0}글자 입니다.",
+						maxlength : "비밀번호는 최대{0}글자 입니다."
+					},
+					repwd :{
+						required : "비밀번호 확인값을 입력하세요.",
+						equalTo :"비밀번호가 일치하지 않습니다."
+					},
+					name : "이름은 필수 항목입니다.",								
+					
+					phone : {
+						required : "숫자만 입력해 주세요 (- 제외 11자리)",
+						maxlength : "전화번호는 최대{0}글자 입니다."					
+					},
+					license : {
+						required :"면허증 입력은 필수 사항입니다.",
+						minlength : "면허증번호 최소 {0}글자 입니다.",
+						maxlength : "면허증번호 최대 {0}글자 입니다."
+					},				 
+					validate : "유효기간을 확인해주세요."				
+				}	 
+			});
+		});	
+		
+		</script>
 	</body>
 </html>
