@@ -1,6 +1,12 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+<!--
+   Road Trip by TEMPLATED
+   templated.co @templatedco
+   Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
 <html>
 <head>
    <title>PICAR - Pick your CAR</title>
@@ -56,7 +62,7 @@
             <c:if test="${picarmember ==null}">
                <table>
                <form action="login" method="post">
-               	대소문자를 구분해 주세요 . <br />
+               대소문자를 구분해 주세요 . <br />
                <input type="text" name="id" id="id" placeholder="Username" /> <br />
                <input type="password" name="password" id="password" placeholder="password"/> 
                
@@ -70,6 +76,7 @@
                <a href="password_find" class="qwe">비밀번호 찾기</a>
             </tr>               
             </table>
+            ${message}
             </c:if>   
                
             <p>${picarmember.id}</p>
@@ -81,39 +88,36 @@
          </ul>
       </nav>
 
+   <!-- Content -->
+   <!--
+      Note: To show a background image, set the "data-bg" attribute below
+      to the full filename of your image. This is used in each section to set
+      the background image.
+   -->
       <section id="post" class="wrapper bg-img" data-bg="banner2.jpg">
          <div class="inner">
             <article class="box">
                <header>
-                  <center><h2>datail</h2></center>
+                  <center><h2>Nibh non lobortis mus nibh</h2></center>
+                  <p>01.01.2017</p>
                </header>
-               <form action="picarmember_update?membernum=${picarmember.memberNum}" method="post">
-		회원번호: <input type="text" name="memberNum" value="${picarmember.memberNum}" disabled="disabled" /> <br /> 
-		아이디: <input type="text" name="id" value="${picarmember.id}" /> <br />
-		비밀번호 : <input type="text" name="password" value="${picarmember.password}" /> <br />
-		이름 : <input type="text" name="name" value="${picarmember.name}" /> <br /> 
-		전화번호 : <input type="text" name="phone" value="${picarmember.phone}" /> <br />
-		면허증번호 : <input type="text" name="license" value="${picarmember.license}" /><br />
-		면허증 유효기간 : <input type="text" name="validate" value="${picarmember.validate}" /> <br />
+               <div class="content">
+                  <p>Ac pretium parturient et scelerisque dis pulvinar nascetur suspendisse justo parturient est quis adipiscing nisi dis eu ullamcorper. Penatibus aliquet vestibulum dis pretium a ullamcorper accumsan facilisis elit ullamcorper porttitor dictumst per a a potenti interdum fusce a adipiscing nostra ac parturient. Proin a imperdiet at a scelerisque quam et at ante aenean per per faucibus senectus lobortis mi tincidunt a penatibus. Mauris vestibulum aliquet parturient odio dapibus euismod a mi ullamcorper maecenas turpis non scelerisque nibh fermentum natoque erat parturient suspendisse a magna curabitur cum.</p>
 
-		 회원등급 :
-	  	<select name="membergrade">
-			<c:forEach var="member" items="${membergrades}">
-			
-				<c:if test="${picarmember.gradeNo == member.gradeNo}">
-					<option value="${member.gradeNo}" selected="selected">${member.memberGrade}</option>		
-				</c:if>	
-				
-				<c:if test="${picarmember.gradeNo != member.gradeNo}">
-					<option value="${member.gradeNo}">${member.memberGrade}</option>
-				</c:if>	
-				
-			</c:forEach>
-		</select>   	
-		<br /> <input type="submit" class="btn btn-primary" value="수정" />
-		<a href="picarmember_delete?membernum=${picarmember.memberNum}">삭제</a>
+                  <p>Aliquet a consectetur semper suscipit ridiculus mattis augue volutpat hendrerit proin hac vel tristique quis amet parturient sem. Adipiscing laoreet blandit vestibulum laoreet fermentum sed sociis lorem class ipsum scelerisque porttitor viverra vestibulum nascetur. Ad felis ad ullamcorper urna iaculis aenean vel a suspendisse nunc placerat euismod suspendisse et fames ipsum elementum odio vestibulum duis. Fringilla condimentum donec tincidunt enim volutpat nam velit quisque laoreet adipiscing nam in suspendisse mattis ad libero parturient scelerisque. Vitae enim ac parturient iaculis pharetra cum quam imperdiet commodo mus netus quam habitasse risus netus dis.</p>
 
-		</form>
+                  <p>Arcu est vestibulum condimentum conubia tempus a porttitor quam urna adipiscing a adipiscing condimentum tortor cubilia parturient per senectus interdum felis suspendisse penatibus auctor pretium ac. Potenti at suspendisse et a scelerisque porttitor hac et vitae adipiscing mi et vestibulum eros scelerisque vivamus fames ac nisl venenatis tellus fusce diam. Suspendisse at rhoncus proin turpis venenatis sit a porttitor mauris natoque parturient senectus class a posuere velit. Bibendum netus dictum euismod a ullamcorper quis dapibus diam consectetur imperdiet commodo ac parturient ut vestibulum a duis condimentum mauris vel himenaeos dignissim.</p>
+
+                  <p>A adipiscing a ac aliquet elit a senectus feugiat litora condimentum dignissim ullamcorper conubia venenatis torquent consectetur dui aptent dignissim condimentum suspendisse. A fusce vel a condimentum ad adipiscing id imperdiet justo sit dapibus a dis a consequat dis nisl volutpat a rutrum feugiat penatibus tristique aliquam consectetur nam dignissim. Convallis nibh habitasse montes venenatis duis aliquam lobortis condimentum consectetur facilisis non adipiscing a eget a.</p>
+
+                  <p>Penatibus vestibulum ullamcorper diam commodo volutpat at a sodales dis id ut condimentum a arcu at nostra pretium urna suspendisse. Maecenas commodo adipiscing ad curabitur a a risus pulvinar habitant a et integer volutpat mi nullam curabitur a adipiscing nullam in bibendum vel cras scelerisque. Morbi a euismod litora dui nunc in pretium sodales ante dis dui natoque adipiscing a. Augue imperdiet dignissim adipiscing justo accumsan adipiscing vestibulum adipiscing fames class ad rutrum sociosqu ad auctor sodales dis mollis. Ac euismod enim ad viverra dui auctor at integer inceptos parturient mi convallis aliquet iaculis ad diam.</p>
+               </div>
+               <footer>
+                  <ul class="actions">
+                     <li><a href="#" class="button alt icon fa-chevron-left"><span class="label">Previous</span></a></li>
+                     <li><a href="#" class="button alt icon fa-chevron-right"><span class="label">Next</span></a></li>
+                  </ul>
+               </footer>
             </article>
          </div>
       </section>

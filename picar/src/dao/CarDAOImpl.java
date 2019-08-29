@@ -13,8 +13,7 @@ import model.JoinInsert;
 public class CarDAOImpl extends BaseDAO implements CarDAO {
 	private static final String CAR_INSERT_SQL="insert into carlist values(?,?,?,?,'Y',0,null)";
 	private static final String CAR_SELECT_BY_CARTYPE = "SELECT carname, fueltype, colortype, carimage FROM car WHERE cartype=?";
-	private static final String CAR_SELECT_ALL = "SELECT cartype, carname, fueltype, colortype, people, carimage FROM car";	
-		
+	private static final String CAR_SELECT_ALL = "SELECT cartype, carname, fueltype, colortype, people, carimage FROM car";		
 	
 	@Override// 차량등록- 관리자
 	public boolean insert(JoinInsert joininsert) {	
@@ -79,6 +78,8 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 		
 		return car;
 	}
+	
+	//차량리스트
 	@Override
 	public List<Car> selectAll() {
 		List<Car> carList = new ArrayList<Car>();
@@ -112,6 +113,4 @@ public class CarDAOImpl extends BaseDAO implements CarDAO {
 		}
 		return carList;
 	}
-
-	
 }

@@ -29,4 +29,7 @@ public interface PicarMemberDAO {
 	boolean memberInforUpdate(PicarMember picarMember);
 	
 	int checkBypwd(String password);
+	
+	void updateRentedToY(int memberNum);
+	void updateRentedToN(int memberNum);
 }

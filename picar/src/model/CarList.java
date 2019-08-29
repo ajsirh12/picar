@@ -10,6 +10,7 @@ public class CarList {
 	private int usedTime;
 	private String carInfo;
 	private String carName;
+	private String location;
 	
 	public String getCarInfo() {
 		return carInfo;
@@ -65,13 +66,18 @@ public class CarList {
 	public void setCarName(String carName) {
 		this.carName = carName;
 	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	
 	@Override
 	public String toString() {
 		return "CarList [carnum=" + carnum + ", carType=" + carType + ", cost=" + cost + ", carLoc=" + carLoc
 				+ ", validRent=" + validRent + ", driveRange=" + driveRange + ", usedTime=" + usedTime + ", carInfo="
-				+ carInfo + ", carName=" + carName + "]";
+				+ carInfo + ", carName=" + carName + ", location=" + location + "]";
 	}
-	
-	
-		
+			
 }
