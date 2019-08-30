@@ -128,7 +128,7 @@ public class PicarController extends HttpServlet {
 				rd.forward(req, resp);
 			}
 			else if(rentInfo==null) {
-				resp.sendRedirect("index.jsp");
+				resp.sendRedirect("carlistloc");
 			}
 		}
 		else if(action.equals("renew_car.do")) {

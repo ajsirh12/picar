@@ -35,24 +35,38 @@
 		</table>
 		<input type="hidden" value="${detail.carnum}" name="carnum" />
 		<input type="hidden" value="${picarmember.memberNum }" name="membernum" />
+		<input type="hidden" value="${picarmember.validate}" class="validate" />
 		<input type="button" value="예약하기" id="reservebtn" />
 	</form>
 	<input type="button" value="뒤로가기" onclick="history.back(-1);" />
+	${picarmember.validate}
 <script type="text/javascript">
 $(function() {
 	$("#reservebtn").click(function() {
-			var firstdate = $(".firstdate").val();
-			var stdate = new Date(firstdate);
-			var lastdate = $(".lastdate").val();
-			var endate = new Date(lastdate);
-			var cost = ${detail.cost};
-			
-			var rented = endate-stdate;
-			var date = 24 * 60 * 60 * 1000;
-			
-		if(confirm("총 대여일은 "+(rented/date)+"일 대여비용은 " + (rented/date)*cost + "원 입니다. 예약하시겠습니까?")){
-	        document.getElementById('frm').submit();
-	        return false;
+		var firstdate = $(".firstdate").val();
+		var stdate = new Date(firstdate);
+		var lastdate = $(".lastdate").val();
+		var endate = new Date(lastdate);
+		var cost = ${detail.cost};
+		var rented = endate-stdate;
+		
+		var date = 24 * 60 * 60 * 1000;
+		
+		var valid = $(".validate").val();
+		var validate = new Date(valid);
+		var today = new Date();
+		var lesssix = (validate-today)/date;
+		
+		alert(lesssix);
+		
+		if(lesssix>=180){
+			if(confirm("총 대여일은 "+(rented/date)+"일 대여비용은 " + (rented/date)*cost + "원 입니다. 예약하시겠습니까?")){
+		        document.getElementById('frm').submit();
+		        return false;
+			}
+		}
+		else{
+			alert("면허기간이 6개월 미만입니다. 예약이 불가능합니다.");
 		}
 	})
 });
