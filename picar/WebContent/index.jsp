@@ -33,10 +33,10 @@
 	.qwe{
 		color: white;
 		text-decoration: none;
-	};
+	}
 	.qwe:hover {
 		color: black;
-	};
+	}
 	</style>
 </head>
 <body>
