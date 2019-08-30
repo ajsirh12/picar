@@ -104,11 +104,9 @@
          <div class="inner">
             <article class="box">
                <header>
-                  <center><h2>Nibh non lobortis mus nibh</h2></center>
-                  <p>01.01.2017</p>
+                  <center><h2>차량 상세정보</h2></center>
                </header>
                <div class="content">
-                  <h4>차량 상세정보</h4>
 	<form action="reserveCar.do" method="post" id="frm">
 		<table border=1>
 			<tr>
