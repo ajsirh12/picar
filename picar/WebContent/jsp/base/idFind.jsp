@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -121,5 +120,25 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript">  
+    $(function(){
+      $("#findForm").validate({
+         debug : false,
+         
+         rules : {
+            name2 :"required",
+            phone2 :"required"               
+         },
+      
+         messages : {
+        	name2 :"이름을 입력해주세요",
+        	phone2 :"전화번호를 입력해주세요"            
+         }
+      });      
+   });
+     
+</script>   
+   
    </body>
 </html>

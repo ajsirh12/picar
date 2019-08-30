@@ -31,13 +31,16 @@
    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
    <meta name="theme-color" content="#ffffff">
    <style>
-   .qwe{
-      color: white;
-      text-decoration: none;
-   };
-   .qwe:hover {
-      color: black;
-   };
+	.asd{
+		color: black;
+	}
+	.qwe{
+		color: white;
+		text-decoration: none;
+	};
+	.qwe:hover {
+		color: black;
+	};
    </style>
 </head>
 <body class="subpage">
@@ -100,6 +103,7 @@
                <header>
                   <center><h2>Insert Car</h2></center>
                </header>
+               <div class="content">
               	<form action="registercar" method="post">
 					<h4>차량번호 </h4>
 						<input type="text" placeholder="차량번호" name="carnum" /><br />
@@ -120,6 +124,7 @@
 						</c:forEach>
 						</select><br />
 						<br />
+						</div>
 						<div align="left">
 						<input type="submit" value="등 록" />
 						</div>

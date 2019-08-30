@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +21,8 @@ import dao.JoinDAO;
 import dao.JoinDAOImpl;
 import dao.LocationDAO;
 import dao.LocationDAOImpl;
+import dao.PicarMemberDAO;
+import dao.PicarMemberDAOImpl;
 import dao.RentInfoDAO;
 import dao.RentInfoDAOImpl;
 import model.Car;
@@ -31,7 +34,7 @@ import page.PageManager;
 import page.PageSQL;
 
 @WebServlet(name = "PicarController", urlPatterns = {"/rentedList.do", "/rentedSearch.do", "/myRentCar.do", "/renew_car.do", "/allRentCar.do",
-		"/allRentCarSearch.do", "/carDetail.do", "/returnCar.do", "/carInfoUpdate.do", "/carInfoDelete.do", "/go_index", "/carInfo.do"})
+		"/allRentCarSearch.do", "/carDetail.do", "/returnCar.do", "/carInfoUpdate.do", "/carInfoDelete.do", "/go_index", "/carInfo.do", "/reserveCar.do"})
 public class PicarController extends HttpServlet {
 
 	@Override
@@ -222,12 +225,17 @@ public class PicarController extends HttpServlet {
 			rd.forward(req, resp);
 		}
 		else if(action.equals("returnCar.do")) {
-			String carNum = req.getParameter("carNum");
+			int memberNum = Integer.parseInt(req.getParameter("membernum"));
+			String carNum = req.getParameter("carnum");
 			String carInfo = req.getParameter("carinfo");
-			System.out.println(carInfo);
+			/*System.out.println(carInfo);*/
+			
 			CarListDAO carListDAO = new CarListDAOImpl();
 			carListDAO.updateValidRent(carNum);
 			carListDAO.updateCarInfo(carInfo, carNum);
+			
+			PicarMemberDAO picarMemberDAO = new PicarMemberDAOImpl();
+			picarMemberDAO.updateRentedToY(memberNum);
 			
 			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
 			rentInfoDAO.deleteByCarNum(carNum);
@@ -269,13 +277,46 @@ public class PicarController extends HttpServlet {
 			CarList carList = carListDAO.selectCarInfo(carNum);
 			JoinDAO joinDAO = new JoinDAOImpl();
 			JoinRent joinRent = joinDAO.selectReturn(carNum);
-			System.out.println(joinRent);
+			
+			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
+			RentInfo rentInfo = rentInfoDAO.selectByCarnum(carNum);
 			
 			req.setAttribute("carList", carList);
 			req.setAttribute("joinRent", joinRent);
+			req.setAttribute("rentInfo", rentInfo);
+			
+			System.out.println(rentInfo.getMemberNum());
 			
 			RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/carinfo.jsp");
 			rd.forward(req, resp);
+		}
+		else if(action.equals("reserveCar.do")) {
+			String firstDate = req.getParameter("firstdate");
+			String lastDate = req.getParameter("lastdate");
+			int memberNum = Integer.parseInt(req.getParameter("membernum"));
+			String carNum = req.getParameter("carnum");
+			
+			/*System.out.println(firstDate);
+			System.out.println(lastDate);
+			System.out.println(memberNum);
+			System.out.println(carNum);*/
+			
+			CarListDAO carListDAO = new CarListDAOImpl();
+			carListDAO.updateValidRentToN(carNum);
+			
+			PicarMemberDAO picarMemberDAO = new PicarMemberDAOImpl();
+			picarMemberDAO.updateRentedToN(memberNum);
+			
+			RentInfoDAO rentInfoDAO = new RentInfoDAOImpl();
+			RentInfo rentInfo = new RentInfo();
+			rentInfo.setRentStart(firstDate);
+			rentInfo.setRentEnd(lastDate);
+			rentInfo.setMemberNum(memberNum);
+			rentInfo.setCarNum(carNum);
+			System.out.println(rentInfo);
+			rentInfoDAO.insertRentInfo(rentInfo);
+			
+			resp.sendRedirect("myRentCar.do?membernum="+memberNum);
 		}
 	}
 	

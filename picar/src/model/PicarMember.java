@@ -11,7 +11,14 @@ public class PicarMember {
 	private String validate;
 	private int gradeNo;	
 	private String memberGrade;
+	private String rented;
 	
+	public String getRented() {
+		return rented;
+	}
+	public void setRented(String rented) {
+		this.rented = rented;
+	}
 	public int getMemberNum() {
 		return memberNum;
 	}
@@ -65,13 +72,16 @@ public class PicarMember {
 	}
 	public void setMemberGrade(String memberGrade) {
 		this.memberGrade = memberGrade;
-	}
+
+	}	
+		
 	@Override
 	public String toString() {
 		return "PicarMember [memberNum=" + memberNum + ", id=" + id + ", password=" + password + ", name=" + name
 				+ ", phone=" + phone + ", license=" + license + ", validate=" + validate + ", gradeNo=" + gradeNo
-				+ ", memberGrade=" + memberGrade + "]";
+				+ ", memberGrade=" + memberGrade + ", rented=" + rented + "]";
 	}
+	
 	
 	
 	

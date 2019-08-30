@@ -116,6 +116,7 @@ public class dahaeController extends HttpServlet {
 			rd.forward(req, resp);
 	
 		//중복체크
+			
 		}else if(action.equals("idcheck")) {
 
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
@@ -163,14 +164,14 @@ public class dahaeController extends HttpServlet {
 		//비밀번호 찾기
 		}else if (action.equals("passwordfind")) {
 			
-			String id =req.getParameter("id");					
+			String id = req.getParameter("id");					
 			String name = req.getParameter("name"); 
 			String phone = req.getParameter("phone");
 			
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			PicarMember picarmember = dao.selectFindPassword(id, name, phone);
 			
-			req.setAttribute("picarmember", picarmember);
+			req.setAttribute("picarmembers", picarmember);
 			System.out.println(picarmember);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/passwordChange.jsp");
