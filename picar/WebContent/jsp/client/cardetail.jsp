@@ -39,7 +39,7 @@
 		<input type="button" value="예약하기" id="reservebtn" />
 	</form>
 	<input type="button" value="뒤로가기" onclick="history.back(-1);" />
-	${picarmember.validate}
+	
 <script type="text/javascript">
 $(function() {
 	$("#reservebtn").click(function() {
