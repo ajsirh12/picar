@@ -43,7 +43,8 @@
 
    <!-- Nav -->
       <nav id="menu">
-         <ul class="links">      
+         <ul class="links"> 
+         <p>${picarmember.id} 님 <br>어서오세요.</p>     
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">         
@@ -91,20 +92,19 @@
 				<form action="login" method="post">
 				대소문자를 구분해 주세요 . <br />	
 				<table>
-				<tr>
-					<td>이름 :</td>					
-					<td><input style="width:400px;" type="text" name="id" id="id" placeholder="Username" /> </td><br>					
-				</tr>
-				
-				<tr>
-				<td>비밀번호 :</td>
-				 
-				 <td><input style="width:400px;" type="password" name="password" id="password" placeholder="password"/> </td><br>
-				
-				</tr>
+					<tr>
+						<td>이름 :</td>					
+						<td><input style="width:600px;" type="text" name="id" id="id" placeholder="Username" /></td><br>					
+					</tr>
+					
+					<tr>
+						<td>비밀번호 :</td>				 
+					 	<td><input style="width:600px;" type="password" name="password" id="password" placeholder="password"/></td><br>				
+					</tr>
 				</table>
-				${message}<br />					
-				<center><input type="submit" value="로그인"></center>	
+				<br>
+				${message}<br>					
+				<center><input style="width:300px;" type="submit" value="로그인"></center>	
 				</form>	
 				<div align="right">
 					<a href="id_find">아이디찾기</a>
@@ -113,8 +113,7 @@
 	
 				<div align="right">
 				<a href="sign_up"><button>회원가입</button></a></div>
-				
-			
+							
 	            </article>
 	         </div>
 	      </section>

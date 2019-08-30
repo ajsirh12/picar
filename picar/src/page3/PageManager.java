@@ -13,7 +13,7 @@ public class PageManager {
 		this.requestPage = requestPage;
 	}
 	
-	public PageRowResult getPageRowResullt() {
+	public PageRowResult getPageRowResult() {
 		PageRowResult pageRowResult = new PageRowResult();
 		//PageRowResult의 객체변수 값 셋팅
 		
@@ -72,8 +72,8 @@ public class PageManager {
 		
 		PageManager pm = new PageManager(1);
 		
-		System.out.println(pm.getPageRowResullt().getRowStartNumber());
-		System.out.println(pm.getPageRowResullt().getRowEndNumber());
+		System.out.println(pm.getPageRowResult().getRowStartNumber());
+		System.out.println(pm.getPageRowResult().getRowEndNumber());
 		
 		
 	}

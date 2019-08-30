@@ -32,4 +32,6 @@ public interface PicarMemberDAO {
 	
 	void updateRentedToY(int memberNum);
 	void updateRentedToN(int memberNum);
+	
+	List<PicarMember> selectListAll(int rowStartNumber, int rowEndNumber);	
 }

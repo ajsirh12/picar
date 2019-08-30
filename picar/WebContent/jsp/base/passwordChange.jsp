@@ -44,6 +44,7 @@
    <!-- Nav -->
       <nav id="menu">
          <ul class="links">      
+         <p>${picarmember.id} 님 <br>어서오세요.</p>
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">         

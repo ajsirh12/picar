@@ -43,7 +43,8 @@
 
    <!-- Nav -->
       <nav id="menu">
-         <ul class="links">      
+         <ul class="links">   
+         <p>${picarmember.id} 님 <br>어서오세요.</p>   
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">         
@@ -85,18 +86,18 @@
          <div class="inner">
             <article class="box">
                <header>
-                  <center><h2>datail</h2></center>
+                  <center><h2>detail</h2></center>
                </header>
                <form action="picarmember_update?membernum=${picarmember.memberNum}" method="post">
-				회원번호: <input type="text" name="memberNum" value="${picarmember.memberNum}" disabled="disabled" /> <br /> 
-				아이디: <input type="text" name="id" value="${picarmember.id}" /> <br />
-				비밀번호 : <input type="text" name="password" value="${picarmember.password}" /> <br />
-				이름 : <input type="text" name="name" value="${picarmember.name}" /> <br /> 
-				전화번호 : <input type="text" name="phone" value="${picarmember.phone}" /> <br />
-				면허증번호 : <input type="text" name="license" value="${picarmember.license}" /><br />
-				면허증 유효기간 : <input type="text" name="validate" value="${picarmember.validate}" /> <br />
+				회원번호<input type="text" name="memberNum" value="${picarmember.memberNum}" disabled="disabled" /> <br /> 
+				아이디<input type="text" name="id" value="${picarmember.id}" /> <br />
+				비밀번호 <input type="text" name="password" value="${picarmember.password}" /> <br />
+				이름 <input type="text" name="name" value="${picarmember.name}" /> <br /> 
+				전화번호 <input type="text" name="phone" value="${picarmember.phone}" /> <br />
+				면허증번호 <input type="text" name="license" value="${picarmember.license}" /><br />
+				면허증 유효기간 <input type="text" name="validate" value="${picarmember.validate}" /> <br />
 		
-				 회원등급 :
+				 회원등급 
 			  	<select name="membergrade">
 					<c:forEach var="member" items="${membergrades}">
 					

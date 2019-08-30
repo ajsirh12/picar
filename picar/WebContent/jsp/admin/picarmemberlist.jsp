@@ -31,7 +31,11 @@
    };
    .qwe:hover {
       color: black;
+   };   
+   #select {
+		font-size : 50px;
    };
+  
    </style>
 </head>
 <body class="subpage">
@@ -43,7 +47,8 @@
 
    <!-- Nav -->
       <nav id="menu">
-         <ul class="links">      
+         <ul class="links">  
+         <p>${picarmember.id} 님 <br>어서오세요.</p>    
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">         
@@ -110,25 +115,26 @@
 					</tr>
 					</c:forEach>
 				</table>
-			
+				<div align="center">
 				<c:if test="${pageGroupResult.beforPage}">
-					<a href="member_list.do?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
+					<a href="member_list?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
 				</c:if>
 				 
 				<c:forEach var="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
 					<c:choose>
 						<c:when test="${pageGroupResult.selectPageNumber==index}">
-							<a href="member_list.do?reqPage=${index}">${index}</a>
+							<span id="select"><a href="member_list?reqPage=${index}">${index}</a></span>
 						</c:when>
 						<c:otherwise>
-							<a href="member_list.do?reqPage=${index}">${index}</a>
+							<a href="member_list?reqPage=${index}">${index}</a>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				
 				<c:if test="${pageGroupResult.afterPage}">
-					<a href="member_list.do?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
-				</c:if> 
+					<a href="member_list?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
+				</c:if>
+				</div> 
             </article>
          </div>
       </section>

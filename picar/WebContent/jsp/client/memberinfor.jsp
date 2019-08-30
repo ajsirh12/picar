@@ -28,10 +28,10 @@
    .qwe{
       color: white;
       text-decoration: none;
-   };
+   }
    .qwe:hover {
       color: black;
-   };
+   }
    </style>
 </head>
 <body class="subpage">
@@ -43,7 +43,8 @@
 
    <!-- Nav -->
       <nav id="menu">
-         <ul class="links">      
+         <ul class="links"> 
+         <p>${picarmember.id} 님 <br>어서오세요.</p>     
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">         
@@ -72,7 +73,6 @@
             </table>
             </c:if>   
                
-            <p>${picarmember.id}</p>
             <c:if test="${picarmember !=null}">
                <form action = "logout">
                <input type = "submit" value="로그 아웃" />   
@@ -91,18 +91,16 @@
 		
 					 <input type="hidden" name="memberNum" value="${picarmember.memberNum}" disabled="disabled" /> <br /> 
 					
-					아이디: <input type="text" name="id" value="${picarmember.id}" disabled="disabled"/> <br />		
-					현재 비밀번호 : <input id="password" type="password" placeholder="현재 비밀번호" maxlength="20" name="password" onKeyup="this.value=this.value.replace(' ','');"/> 							
+					아이디 <input type="text" name="id" value="${picarmember.id}" disabled="disabled"/> <br />		
+					현재 비밀번호 <input id="now_password" type="password" placeholder="현재 비밀번호" maxlength="20" name="now_password" onKeyup="this.value=this.value.replace(' ','');"/> 							
 					<div class="console"></div>
 					<div align="right"><input type="button" id="pw_check" value="비밀번호 확인" /></div><br />
 					새 비밀번호<input id="newpwd" type="password" placeholder="비밀번호는 6~20자리로 입력해주세요." maxlength="20" name="newpassword" onKeyup="this.value=this.value.replace(' ','');"/><br />
-					비밀번호 확인<input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" onKeyup="this.value=this.value.replace(' ','');"/><br />		  
-					
-					이름 : <input type="text" name="name" value="${picarmember.name}"  onKeyup="this.value=this.value.replace(/[^가-힣]/g,'');" /> <br /> 
-																				
-					전화번호 : <input type="text" name="phone" value="${picarmember.phone}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/> <br />
-					면허증번호 : <input type="text" name="license" value="${picarmember.license}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/><br />
-					면허증 유효기간 : <input type="text" name="validate" value="${picarmember.validate}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/> <br />
+					비밀번호 확인<input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" onKeyup="this.value=this.value.replace(' ','');"/><br />		  					
+					이름  <input type="text" name="name" value="${picarmember.name}"  onKeyup="this.value=this.value.replace(/[^가-힣]/g,'');" /> <br /> 																				
+					전화번호  <input type="text" name="phone" value="${picarmember.phone}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/> <br />
+					면허증번호  <input type="text" name="license" value="${picarmember.license}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/><br />
+					면허증 유효기간  <input type="text" name="validate" value="${picarmember.validate}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/> <br />
 			
 					 <div align="center"> <input type="submit" class="btn btn-primary" id="revision" value="수정" /></div>
 					 <div align="right"> <input type="button" id="out" value="회원탈퇴" onclick="location.href='picarmember_delete?membernum=${picarmember.memberNum}'" /></div>
@@ -122,37 +120,32 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script type="text/javascript">
+
 	$(function(){
 		$("#out").click(function(){
-		alert("탈퇴되었습니다.");
-		return true;
-		}); 
+			if (confirm("정말 탈퇴하시겠습니까??") == true){    //확인
+				 alert("탈퇴 되었습니다");
+			}else{   //취소
+			    return;
+			};		
+		});
 	});
-	
-	$(function(){
-		$("#revision").click(function(){
-			alert("회원정보 수정 완료");
-			return true;
-		});		
-	});
-	
+
 	//현재 비밀번호 확인
-	$(function(){ 
-		
+	$(function(){ 		
       $("#pw_check").click(function(){
-         var input_val =$("#password").val();
-         
+         var input_val=$("#now_password").val();
+         alert(input_val);
          if(!input_val){
          	alert("비밀번호를 입력해주세요");
             return false;                   
          }
-         var url="passwodcheck";
+         var url="passwordcheck";
          
-         $.get(url,{"password":input_val},function(xml){
-            
-            var result = $(xml).find("result").text();
+         $.get(url,{"now_password":input_val},function(xml){
+        	 var result = $(xml).find("result").text();           
             $(".console").html(result);
-           
+          
          });       
       });     
    });
@@ -219,7 +212,6 @@
 		});
 	});	
 
-</script>   
-   
+	</script>      
    </body>
 </html>
