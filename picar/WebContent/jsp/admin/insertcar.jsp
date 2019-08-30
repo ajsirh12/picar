@@ -31,16 +31,16 @@
    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
    <meta name="theme-color" content="#ffffff">
    <style>
-	.asd{
+   	.asd{
 		color: black;
 	}
-	.qwe{
-		color: white;
-		text-decoration: none;
-	};
-	.qwe:hover {
-		color: black;
-	};
+   .qwe{
+      color: white;
+      text-decoration: none;
+   };
+   .qwe:hover {
+      color: black;
+   };
    </style>
 </head>
 <body class="subpage">
@@ -52,7 +52,8 @@
 
    <!-- Nav -->
       <nav id="menu">
-         <ul class="links">      
+         <ul class="links">
+            <li><a href="carlistloc">차량리스트</a></li>      
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">         
@@ -60,6 +61,7 @@
                <li><a href="picarmemberlist">회원 관리</a></li>                  
                <li><a href="rentedList.do?reqPage=1">대여목록</a></li>
                <li><a href="allRentCar.do?reqPage=1">관리자 차량목록</a></li>
+               <li><a href="insertcar">차량등록</a></li>
             </c:if>   
                <li><a href="myRentCar.do?membernum=${picarmember.memberNum }">내 차량</a></li>   
             <c:if test="${picarmember ==null}">
@@ -101,17 +103,16 @@
          <div class="inner">
             <article class="box">
                <header>
-                  <center><h2>Insert Car</h2></center>
+                  <center><h2> 차량 등록 </h2></center>
                </header>
-               <div class="content">
               	<form action="registercar" method="post">
 					<h4>차량번호 </h4>
 						<input type="text" placeholder="차량번호" name="carnum" /><br />
 					<h4>차종 </h4> 
 						<select name=cartype>
 						<option value="" selected disabled hidden> === 차 종  선 택 === </option>
-						<c:forEach var="car" items="${carlist }">
-						<option value="${car.carType }">${car.carName }</option>
+						<c:forEach var="car" items="${carlist}">
+						<option value="${car.carType}" class="asd">${car.carName}</option>
 						</c:forEach>
 						</select>
 						<h4>대여비용</h4>
@@ -119,14 +120,14 @@
 						<h4>보유지점 </h4>
 						<select name="carloc">
 						<option value="" selected disabled hidden> === 지 점  선 택 === </option>
-						<c:forEach var="loc" items="${locationlist }">
-						<option value="${loc.carLoc }">${loc.location }</option>
+						<c:forEach var="loc" items="${locationlist}">
+						<option value="${loc.carLoc}" class="asd">${loc.location}</option>
 						</c:forEach>
 						</select><br />
 						<br />
-						</div>
-						<div align="left">
-						<input type="submit" value="등 록" />
+						<div align="left">					
+						<input type="button" style="margin-left:1px; margin-right:578px;" value="뒤로가기" onclick="history.back(-1);" />
+						<input type="submit" value="등 록" onclick="location.href='carlist'"/>						
 						</div>
 				</form>	
             </article>
