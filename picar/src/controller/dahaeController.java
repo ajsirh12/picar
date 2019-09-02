@@ -243,10 +243,9 @@ public class dahaeController extends HttpServlet {
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			boolean result = dao.memberUpdate(picarmember);
 			
-			System.out.println(picarmember+"1212");
 			System.out.println(result);
-			
-			RequestDispatcher rd = req.getRequestDispatcher("picarmemberlist");
+						
+			RequestDispatcher rd = req.getRequestDispatcher("member_list?reqPage=1");
 			rd.forward(req, resp);
 			
 		//관리자가 회원 정보 삭제

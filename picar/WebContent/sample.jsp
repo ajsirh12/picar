@@ -129,6 +129,26 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+		   $(function(){
+		      $("#passwordfindForm").validate({
+		         debug : false,
+		         
+		         rules : {
+		            id :"required",
+		            name :"required",
+		            phone :"required"               
+		         },
+		      
+		         messages : {
+		            id :"아이디를 입력해주세요.",
+		            name :"이름을 입력해주세요.",
+		            phone :"전화번호를 입력해주세요.."            
+		         }
+		      });      
+		   });		     
+		</script>   
+   
    </body>
 </html>
 
