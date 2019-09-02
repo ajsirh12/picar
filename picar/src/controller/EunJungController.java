@@ -24,6 +24,7 @@ import model.JoinDetail;
 import model.JoinInsert;
 import model.Location;
 
+
 @WebServlet(name = "EunJungController", urlPatterns = {"/insertcar","/registercar","/carlistloc",
 													"/carlists","/carlisty","/cardetail","/carsearch"})
 
@@ -82,8 +83,9 @@ public class EunJungController extends HttpServlet{
 				System.out.println(jis);
 				System.out.println(result);
 				
-				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
-				rd.forward(req, resp);			
+				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/carlist.jsp");
+	            rd.forward(req, resp);
+				
 			
 			//보유지점 리스트
 			}else if(action.equals("carlistloc")) {
@@ -116,15 +118,14 @@ public class EunJungController extends HttpServlet{
 				
 			//차량리스트
 			}*/else if(action.equals("carlisty")) {
-				
 				int carloc = Integer.parseInt(req.getParameter("carloc"));
-				
+	
 				CarListDAO dao = new CarListDAOImpl();
 				List<CarList> carlists = dao.selectbyCarloc(carloc);
-				
+		
 				req.setAttribute("carloc", carloc);
 				req.setAttribute("carlists", carlists);
-				
+
 				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/carlist.jsp");
 				rd.forward(req, resp);
 		     
