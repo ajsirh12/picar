@@ -11,22 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CommentJoinListDAO;
-import dao.CommentJoinListDAOImpl;
 import dao.MemberGradeDAO;
 import dao.MemberGradeDAOImpl;
 import dao.PicarMemberDAO;
 import dao.PicarMemberDAOImpl;
-import model.CommentJoinList;
 import model.MemberGrade;
 import model.PicarMember;
-import page2.PageManager;
-import page2.PageSQL;
+import page3.PageManager;
+import page3.PageSQL;
+
 
 @WebServlet(name = "dahaeController", urlPatterns = {"/login","/logout","/login_input","/member_save",
 				"/sign_up","/idcheck","/idinput","/idfind","/id_find","/password_find","/passwordfind",
 				"/password_update","/picarmemberlist","/member_detail","/picarmember_update",
-				"/picarmember_delete","/member_infor","/member_infor_update","/passwodcheck"})
+				"/picarmember_delete","/member_infor","/member_infor_update","/passwordcheck","/member_list"})
 public class dahaeController extends HttpServlet {
 
 	@Override
@@ -115,7 +113,7 @@ public class dahaeController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/membership.jsp");
 			rd.forward(req, resp);
 	
-		//중복체크
+		//중복체크			
 		}else if(action.equals("idcheck")) {
 
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
@@ -163,14 +161,14 @@ public class dahaeController extends HttpServlet {
 		//비밀번호 찾기
 		}else if (action.equals("passwordfind")) {
 			
-			String id =req.getParameter("id");					
+			String id = req.getParameter("id");					
 			String name = req.getParameter("name"); 
 			String phone = req.getParameter("phone");
 			
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 			PicarMember picarmember = dao.selectFindPassword(id, name, phone);
 			
-			req.setAttribute("picarmember", picarmember);
+			req.setAttribute("picarmembers", picarmember);
 			System.out.println(picarmember);
 
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/base/passwordChange.jsp");
@@ -196,13 +194,17 @@ public class dahaeController extends HttpServlet {
 			rd.forward(req, resp);
 		
 		//관리자 회원 리스트
-		}else if(action.equals("picarmemberlist")) {
+		}else if(action.equals("member_list")) {
 			
+			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
+			PageManager pm = new PageManager(requestPage);
+					
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
 
-			List<PicarMember> picarmemberlists = dao.selectAll();
+			List<PicarMember> picarmemberlists = dao.selectListAll(pm.getPageRowResult().getRowStartNumber(), pm.getPageRowResult().getRowEndNumber());
 			
-			req.setAttribute("picarmemberlists",picarmemberlists);	
+			req.setAttribute("picarmemberlists", picarmemberlists);	
+			req.setAttribute("pageGroupResult", pm.getPageGroupResult(PageSQL.PICARMEMBER_SELECT_ALL_COUNT));
 			
 			RequestDispatcher rd = req.getRequestDispatcher("/jsp/admin/picarmemberlist.jsp");
 			rd.forward(req, resp);
@@ -289,25 +291,24 @@ public class dahaeController extends HttpServlet {
 			rd.forward(req, resp);
 		
 		
-		}else if(action.equals("passwodcheck")) {
+		}else if(action.equals("passwordcheck")) {
 	
 			PicarMemberDAO dao = new PicarMemberDAOImpl();
-			int count = dao.checkBypwd(req.getParameter("password"));
-			
-			req.setAttribute("count", count);
+			int count = dao.checkBypwd(req.getParameter("now_password"));
+			System.out.println(count+"c");
+			System.out.println(req.getParameter("now_password"));
 			
 			if(count==0) 
 			{
-				req.setAttribute("message", "기존 비밀번호가 다릅니다.");
+				req.setAttribute("msg", "기존 비밀번호가 일치하지 않습니다.");
 			}else {
-				req.setAttribute("message", "비밀번호가 확인 되었습니다.");				
+				req.setAttribute("msg", "비밀번호가 확인 되었습니다.");				
 			}
 			
-			RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("jsp/base/pwdcheckResult.jsp");
 			rd.forward(req, resp);	
 			
 		}
-
 		
 	}	
 }

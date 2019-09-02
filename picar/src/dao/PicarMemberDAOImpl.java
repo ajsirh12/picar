@@ -12,13 +12,16 @@ import model.PicarMember;
 public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 
 	private static final String PICARMEMBER_INSERT_SQL
-	="insert into picarmember VALUES(SEQ_MEMBERNUM.nextval,?,?,?,?,?,?,10)";
+	="insert into picarmember VALUES(SEQ_MEMBERNUM.nextval,?,?,?,?,?,?,10,'N')";
 	
 	private static final String PICARMEMBER_SELECT_BY_ID_SQL
 	="SELECT MEMBERNUM,ID,PASSWORD,NAME,PHONE,LICENSE,to_char(validdate,'yyyy-mm-dd')VALIDDATE,GRADENO,RENTED FROM picarmember WHERE id=? and password=?";
 	
 	private static final String PICARMEMBER_SELECT_ALL_SQL
 	="SELECT membernum,id,password,name,phone,license,to_char(validdate,'yyyy-mm-dd')validdate,MEMBERGRADE,membergrade.gradeno FROM picarmember ,membergrade where picarmember.gradeno = membergrade.gradeno ORDER BY membernum";
+	
+	private static final String PICARMEMBER_SELECT_ALL_PASING_SQL
+	="SELECT * FROM (SELECT ROWNUM RN, members.* FROM (SELECT membernum as , id,password, name, phone, license, to_char(validdate,'yyyy-mm-dd')validdate,MEMBERGRADE,membergrade.gradeno as gradeno FROM picarmember,MEMBERGRADE WHERE picarmember.gradeno = membergrade.gradeno order by membernum desc) members) WHERE rn BETWEEN ? and ?";
 	
 	private static final String PICARMEMBER_CHECK_BY_ID_SQL
 	="SELECT COUNT(*) AS cnt FROM picarmember WHERE id=?"; 
@@ -44,8 +47,8 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	private static final String PICARMEMBER_INFOR_UPDATE_SQL
 	="UPDATE picarmember SET PASSWORD=?, NAME=?, PHONE=?, LICENSE=?, VALIDDATE=? WHERE membernum=?";
 	
-	private static final String PICAEMEMBER_CHECK_BY_SQL
-	="select count(*) as cnt from picarmember where password=?";
+	private static final String PICAEMEMBER_CHECK_PASSWORD_SQL
+	="SELECT COUNT(*) AS cntt FROM picarmember WHERE PASSWORD=?";
 	
 	private static final String PICARMEMBER_UPDATE_TO_Y
 	="UPDATE picarmember SET rented = 'Y' WHERE membernum=?";
@@ -292,11 +295,13 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			resultSet = preparedStatement.executeQuery();
 
 			if(resultSet.next()) {
-				count =resultSet.getInt("cnt");
+				count = resultSet.getInt("cnt");
+				System.out.println(count);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return count;
 	}
 
@@ -402,7 +407,6 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		}
 		return result;
 	}
-
 	
 	//회원이 정보 수정
 	@Override
@@ -438,7 +442,7 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 	}
 
 	//비밀번호 확인
-	@Override
+	@Override                     
 	public int checkBypwd(String password) {
 		int count = 1;
 		
@@ -448,17 +452,19 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 		
 		try {
 			connection = getConnection();
-			preparedStatement = connection.prepareStatement(PICAEMEMBER_CHECK_BY_SQL);
+			preparedStatement = connection.prepareStatement(PICAEMEMBER_CHECK_PASSWORD_SQL);
 			preparedStatement.setString(1, password);
 			
 			resultSet = preparedStatement.executeQuery();
-
 			if(resultSet.next()) {
-				count =resultSet.getInt("cnt");
+				count = resultSet.getInt("cntt");
+				System.out.println(count+"//111");
 			}
+			System.out.println(count+"//2222");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println(count);
 		return count;
 	}
 
@@ -499,6 +505,48 @@ public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 			closeDBObjects(null, preparedStatement, connection);
 		}
 	}
-
 	
+	//페이징
+	@Override
+	public List<PicarMember> selectListAll(int rowStartNumber, int rowEndNumber) {
+		List<PicarMember> picarMembers = new ArrayList<PicarMember>();
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(PICARMEMBER_SELECT_ALL_PASING_SQL);
+			preparedStatement.setInt(1,rowStartNumber);
+			preparedStatement.setInt(2,rowEndNumber);
+			resultSet = preparedStatement.executeQuery();
+			
+		while(resultSet.next()) {
+			PicarMember picarMember = new PicarMember();
+			
+			picarMember.setMemberNum(resultSet.getInt("memberNum"));
+			picarMember.setId(resultSet.getString("id"));
+			picarMember.setPassword(resultSet.getString("password"));
+			picarMember.setName(resultSet.getString("name"));
+			picarMember.setPhone(resultSet.getString("phone"));
+			picarMember.setLicense(resultSet.getString("license"));
+			picarMember.setValidate(resultSet.getString("validdate"));			
+			picarMember.setGradeNo(resultSet.getInt("gradeNo"));
+			picarMember.setMemberGrade(resultSet.getString("membergrade"));
+
+			
+			picarMembers.add(picarMember);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return picarMembers;
+	}
+
+
 }

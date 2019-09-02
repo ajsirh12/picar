@@ -1,12 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<!--
-   Road Trip by TEMPLATED
-   templated.co @templatedco
-   Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html>
 <head>
    <title>PICAR - Pick your CAR</title>
@@ -71,15 +65,14 @@
                
                <tr>
                <td><input type="submit" value="로그인"></td>      
-            </form>
-            <td><a href="sign_up"><button>회원가입</button></a></td>
-            </tr>
-            <tr align="center">
-               &nbsp<a href="id_find" class="qwe">아이디찾기</a>&nbsp&nbsp&nbsp
-               <a href="password_find" class="qwe">비밀번호 찾기</a>
-            </tr>               
-            </table>
-            ${message}
+	            </form>
+	            <td><a href="sign_up"><button>회원가입</button></a></td>
+	            </tr>
+	            <tr align="center">
+	               &nbsp<a href="id_find" class="qwe">아이디찾기</a>&nbsp&nbsp&nbsp
+	               <a href="password_find" class="qwe">비밀번호 찾기</a>
+	            </tr>               
+	            </table>
             </c:if>   
                
             <p>${picarmember.id}</p>
@@ -91,12 +84,6 @@
          </ul>
       </nav>
 
-   <!-- Content -->
-   <!--
-      Note: To show a background image, set the "data-bg" attribute below
-      to the full filename of your image. This is used in each section to set
-      the background image.
-   -->
       <section id="post" class="wrapper bg-img" data-bg="banner2.jpg">
          <div class="inner">
             <article class="box">
@@ -114,13 +101,33 @@
             	
          </div>	
       </section>
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+		<script type="text/javascript">  
+		    $(function(){
+		      $("#findForm").validate({
+		         debug : false,
+		         
+		         rules : {
+		            name2 :"required",
+		            phone2 :"required"               
+		         },
+		      
+		         messages : {
+		        	name2 :"이름을 입력해주세요",
+		        	phone2 :"전화번호를 입력해주세요"            
+		         }
+		      });      
+		   });
+		     
+		</script>   
+   
    </body>
 </html>

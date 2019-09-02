@@ -31,19 +31,19 @@
    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
    <meta name="theme-color" content="#ffffff">
    <style>
-   .firstdate.asd{
-		color: black;
-	}
-	.lastdate.asd{
-		color:black;
-	}
    .qwe{
       color: white;
       text-decoration: none;
-   };
+   }
    .qwe:hover {
       color: black;
-   };
+   }
+   .firstdate{
+   	color: black;
+   }
+   .lastdate {
+   	color: black;
+   }
    </style>
 </head>
 <body class="subpage">
@@ -55,8 +55,7 @@
 
    <!-- Nav -->
       <nav id="menu">
-         <ul class="links">
-            <li><a href="carlistloc">차량리스트</a></li>        
+         <ul class="links">      
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">         
@@ -107,57 +106,46 @@
                <header>
                   <center><h2>차량 상세정보</h2></center>
                </header>
-               <form action="reserveCar.do" method="post" id="frm">
-				<table border=1>
-					<tr>
-						<td>차량번호</td>
-						<td>차량종류</td>
-						<td>보유지점</td>
-						<td>대여비용</td>
-						<td>탑승인원</td>
-						<td>연료종류</td>
-					</tr>
-					<tr>
-						<td>${detail.carnum}</td>
-						<td>${detail.carname}</td>
-						<td>${detail.location}</td>
-						<td>${detail.cost} <span> * DAY</span></td>
-						<td>${detail.people}</td>
-						<td>${detail.fueltype}</td>
-					</tr>
-					<tr>
-						<td>대여기간</td>
-						<td><input type="date" name="firstdate" class="firstdate asd" required="required" value="" /></td>
-						<td><input type="date" name="lastdate" class="lastdate asd" required="required" /></td>
-					</tr>
-				</table>
-				<div align="left">
-				<input type="button" style="margin-left:1px; margin-right:550px;" value="뒤로가기" onclick="history.back(-1);" />	
-				<input type="hidden" value="${detail.carnum}" name="carnum" />
-				<input type="hidden" value="${picarmember.memberNum}" name="membernum" />
-				<input type="button" value="예약하기" id="reservebtn" />
-				</div>
-			</form>
-				<script type="text/javascript">
-					$(function() {
-						$("#reservebtn").click(function() {
-								var firstdate = $(".firstdate").val();
-								var stdate = new Date(firstdate);
-								var lastdate = $(".lastdate").val();
-								var endate = new Date(lastdate);
-								var cost = ${detail.cost};
-								
-								var rented = endate-stdate;
-								var date = 24 * 60 * 60 * 1000;
-								
-								if(lesssix>=180){
-							         if(confirm("총 대여일은 "+rented+"일 대여비용은 " + rented*cost + "원 입니다. 예약하시겠습니까?")){
-							              document.getElementById('frm').submit();
-							              return false;}
-							}
-						})
-					});
-				</script>		
+               <div class="content">
+	<form action="reserveCar.do" method="post" id="frm">
+		<table border=1>
+			<tr>
+				<td>차량번호</td>
+				<td>차량종류</td>
+				<td>보유지점</td>
+				<td>대여비용</td>
+				<td>탑승인원</td>
+				<td>연료종류</td>
+			</tr>
+			<tr>
+				<td>${detail.carnum}</td>
+				<td>${detail.carname}</td>
+				<td>${detail.location}</td>
+				<td>${detail.cost} <span> * DAY</span></td>
+				<td>${detail.people}</td>
+				<td>${detail.fueltype}</td>
+			</tr>
+			<tr>
+				<td>대여일</td>
+				<td colspan="2"><input type="date" name="firstdate" class="firstdate" required="required" value="" /></td>
+				<td>반납일</td>
+				<td colspan="2"><input type="date" name="lastdate" class="lastdate" required="required" /></td>
+			</tr>
+		</table>
+		<input type="hidden" value="${detail.carnum}" name="carnum" />
+		<input type="hidden" value="${picarmember.memberNum }" name="membernum" />
+		<input type="hidden" value="${picarmember.validate}" class="validate" />
+		<div align="center">
+		<c:if test="${picarmember.rented == Y }">
+			<input type="button" value="예약하기" id="reservebtn" />	
+		</c:if>
+		<c:if test="${picarmember.rented != Y }">
+			<input type="button" value="예약불가" id="nobtn" />	
+		</c:if>
+	</form>
+	<input type="button" value="뒤로가기" onclick="history.back(-1);" /></div>
+	
+               </div>
             </article>
          </div>
       </section>
@@ -171,36 +159,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-   $("#reservebtn").click(function() {
-      var date = 24 * 60 * 60 * 1000;
-      
-      var firstdate = $(".firstdate").val();
-      var stdate = new Date(firstdate);
-      var lastdate = $(".lastdate").val();
-      var endate = new Date(lastdate);
-      var cost = ${detail.cost};
-      
-      var rented = (endate-stdate)/date+1;
-      
-      var valid = $(".validate").val();
-      var validate = new Date(valid);
-      var today = new Date();
-      var lesssix = (validate-today)/date;
-      
-      if(lesssix>=180){
-         if(confirm("총 대여일은 "+rented+"일 대여비용은 " + rented*cost + "원 입니다. 예약하시겠습니까?")){
-              document.getElementById('frm').submit();
-              return false;
-         }
-      }
-      else{
-         alert("면허기간이 6개월 미만입니다. 예약이 불가능합니다.");
-      }
-   });
-   $("#nobtn").click(function() {
-      alert("고객님은 이미 차량을 대여중입니다.");
-   });
+	$("#reservebtn").click(function() {
+		var date = 24 * 60 * 60 * 1000;
+		
+		var firstdate = $(".firstdate").val();
+		var stdate = new Date(firstdate);
+		var lastdate = $(".lastdate").val();
+		var endate = new Date(lastdate);
+		var cost = ${detail.cost};
+		
+		var rented = (endate-stdate)/date+1;
+		
+		var valid = $(".validate").val();
+		var validate = new Date(valid);
+		var today = new Date();
+		var lesssix = (validate-today)/date;
+		
+		if(lesssix>=180){
+			if(confirm("총 대여일은 "+rented+"일 대여비용은 " + rented*cost + "원 입니다. 예약하시겠습니까?")){
+		        document.getElementById('frm').submit();
+		        return false;
+			}
+		}
+		else{
+			alert("면허기간이 6개월 미만입니다. 예약이 불가능합니다.");
+		}
+	});
+	$("#nobtn").click(function() {
+		alert("고객님은 이미 차량을 대여중입니다.");
+	});
 });
-</script>   
+</script>	
    </body>
 </html>
+

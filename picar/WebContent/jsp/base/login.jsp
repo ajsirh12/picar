@@ -1,12 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<!--
-   Road Trip by TEMPLATED
-   templated.co @templatedco
-   Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html>
 <head>
    <title>PICAR - Pick your CAR</title>
@@ -49,7 +43,10 @@
 
    <!-- Nav -->
       <nav id="menu">
-         <ul class="links">      
+         <ul class="links"> 
+         <c:if test="${picarmember !=null}">
+         <p>${picarmember.id} 님 <br>어서오세요.</p>   
+         </c:if>        
     		<li><a href="carlistloc">차량리스트</a></li>
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
@@ -77,7 +74,6 @@
                <a href="password_find" class="qwe">비밀번호 찾기</a>
             </tr>               
             </table>
-            ${message}
             </c:if>   
                
             <p>${picarmember.id}</p>
@@ -89,44 +85,48 @@
          </ul>
       </nav>
 
-   <!-- Content -->
-   <!--
-      Note: To show a background image, set the "data-bg" attribute below
-      to the full filename of your image. This is used in each section to set
-      the background image.
-   -->
       <section id="post" class="wrapper bg-img" data-bg="banner2.jpg">
          <div class="inner">
             <article class="box">
                <header>
 					<center><h2>sign in</h2></center>						
 				</header>
-	<form action="login" method="post">
-	대소문자를 구분해 주세요 . <br />
+				
+				<form action="login" method="post">
+				대소문자를 구분해 주세요 . <br />	
+				<table>
+					<tr>
+						<td>이름 :</td>					
+						<td><input style="width:600px;" type="text" name="id" id="id" placeholder="Username" /></td><br>					
+					</tr>
+					
+					<tr>
+						<td>비밀번호 :</td>				 
+					 	<td><input style="width:600px;" type="password" name="password" id="password" placeholder="password"/></td><br>				
+					</tr>
+				</table>
+				<br>
+				${message}<br>					
+				<center><input style="width:300px;" type="submit" value="로그인"></center>	
+				</form>	
+				<div align="right">
+					<a href="id_find">아이디찾기</a>
+					<a href="password_find">비밀번호 찾기</a> <br>
+				</div>
 	
-		<input type="text" name="id" id="id" placeholder="Username" /> <br>
-		<input type="password" name="password" id="password" placeholder="password"/> <br>
-		<center><input type="submit" value="로그인"></center>	
-	</form>	
-	<div align="right">
-		<a href="id_find">아이디찾기</a>
-		<a href="password_find">비밀번호 찾기</a> <br>
-	</div>
-	
-	<div align="right">
-	<a href="sign_up"><button>회원가입</button></a></div>
-	
-	${message}	
-            </article>
-         </div>
-      </section>
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+				<div align="right">
+				<a href="sign_up"><button>회원가입</button></a></div>
+							
+	            </article>
+	         </div>
+	      </section>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    </body>
 </html>

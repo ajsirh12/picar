@@ -3467,7 +3467,7 @@
 		-ms-transition: -ms-transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		transition: transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		-webkit-overflow-scrolling: touch;
-		background: #FFC314;
+		background: #FFC341;
 		box-shadow: none;
 		color: #000000;
 		height: 100%;
@@ -3521,7 +3521,7 @@
 			transition: color 0.2s ease-in-out;
 			-webkit-tap-highlight-color: transparent;
 			border: 0;
-			color: #fbb5b5;
+			color: #000000;
 			cursor: pointer;
 			display: block;
 			height: 3.25em;
@@ -3550,7 +3550,7 @@
 			}
 
 			#menu .close:hover {
-				color: #ffffff;
+				color: #000000;
 			}
 
 			@media screen and (max-width: 736px) {
@@ -4179,26 +4179,26 @@
 /* Footer */
 
 	#footer {
-		background-color: #F64747;
-		color: #fdd1d1;
+		background-color: #FFC341;
+		color: #000000;
 		padding: 6em 0 4em 0;
-		background: #F64747;
+		background: #FFC341;
 	}
 
 		#footer input, #footer select, #footer textarea {
-			color: #ffffff;
+			color: #000000;
 		}
 
 		#footer a {
-			color: #ffffff;
+			color: #000000;
 		}
 
 		#footer strong, #footer b {
-			color: #ffffff;
+			color: #000000;
 		}
 
 		#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 {
-			color: #ffffff;
+			color: #000000;
 		}
 
 		#footer blockquote {
@@ -4228,7 +4228,7 @@
 			#footer input[type="button"]:hover,
 			#footer button:hover,
 			#footer .button:hover {
-				background-color: #676767;
+				background-color: #FFC341;
 			}
 
 			#footer input[type="submit"]:active,
@@ -4270,7 +4270,7 @@
 				#footer input[type="button"].alt.icon:before,
 				#footer button.alt.icon:before,
 				#footer .button.alt.icon:before {
-					color: #fbb5b5;
+					color: #FFC341;
 				}
 
 			#footer input[type="submit"].special,
@@ -4279,7 +4279,7 @@
 			#footer button.special,
 			#footer .button.special {
 				background-color: #ffffff;
-				color: #F64747 !important;
+				color: #FFC341 !important;
 			}
 
 		#footer label {

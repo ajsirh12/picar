@@ -72,7 +72,9 @@ public class PicarMember {
 	}
 	public void setMemberGrade(String memberGrade) {
 		this.memberGrade = memberGrade;
-	}
+
+	}	
+		
 	@Override
 	public String toString() {
 		return "PicarMember [memberNum=" + memberNum + ", id=" + id + ", password=" + password + ", name=" + name
