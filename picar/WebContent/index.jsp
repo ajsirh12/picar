@@ -31,7 +31,7 @@
 	<meta name="theme-color" content="#ffffff">
 	<style>
 	.qwe{
-		color: white;
+		color: black;
 		text-decoration: none;
 	}
 	.qwe:hover {
