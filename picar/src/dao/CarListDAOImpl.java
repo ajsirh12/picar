@@ -23,7 +23,9 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 	private static final String CARLIST_UPDATE_CARINFO_BY_CARNUM = "UPDATE carlist set carinfo = ? WHERE carnum = ?";
 	private static final String CARLIST_UPDATE_VALIDRENT_TO_N = "UPDATE carlist SET validrent = 'N' WHERE carnum=?";
 	private static final String CAR_SELECT_CARNAME="select carlist.carnum, car.carname, carlist.validrent, location.location from carlist join car on carlist.cartype = car.cartype join location on carlist.carloc = location.carloc where location.carloc=? and car.carname like ?";
-	
+	private static final String CARLIST_SELECT_ALL_COUNT="SELECT * FROM (SELECT ROWNUM RN, cars.* "
+														+ "	FROM (SELECT LOCATION,CARNUM, CARNAME, VALIDRENT as carlists FROM location,car,carlist WHERE car.cartype=carlist.cartype and carlist.carloc=location.carloc and location.carloc=?) cars)"
+														+ " WHERE RN BETWEEN ? and ?";
 	
 	@Override
 	public CarList selectByCarNum(String carNum) {
@@ -394,4 +396,5 @@ public class CarListDAOImpl extends BaseDAO implements CarListDAO {
 			}	
 			return carlist;
 		}
+	
 }

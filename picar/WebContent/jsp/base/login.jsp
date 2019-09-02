@@ -46,7 +46,8 @@
          <ul class="links"> 
          <c:if test="${picarmember !=null}">
          <p>${picarmember.id} 님 <br>어서오세요.</p>   
-         </c:if>  
+         </c:if>        
+    		<li><a href="carlistloc">차량리스트</a></li>
             <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">         
@@ -59,8 +60,8 @@
             <c:if test="${picarmember ==null}">
                <table>
                <form action="login" method="post">
-               	대소문자를 구분해 주세요 . <br />
-               <input type="text" name="id" id="id" placeholder="Username" maxlength="20	"/> <br />
+               대소문자를 구분해 주세요 . <br />
+               <input type="text" name="id" id="id" placeholder="Username" /> <br />
                <input type="password" name="password" id="password" placeholder="password"/> 
                
                <tr>

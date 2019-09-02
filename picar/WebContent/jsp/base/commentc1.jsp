@@ -31,7 +31,8 @@
 
 		<!-- Nav -->
 			<nav id="menu">
-			<ul class="links">      
+			<ul class="links">
+			   <li><a href="carlistloc">차량리스트</a></li>      
 			   <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
 			      
 			   <c:if test="${picarmember.gradeNo==30}">         

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +90,7 @@
          <div class="inner">
             <article class="box">
                <header>
-                  <center><h2>비밀번호 찾기</h2></center>                
+                  <center><h2>새 비밀번호 </h2></center>                
                </header>
                <form method="post" id="passwordForm" action="password_update">
 					picar 아이디: ${picarmembers.id} <br />
@@ -103,50 +104,50 @@
             </article>
          </div>
       </section>
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$("#passwordForm").validate({
-		debug : false,
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$("#passwordForm").validate({
+				debug : false,
+				
+				rules : {								
+					password : {
+						required : true,	
+						minlength : 6,
+						maxlength : 10
+					},
+					repwd :{
+						required : true,
+						equalTo :"#password"
+					}				
+				},
+			
+				messages : {											
+					password : {
+						required : "비밀번호를 입력하세요",	
+						minlength : "비밀번호는 최소{0}글자 입니다.",
+						maxlength : "비밀번호는 최대{0}글자 입니다."
+					},
+					repwd :{
+						required : "비밀번호 확인값을 입력하세요.",
+						equalTo :"비밀번호가 일치하지 않습니다."
+					}
+							
+				}	 			
+			});	
+			
+		});
 		
-		rules : {								
-			password : {
-				required : true,	
-				minlength : 6,
-				maxlength : 10
-			},
-			repwd :{
-				required : true,
-				equalTo :"#password"
-			}				
-		},
-	
-		messages : {											
-			password : {
-				required : "비밀번호를 입력하세요",	
-				minlength : "비밀번호는 최소{0}글자 입니다.",
-				maxlength : "비밀번호는 최대{0}글자 입니다."
-			},
-			repwd :{
-				required : "비밀번호 확인값을 입력하세요.",
-				equalTo :"비밀번호가 일치하지 않습니다."
-			}
-					
-		}	 			
-	});	
-	
-});
-
-</script>   
-   
+		</script>   
+		   
    </body>
 </html>

@@ -12,7 +12,7 @@ import javax.naming.spi.DirStateFactory.Result;
 import model.Location;
 
 public class LocationDAOImpl extends BaseDAO implements LocationDAO {
-	private static final String LOCATION_SELECT_ALL = "SELECT carloc, location FROM location";
+	private static final String LOCATION_SELECT_ALL = "SELECT carloc, location FROM location order by location";
 	private static final String LOCATION_SELECTBY_CARLOC="select carloc, location from location where carloc=?";
 	
 	@Override

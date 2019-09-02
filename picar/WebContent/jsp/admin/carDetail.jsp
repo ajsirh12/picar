@@ -52,7 +52,8 @@
 
 	<!-- Nav -->
 		<nav id="menu">
-			<ul class="links">      
+			<ul class="links">
+			   <li><a href="carlistloc">차량리스트</a></li>      
 			   <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
 			      
 			   <c:if test="${picarmember.gradeNo==30}">         
@@ -60,6 +61,7 @@
 			      <li><a href="picarmemberlist">회원 관리</a></li>                  
 			      <li><a href="rentedList.do?reqPage=1">대여목록</a></li>
 			      <li><a href="allRentCar.do?reqPage=1">관리자 차량목록</a></li>
+			      <li><a href="insertcar">차량등록</a></li>
 			   </c:if>   
 			      <li><a href="myRentCar.do?membernum=${picarmember.memberNum }">내 차량</a></li>   
 			   <c:if test="${picarmember ==null}">
@@ -104,27 +106,27 @@
 						<center><h2>차량 상세정보</h2></center>
 					</header>
 					<div class="content">
-						<c:if test="${picarmember.gradeNo == 30 }">
+						<c:if test="${picarmember.gradeNo == 30}">
 						<table>
-						<c:forEach var="car" items="${carList }">
-							<c:if test="${car.carType == carListList.carType }">
+						<c:forEach var="car" items="${carList}">
+							<c:if test="${car.carType == carListList.carType}">
 							<tr>
-								<td colspan="2"><img src="${car.carImage }" width="100%" alt="" /></td>
+								<td colspan="2"><img src="${car.carImage}" width="100%" alt="" /></td>
 							</tr>
 							</c:if>
 						</c:forEach>
 						<form action="carInfoUpdate.do" method="post">
 						<tr>
 							<td>차량번호</td>
-							<td><input type="text" disabled="disabled" value="${carListList.carnum }" />
-							<input type="hidden" value="${carListList.carnum }" name="carnum" /></td>
+							<td><input type="text" disabled="disabled" value="${carListList.carnum}" />
+							<input type="hidden" value="${carListList.carnum}" name="carnum" /></td>
 						</tr>
 						<tr>
 							<td>차량종류</td>
 							<td>
-							<c:forEach var="car" items="${carList }">
-							<c:if test="${car.carType == carListList.carType }">
-							<input type="text" disabled="disabled" value="${car.carName }"/>
+							<c:forEach var="car" items="${carList}">
+							<c:if test="${car.carType == carListList.carType}">
+							<input type="text" disabled="disabled" value="${car.carName}"/>
 							</c:if>
 							</c:forEach>
 							</td>
@@ -132,9 +134,9 @@
 						<tr>
 							<td>차량색상</td>
 							<td>
-							<c:forEach var="car" items="${carList }">	
-							<c:if test="${car.carType == carListList.carType }">
-							<input type="text" disabled="disabled" value="${car.colorType }"/>
+							<c:forEach var="car" items="${carList}">	
+							<c:if test="${car.carType == carListList.carType}">
+							<input type="text" disabled="disabled" value="${car.colorType}"/>
 							</c:if>
 							</c:forEach>
 							</td>
@@ -142,9 +144,9 @@
 						<tr>
 							<td>차량연료</td>
 							<td>
-							<c:forEach var="car" items="${carList }">
-							<c:if test="${car.carType == carListList.carType }">
-							<input type="text" disabled="disabled" value="${car.fuelType }"/>
+							<c:forEach var="car" items="${carList}">
+							<c:if test="${car.carType == carListList.carType}">
+							<input type="text" disabled="disabled" value="${car.fuelType}"/>
 							</c:if>
 							</c:forEach>
 							</td>
@@ -152,10 +154,10 @@
 						<tr>
 							<td>승차인원</td>
 							<td>
-							<c:forEach var="car" items="${carList }">
-							<c:if test="${car.carType == carListList.carType }">
+							<c:forEach var="car" items="${carList}">
+							<c:if test="${car.carType == carListList.carType}">
 							<%-- <input type="number" class="asd" disabled="disabled" value="${car.people }"/> --%>
-							${car.people }
+							${car.people}
 							</c:if>
 							</c:forEach>
 							 명
@@ -163,18 +165,18 @@
 						</tr>
 						<tr>
 							<td>대여비용</td>
-							<td><input type="number" class="asd" name="cost" min="0" value="${carListList.cost }" /> 원</td>
+							<td><input type="number" class="asd" name="cost" min="0" value="${carListList.cost}" /> 원</td>
 						</tr>
 						<tr>
 							<td>지점위치 </td>
 							<td>
 							<select name="carloc">
-							<c:forEach var="loc" items="${locationList }">
-								<c:if test="${carListList.carLoc == loc.carLoc }">
-									<option value="${loc.carLoc }" class="asd" selected="selected">${loc.location }</option>
+							<c:forEach var="loc" items="${locationList}">
+								<c:if test="${carListList.carLoc == loc.carLoc}">
+									<option value="${loc.carLoc}" class="asd" selected="selected">${loc.location}</option>
 								</c:if>
-								<c:if test="${loc.carLoc != carListList.carLoc }">
-									<option value="${loc.carLoc }" class="asd">${loc.location }</option>
+								<c:if test="${loc.carLoc != carListList.carLoc}">
+									<option value="${loc.carLoc}" class="asd">${loc.location}</option>
 								</c:if>
 							</c:forEach>
 							</select>
@@ -184,11 +186,11 @@
 							<td>대여가능여부</td>
 							<td>
 							<select name="validrent">
-								<c:if test="${carListList.validRent == 'Y' || carListLIst.validRent == 'y' }">
+								<c:if test="${carListList.validRent == 'Y' || carListLIst.validRent == 'y'}">
 									<option value="Y" class="asd" selected="selected">대여가능</option>
 									<option value="N" class="asd">대여불가</option>
 								</c:if>
-								<c:if test="${carListList.validRent == 'N' || carListLIst.validRent == 'n' }">
+								<c:if test="${carListList.validRent == 'N' || carListLIst.validRent == 'n'}">
 									<option value="Y" class="asd">대여가능</option>
 									<option value="N" class="asd" selected="selected">대여불가</option>
 								</c:if>
@@ -206,12 +208,12 @@
 						<tr>
 							<td>대여횟수</td>
 							<%-- <td><input type="number" class="asd" min="${carListList.usedTime }" max="${carListList.usedTime+1 }" value="${carListList.usedTime }" disabled="disabled"/></td> --%>
-							<td>${carListList.usedTime } 회</td>
+							<td>${carListList.usedTime} 회</td>
 						</tr>
 						<tr align="center">
 							<td colspan="2">
 							<input type="submit" value="수정" /></form>
-							<input type="button" value="삭제" onclick="location.href='carInfoDelete.do?carnum=${carListList.carnum }'"/>
+							<input type="button" value="삭제" onclick="location.href='carInfoDelete.do?carnum=${carListList.carnum}'"/>
 							<input type="button" value="뒤로" onclick="history.back(-1);"/>
 							<%-- <a href="carInfoDelete.do?carnum=${carListList.carnum }"><button>삭제</button></a>
 							<a href="allRentCar.do?reqPage=1"><button>뒤로</button></a> --%>
@@ -219,7 +221,7 @@
 						</tr>
 						</table>
 					</c:if>
-					<c:if test="${picarmember.gradeNo != 30 }">
+					<c:if test="${picarmember.gradeNo != 30}">
 						<h1>잘못된 접근입니다.</h1>
 						<a href="go_index">홈으로 돌아가기</a>
 					</c:if>	
