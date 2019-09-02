@@ -73,7 +73,7 @@
 					<tr>
 					<td><input type="submit" value="로그인"></td>		
 				</form>
-				<td><a href="sign_up"><button>회원가입</button></a></td>
+				<td><input type="button" value="회원가입" onclick="location.href='sign_up'" /></td> 
 				</tr>
 				<tr align="center">
 					&nbsp<a href="id_find" class="qwe">아이디찾기</a>&nbsp&nbsp&nbsp
