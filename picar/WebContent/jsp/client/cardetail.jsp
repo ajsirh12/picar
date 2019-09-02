@@ -136,10 +136,10 @@
 		<input type="hidden" value="${picarmember.memberNum }" name="membernum" />
 		<input type="hidden" value="${picarmember.validate}" class="validate" />
 		<div align="center">
-		<c:if test="${picarmember.rented == Y }">
+		<c:if test="${picarmember.rented != N }">
 			<input type="button" value="예약하기" id="reservebtn" />	
 		</c:if>
-		<c:if test="${picarmember.rented != Y }">
+		<c:if test="${picarmember.rented == N }">
 			<input type="button" value="예약불가" id="nobtn" />	
 		</c:if>
 	</form>
