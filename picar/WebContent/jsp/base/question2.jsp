@@ -94,9 +94,15 @@
 							<h2>문의사항 게시판</h2>
 						</header>
 						
+						
+						<c:if test="${empty commentJoinLists}">
+						검색된 결과가 없습니다.
+						</c:if>
+						
 						<p>
 						<a href="question_insert.do?memberNum=${picarmember.memberNum}">글작성</a>
 						</p>
+				<c:if test="${!empty commentJoinLists}">
 				<table border="1" class="table table-striped"> 
 					<tr>
 						<td>번호</td>
@@ -113,6 +119,11 @@
 					</tr>		
 					</c:forEach>
 				</table>
+				</c:if>
+			<form action ="comment_search.do" method="post">
+				<input type="text" name="questTitle" placeholder="제목을 입력해주세요" style="width:300px; float:left;" />
+				<input type="submit" value = "검색" style="float:left;"/>
+			</form>	<br><br>
 				
 			<c:if test="${pageGroupResult.beforPage}">
 				<a href="question_req_list.do?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
@@ -132,6 +143,7 @@
 	 		<c:if test="${pageGroupResult.afterPage}">
 				<a href="question_req_list.do?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
 			</c:if> 
+			
 						
 					</article>
 				</div>
