@@ -30,7 +30,8 @@ import page2.PageSQL;
 
 @WebServlet(name = "KangController", urlPatterns = {"/question_list.do","/question_insert.do","/question_req_list.do","/question_input.do","/question_req_insert.do",
 													"/question_detail.do","/question_detail2.do","/question_delete.do","/question_update.do","/question_req_admin_list.do",
-													"/question_admin_detail.do","/question_admin_delete.do","/question_admin_detail2.do","/commlist_insert.do","/commlist.update.do"})
+													"/question_admin_detail.do","/question_admin_delete.do","/question_admin_detail2.do","/commlist_insert.do",
+													"/commlist.update.do","/comment_search.do","/comment_admin_search.do"})
 public class KangController extends HttpServlet {
 
 	@Override
@@ -274,6 +275,31 @@ public class KangController extends HttpServlet {
 				System.out.println(commList);
 				
 				RequestDispatcher rd = req.getRequestDispatcher("question_req_admin_list.do?reqPage=1");
+				rd.forward(req, resp);
+			}
+			else if(action.equals("comment_search.do")) {
+				
+				String questTitle = req.getParameter("questTitle");
+				
+				CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+				List<CommentJoinList> commentJoinList = commentJoinListDAO.selectByTitle(questTitle);
+				
+				req.setAttribute("commentJoinLists", commentJoinList);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("jsp/base/question2.jsp");
+				rd.forward(req, resp);
+			}
+		
+			else if(action.equals("comment_admin_search.do")) {
+				
+				String questTitle = req.getParameter("questTitle");
+				
+				CommentJoinListDAO commentJoinListDAO = new CommentJoinListDAOImpl();
+				List<CommentJoinList> commentJoinList = commentJoinListDAO.selectByTitle(questTitle);
+				
+				req.setAttribute("commentJoinLists", commentJoinList);
+				
+				RequestDispatcher rd = req.getRequestDispatcher("jsp/admin/adminquestionlist.jsp");
 				rd.forward(req, resp);
 			}
 	}

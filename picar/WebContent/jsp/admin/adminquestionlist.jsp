@@ -76,6 +76,11 @@
 						<header>
 							<h2>문의사항 답변게시판</h2>
 						</header>
+						
+						<c:if test="${empty commentJoinLists}">
+						검색된 결과가 없습니다.
+						</c:if>
+				<c:if test="${!empty commentJoinLists}">		
 				<table border="1" class="table table-striped"> 
 					<tr>
 						<td>번호</td>
@@ -92,6 +97,11 @@
 					</tr>		
 					</c:forEach>
 				</table>
+				</c:if>
+			<form action ="comment_admin_search.do" method="post">
+				<input type="text" name="questTitle" placeholder="제목을 입력해주세요" style="width:300px; float:left;" />
+				<input type="submit" value = "검색" style="float:left;"/>
+			</form>	<br><br>
 				
 			<c:if test="${pageGroupResult.beforPage}">
 				<a href="question_req_admin_list.do?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>

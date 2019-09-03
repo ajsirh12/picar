@@ -47,6 +47,12 @@ public class CommentJoinListDAOImpl extends BaseDAO implements CommentJoinListDA
 	="UPDATE QUESTION"
 			+ " SET ANSWER=?"
 			+ " WHERE QUESTNUM =?";
+	
+	private static final String COMMENTJOINLIST_SELECT_BY_QUESTTITLE_SQL
+	="SELECT *"
+			+ " FROM question join PICARMEMBER on picarmember.membernum =question.membernum"
+			+ " WHERE questtitle like ?"
+			+ " ORDER BY QUESTNUM DESC";
 
 	@Override
 	public List<CommentJoinList> selectAll(int rowStartNumber, int rowEndNumber) {
@@ -258,6 +264,47 @@ public class CommentJoinListDAOImpl extends BaseDAO implements CommentJoinListDA
 			closeDBObjects(null, preparedStatement, connection);
 		}
 		return result1;
+	}
+
+	@Override
+	public List<CommentJoinList> selectByTitle(String questTitle) {
+		
+		List<CommentJoinList> commentJoinLists = new ArrayList<CommentJoinList>();
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			connection = getConnection();
+			preparedStatement = connection.prepareStatement(COMMENTJOINLIST_SELECT_BY_QUESTTITLE_SQL);
+			preparedStatement.setString(1, "%" + questTitle + "%");
+			
+			resultSet = preparedStatement.executeQuery();
+			
+		while (resultSet.next()) {
+			
+			CommentJoinList commentJoinList = new CommentJoinList();
+			
+			commentJoinList.setQuestnum(resultSet.getInt("questnum"));
+			commentJoinList.setQuestTitle(resultSet.getString("questTitle"));
+			commentJoinList.setQuestText(resultSet.getString("questText"));
+			commentJoinList.setQuestDate(resultSet.getString("questDate"));
+			commentJoinList.setAnswer(resultSet.getString("answer"));
+			commentJoinList.setMemberNum(resultSet.getInt("memberNum"));
+			commentJoinList.setId(resultSet.getString("id"));
+			
+				
+			commentJoinLists.add(commentJoinList);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			closeDBObjects(resultSet, preparedStatement, connection);
+		}
+		return commentJoinLists;
 	}
 }
 
