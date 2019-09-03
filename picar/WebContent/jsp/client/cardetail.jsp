@@ -186,7 +186,13 @@ $(function() {
 		}
 	});
 	$("#nobtn").click(function() {
-		alert("고객님은 이미 차량을 대여중입니다.");
+		if(${picarmember.rented != null}){
+			alert("고객님은 이미 차량을 대여중입니다.");	
+		}
+		if(${picarmember.rented == null}){
+			alert("로그인하고 이용해주세요.");	
+		}
+		
 	});
 });
 </script>	
