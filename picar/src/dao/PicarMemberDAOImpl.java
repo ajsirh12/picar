@@ -12,7 +12,7 @@ import model.PicarMember;
 public class PicarMemberDAOImpl extends BaseDAO implements PicarMemberDAO {
 
 	private static final String PICARMEMBER_INSERT_SQL
-	="insert into picarmember VALUES(SEQ_MEMBERNUM.nextval,?,?,?,?,?,?,10,'N')";
+	="insert into picarmember VALUES(SEQ_MEMBERNUM.nextval,?,?,?,?,?,?,10,'Y')";
 	
 	private static final String PICARMEMBER_SELECT_BY_ID_SQL
 	="SELECT MEMBERNUM,ID,PASSWORD,NAME,PHONE,LICENSE,to_char(validdate,'yyyy-mm-dd')VALIDDATE,GRADENO,RENTED FROM picarmember WHERE id=? and password=?";

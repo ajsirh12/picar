@@ -12,6 +12,8 @@ public interface CommentJoinListDAO {
 	
 	List<CommentJoinList> adminselectAll(int rowStartNumber, int rowEndNumber);
 	
+	List<CommentJoinList> selectByTitle(String questTitle);
+	
 	CommentJoinList selectByQuestnum(int questnum);
 	
 	boolean deleteByQuestnum(int questnum);

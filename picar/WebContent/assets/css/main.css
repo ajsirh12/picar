@@ -1785,7 +1785,7 @@
 	}
 
 	a {
-		color: #F64747;
+		color: #FFC341;
 	}
 
 	strong, b {
@@ -3323,7 +3323,7 @@
 
 	#header {
 		background-color: transparent;
-		color: #fdd1d1;
+		color: #FFC341;
 		cursor: default;
 		height: 3.25em;
 		left: 0;
@@ -3338,7 +3338,7 @@
 
 		#header.alt {
 			top: 0;
-			background: #F64747;
+			background: #FFC341;
 		}
 
 		#header .logo {
