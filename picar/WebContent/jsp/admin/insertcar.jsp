@@ -112,7 +112,7 @@
                </header>
               	<form action="registercar" method="post">
 					<h4>차량번호 </h4>
-						<input type="text" placeholder="차량번호" name="carnum" /><br />
+						<input type="text" placeholder="차량번호" name="carnum" maxlength="7" /><br />
 					<h4>차종 </h4> 
 						<select name=cartype>
 						<option value="" selected disabled hidden> === 차 종  선 택 === </option>
@@ -121,7 +121,7 @@
 						</c:forEach>
 						</select>
 						<h4>대여비용</h4>
-						<input type="text" placeholder="대여비용" name="cost" /><br />		
+						<input type="text" placeholder="대여비용" name="cost" maxlength="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" /><br />		
 						<h4>보유지점 </h4>
 						<select name="carloc">
 						<option value="" selected disabled hidden> === 지 점  선 택 === </option>
@@ -132,7 +132,7 @@
 						<br />
 						<div align="left">					
 						<input type="button" style="margin-left:1px; margin-right:578px;" value="뒤로가기" onclick="history.back(-1);" />
-						<input type="submit" value="등 록" onclick="location.href='carlist'"/>						
+						<input type="submit" value="등 록"/>						
 						</div>
 				</form>	
             </article>
