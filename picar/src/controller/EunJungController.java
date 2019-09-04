@@ -83,7 +83,7 @@ public class EunJungController extends HttpServlet{
 				System.out.println(jis);
 				System.out.println(result);
 				
-				RequestDispatcher rd = req.getRequestDispatcher("/jsp/client/carlist.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
 	            rd.forward(req, resp);
 				
 			
