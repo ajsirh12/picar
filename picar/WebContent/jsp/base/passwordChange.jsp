@@ -92,15 +92,23 @@
                <header>
                   <center><h2>새 비밀번호 </h2></center>                
                </header>
-               <form method="post" id="passwordForm" action="password_update">
-					picar 아이디: ${picarmembers.id} <br />
-					새 비밀번호 : <input id="password" type="password" placeholder="비밀번호는 6~10자리로 입력해주세요." name="password" /><br />
-					새 비밀번호 확인 : <input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" /><br />
-					<input type="hidden" name="id" value="${picarmembers.id}"/><br />
-					<input type="hidden" name="name" value="${picarmembers.name}"/><br />
-					<input type="hidden" name="phone" value="${picarmembers.phone}"/><br />		
-					<input type="submit" value="확인">
-				</form>
+              	<c:if test="${picarmembers != null}"> 	  				 
+	               <form method="post" id="passwordForm" action="password_update">
+						picar 아이디 ${picarmembers.id} <br />
+						새 비밀번호  <input id="password" type="password" placeholder="비밀번호는 6~10자리로 입력해주세요." name="password" /><br />
+						새 비밀번호 확인  <input id="repwd" type="password" placeholder="비밀번호를 확인해주세요." name="repwd" /><br />
+						<input type="hidden" name="id" value="${picarmembers.id}"/><br />
+						<input type="hidden" name="name" value="${picarmembers.name}"/><br />
+						<input type="hidden" name="phone" value="${picarmembers.phone}"/><br />		
+						<input type="submit" value="확인">
+					</form>					
+				</c:if>	
+						 
+				<c:if test="${picarmembers == null}">  				
+				    고객님의 정보와 일치하는 정보가 없습니다 <br />  <br> 
+				  <button><a href="password_find" class="qwe">비밀번호 찾기</a></button>
+				</c:if>
+			
             </article>
          </div>
       </section>
@@ -143,11 +151,9 @@
 					}
 							
 				}	 			
-			});	
-			
+			});				
 		});
 		
-		</script>   
-		   
+		</script>   		   
    </body>
 </html>

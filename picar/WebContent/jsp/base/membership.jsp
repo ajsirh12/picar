@@ -65,8 +65,7 @@
 
 	<!-- Nav -->
 		<nav id="menu">
-			<ul class="links"> 
-			<p>${picarmember.id} 님 <br>어서오세요.</p>     
+			<ul class="links">    
 			   <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
 			      
 			   <c:if test="${picarmember.gradeNo==30}">         
@@ -239,6 +238,14 @@
 			alert("면허증 유효기간은 6개월 이상 남아있어야 예약이 가능 합니다.");		
 		});		
 			
+		$(function(){
+			$("#join").click(function(){
+				if(picarmember.phone == 0){
+					alert("중복된 전화번호 입니다.");				
+				}					
+			});					
+		});
+		
 		/* 아이디 중복체크 */
 		var idck = 0;
 		$(function(){     
