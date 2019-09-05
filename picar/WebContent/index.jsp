@@ -53,7 +53,7 @@
 	         <p>${picarmember.id} 님 <br>어서오세요.</p>   
 	         </c:if>  
 			   <li><a href="carlistloc">차량리스트</a></li>   
-			   <li><a href="question_req_list.do?reqPage=1">회원 게시판 이동</a></li>
+			   <li><a href="question_req_list?reqPage=1">회원 게시판 이동</a></li>
 			   			   
 			   <c:if test="${picarmember.gradeNo==30}">  			  	         
 			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
@@ -136,7 +136,7 @@
 						<p style="font-size:35px; color:white">피카와 함께 떠나는 Trip</p>
 					</header>
 					<div class="content">
-						<video src="img/pick movie.mp4" width="100%" height="100%" controls="controls"></video>
+						<video src="img/pick movie.mp4" width="90%" controls="controls"></video>
 						<h3 align="left">유의사항</h3>
 						<div align="left">
 						- 피카는 면허증은 기간이 6개월 이하인 회원은 이용이 불가능 합니다<br>

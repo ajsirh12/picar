@@ -28,7 +28,7 @@ import model.Question;
 import page2.PageManager;
 import page2.PageSQL;
 
-@WebServlet(name = "KangController", urlPatterns = {"/question_list.do","/question_insert.do","/question_req_list.do","/question_input.do","/question_req_insert.do",
+@WebServlet(name = "KangController", urlPatterns = {"/question_list.do","/question_insert.do","/question_req_list","/question_input.do","/question_req_insert.do",
 													"/question_detail.do","/question_detail2.do","/question_delete.do","/question_update.do","/question_req_admin_list.do",
 													"/question_admin_detail.do","/question_admin_delete.do","/question_admin_detail2.do","/commlist_insert.do",
 													"/commlist.update.do","/comment_search.do","/comment_admin_search.do"})
@@ -86,7 +86,7 @@ public class KangController extends HttpServlet {
 			rd.forward(req, resp);	
 		}
 		
-		else if(action.equals("question_req_list.do")) {
+		else if(action.equals("question_req_list")) {
 			
 			int requestPage = Integer.parseInt(req.getParameter("reqPage"));
 			PageManager pm = new PageManager(requestPage);
