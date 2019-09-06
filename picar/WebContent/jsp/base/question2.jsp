@@ -60,10 +60,10 @@
 	         <p>${picarmember.id} 님 <br>어서오세요.</p>   
 	         </c:if>  
 			   <li><a href="carlistloc">차량리스트</a></li>   
-			   <li><a href="question_req_list?reqPage=1">회원 게시판 이동</a></li>
+			   <li><a href="question_req_list?reqPage=1">회원 게시판</a></li>
 			   			   
 			   <c:if test="${picarmember.gradeNo==30}">  			  	         
-			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
+			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판</a></li>
 			      <li><a href="member_list?reqPage=1">회원 관리</a></li>			                       
 			      <li><a href="rentedList.do?reqPage=1">대여목록</a></li>
 			      <li><a href="insertcar">차량등록</a></li>
@@ -147,22 +147,22 @@
 			</form>	<br><br>
 				
 			<c:if test="${pageGroupResult.beforPage}">
-				<a href="question_req_list.do?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
+				<a href="question_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
 			</c:if>
 	 
 					<c:forEach var="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
 						<c:choose>
 							<c:when test="${pageGroupResult.selectPageNumber==index}">
-								<span class="badge badge-secondary"><a href="question_req_list.do?reqPage=${index}">${index}</a></span>
+								<span class="badge badge-secondary"><a href="question_req_list?reqPage=${index}">${index}</a></span>
 							</c:when>
 							<c:otherwise>
-								<a href="question_req_list.do?reqPage=${index}">${index}</a>
+								<a href="question_req_list?reqPage=${index}">${index}</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 	
 	 		<c:if test="${pageGroupResult.afterPage}">
-				<a href="question_req_list.do?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
+				<a href="question_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
 			</c:if> 
 			
 						

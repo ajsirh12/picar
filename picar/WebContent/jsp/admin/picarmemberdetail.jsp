@@ -25,6 +25,9 @@
    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
    <meta name="theme-color" content="#ffffff">
    <style>
+   .asd{
+		color: black;
+	}
    .qwe{
       color: white;
       text-decoration: none;
@@ -45,10 +48,10 @@
       <nav id="menu">
 			<ul class="links">
 			   <li><a href="carlistloc">차량리스트</a></li>   
-			   <li><a href="question_req_list?reqPage=1">회원 게시판 이동</a></li>
+			   <li><a href="question_req_list?reqPage=1">회원 게시판</a></li>
 			   			   
 			   <c:if test="${picarmember.gradeNo==30}">  			  	         
-			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
+			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판</a></li>
 			      <li><a href="member_list?reqPage=1">회원 관리</a></li>			                       
 			      <li><a href="rentedList.do?reqPage=1">대여목록</a></li>
 			      <li><a href="insertcar">차량등록</a></li>
@@ -106,11 +109,11 @@
 					<c:forEach var="member" items="${membergrades}">
 					
 						<c:if test="${picarmember.gradeNo == member.gradeNo}">
-							<option value="${member.gradeNo}" selected="selected">${member.memberGrade}</option>		
+							<option value="${member.gradeNo}" selected="selected" class="asd">${member.memberGrade}</option>		
 						</c:if>	
 				
 					<c:if test="${picarmember.gradeNo != member.gradeNo}">
-						<option value="${member.gradeNo}">${member.memberGrade}</option>
+						<option value="${member.gradeNo}" class="asd">${member.memberGrade}</option>
 					</c:if>	
 					
 					</c:forEach>

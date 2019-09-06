@@ -57,10 +57,10 @@
 	         <p>${picarmember.id} 님 <br>어서오세요.</p>   
 	         </c:if>  
 			   <li><a href="carlistloc">차량리스트</a></li>   
-			   <li><a href="question_req_list?reqPage=1">회원 게시판 이동</a></li>
+			   <li><a href="question_req_list?reqPage=1">회원 게시판</a></li>
 			   			   
 			   <c:if test="${picarmember.gradeNo==30}">  			  	         
-			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
+			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판</a></li>
 			      <li><a href="member_list?reqPage=1">회원 관리</a></li>			                       
 			      <li><a href="rentedList.do?reqPage=1">대여목록</a></li>
 			      <li><a href="insertcar">차량등록</a></li>
@@ -110,7 +110,7 @@
                <header>
                   <center><h2> 차량 등록 </h2></center>
                </header>
-              	<form action="registercar" method="post">
+              	<form action="registercar" method="post" id="frm">
 					<h4>차량번호 </h4>
 						<input type="text" placeholder="차량번호" name="carnum" maxlength="7" /><br />
 					<h4>차종 </h4> 
@@ -131,8 +131,8 @@
 						</select><br />
 						<br />
 						<div align="left">					
-						<input type="button" style="margin-left:1px; margin-right:578px;" value="뒤로가기" onclick="history.back(-1);" />
-						<input type="submit" value="등 록"/>						
+						<input type="button" style="margin-left:1px; margin-right:578px;" value="뒤로가기" onclick="location.href='index.jsp'" />
+						<input type="button" value="등 록" id="insert"/>						
 						</div>
 				</form>	
             </article>
@@ -155,5 +155,16 @@
 <script src="assets/js/util.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#insert").click(function() {
+		if(confirm("차량을 등록하시겠습니까?")){
+			alert("등록되었습니다.");
+	        document.getElementById('frm').submit();
+	        return false;
+		}
+	})
+});
+</script>
    </body>
 </html>
