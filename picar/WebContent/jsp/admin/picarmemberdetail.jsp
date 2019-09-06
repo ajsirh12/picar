@@ -25,6 +25,9 @@
    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
    <meta name="theme-color" content="#ffffff">
    <style>
+   .asd{
+		color: black;
+	}
    .qwe{
       color: white;
       text-decoration: none;
@@ -109,11 +112,11 @@
 					<c:forEach var="member" items="${membergrades}">
 					
 						<c:if test="${picarmember.gradeNo == member.gradeNo}">
-							<option value="${member.gradeNo}" selected="selected">${member.memberGrade}</option>		
+							<option value="${member.gradeNo}" selected="selected" class="asd">${member.memberGrade}</option>		
 						</c:if>	
 				
 					<c:if test="${picarmember.gradeNo != member.gradeNo}">
-						<option value="${member.gradeNo}">${member.memberGrade}</option>
+						<option value="${member.gradeNo}" class="asd">${member.memberGrade}</option>
 					</c:if>	
 					
 					</c:forEach>
