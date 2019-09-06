@@ -51,10 +51,10 @@
 	         <p>${picarmember.id} 님 <br>어서오세요.</p>   
 	         </c:if>  
 			   <li><a href="carlistloc">차량리스트</a></li>   
-			   <li><a href="question_req_list?reqPage=1">회원 게시판 이동</a></li>
+			   <li><a href="question_req_list?reqPage=1">회원 게시판</a></li>
                
             <c:if test="${picarmember.gradeNo==30}">  			  	         
-			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판 이동</a></li>
+			      <li><a href="question_req_admin_list.do?reqPage=1">관리자 게시판</a></li>
 			      <li><a href="member_list?reqPage=1">회원 관리</a></li>			                       
 			      <li><a href="rentedList.do?reqPage=1">대여목록</a></li>
 			      <li><a href="insertcar">차량등록</a></li>
