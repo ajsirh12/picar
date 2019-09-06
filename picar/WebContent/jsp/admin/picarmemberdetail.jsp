@@ -44,9 +44,6 @@
    <!-- Nav -->
       <nav id="menu">
 			<ul class="links">
-			 <c:if test="${picarmember !=null}">
-	         <p>${picarmember.id} 님 <br>어서오세요.</p>   
-	         </c:if>  
 			   <li><a href="carlistloc">차량리스트</a></li>   
 			   <li><a href="question_req_list?reqPage=1">회원 게시판 이동</a></li>
 			   			   
