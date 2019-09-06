@@ -23,8 +23,8 @@ import page3.PageSQL;
 
 @WebServlet(name = "dahaeController", urlPatterns = {"/login","/logout","/login_input","/member_save",
 				"/sign_up","/idcheck","/idinput","/idfind","/id_find","/password_find","/passwordfind",
-				"/password_update","/picarmemberlist","/member_detail","/picarmember_update",
-				"/picarmember_delete","/member_infor","/member_infor_update","/passwordcheck","/member_list"})
+				"/password_update","/member_detail","/picarmember_update","/picarmember_delete",
+				"/member_infor","/member_infor_update","/passwordcheck","/member_list"})
 public class dahaeController extends HttpServlet {
 
 	@Override
@@ -97,9 +97,9 @@ public class dahaeController extends HttpServlet {
 			boolean result = dao.insert(picarMember);
 			System.out.println(result);
 		
-			/*RequestDispatcher rd =req.getRequestDispatcher("/index.jsp");
-			rd.forward(req, resp);*/
-			resp.sendRedirect("index.jsp");
+			RequestDispatcher rd =req.getRequestDispatcher("/jsp/base/membership_ok.jsp");
+			rd.forward(req, resp);
+			/*resp.sendRedirect("membership_ok.jsp");*/
 	
 		//회원가입 입력화면
 		}else if(action.equals("sign_up")) {
