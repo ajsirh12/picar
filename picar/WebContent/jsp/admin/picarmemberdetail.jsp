@@ -25,6 +25,9 @@
    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
    <meta name="theme-color" content="#ffffff">
    <style>
+   .asd{
+		color: black;
+	}
    .qwe{
       color: white;
       text-decoration: none;
@@ -44,9 +47,6 @@
    <!-- Nav -->
       <nav id="menu">
 			<ul class="links">
-			 <c:if test="${picarmember !=null}">
-	         <p>${picarmember.id} 님 <br>어서오세요.</p>   
-	         </c:if>  
 			   <li><a href="carlistloc">차량리스트</a></li>   
 			   <li><a href="question_req_list?reqPage=1">회원 게시판</a></li>
 			   			   
@@ -109,11 +109,11 @@
 					<c:forEach var="member" items="${membergrades}">
 					
 						<c:if test="${picarmember.gradeNo == member.gradeNo}">
-							<option value="${member.gradeNo}" selected="selected">${member.memberGrade}</option>		
+							<option value="${member.gradeNo}" selected="selected" class="asd">${member.memberGrade}</option>		
 						</c:if>	
 				
 					<c:if test="${picarmember.gradeNo != member.gradeNo}">
-						<option value="${member.gradeNo}">${member.memberGrade}</option>
+						<option value="${member.gradeNo}" class="asd">${member.memberGrade}</option>
 					</c:if>	
 					
 					</c:forEach>
