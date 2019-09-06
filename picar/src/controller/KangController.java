@@ -69,7 +69,7 @@ public class KangController extends HttpServlet {
 			System.out.println(question);
 			
 			
-			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list?reqPage=1");
 			rd.forward(req, resp);
 		}
 		
@@ -150,7 +150,7 @@ public class KangController extends HttpServlet {
 			
 			System.out.println(result);
 			
-			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list?reqPage=1");
 			rd.forward(req, resp);
 		}
 		else if(action.equals("question_update.do")) {
@@ -167,7 +167,7 @@ public class KangController extends HttpServlet {
 			System.out.println(result);
 			System.out.println(commentJoinList);
 			
-			RequestDispatcher rd = req.getRequestDispatcher("question_req_list.do?reqPage=1");
+			RequestDispatcher rd = req.getRequestDispatcher("question_req_list?reqPage=1");
 			rd.forward(req, resp);
 			
 		}

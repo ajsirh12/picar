@@ -127,7 +127,7 @@
 						<hr>	
 						<input type="submit" value="수정하기">
 						</c:if>
-						<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
+						<input type="button" value="뒤로가기" onclick="location.href='question_req_list?reqPage=1'">
 					</form>
 					</article>
 				</div>

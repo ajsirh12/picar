@@ -144,7 +144,7 @@
 						<textarea rows="20" cols="60" id="questText" name="questText" placeholder="내용을 입력해주세요"></textarea><br>
 						<hr>	
 						<input type="submit" value="등록하기" id="checkTitle">
-						<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
+						<input type="button" value="뒤로가기" onclick="location.href='question_req_list?reqPage=1'">
 				</form>
 						
 					</article>

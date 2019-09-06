@@ -147,22 +147,22 @@
 			</form>	<br><br>
 				
 			<c:if test="${pageGroupResult.beforPage}">
-				<a href="question_req_list.do?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
+				<a href="question_req_list?reqPage=${pageGroupResult.groupStartNumber-1}">《</a>
 			</c:if>
 	 
 					<c:forEach var="index" begin="${pageGroupResult.groupStartNumber}" end="${pageGroupResult.groupEndNumber}">
 						<c:choose>
 							<c:when test="${pageGroupResult.selectPageNumber==index}">
-								<span class="badge badge-secondary"><a href="question_req_list.do?reqPage=${index}">${index}</a></span>
+								<span class="badge badge-secondary"><a href="question_req_list?reqPage=${index}">${index}</a></span>
 							</c:when>
 							<c:otherwise>
-								<a href="question_req_list.do?reqPage=${index}">${index}</a>
+								<a href="question_req_list?reqPage=${index}">${index}</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 	
 	 		<c:if test="${pageGroupResult.afterPage}">
-				<a href="question_req_list.do?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
+				<a href="question_req_list?reqPage=${pageGroupResult.groupEndNumber+1}">》</a>
 			</c:if> 
 			
 						

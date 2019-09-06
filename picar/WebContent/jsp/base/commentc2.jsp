@@ -161,7 +161,7 @@
 						<input type="hidden" id="questnum" name="questnum" value="${commentJoinList.questnum}"/>
 							<input type="submit" value="삭제하기" id="deletebutton">
 						</form>	
-							<input type="button" value="뒤로가기" onclick="location.href='question_req_list.do?reqPage=1'">
+							<input type="button" value="뒤로가기" onclick="location.href='question_req_list?reqPage=1'">
 						
 					</article>
 				</div>
